@@ -12,3 +12,12 @@
     - 使用string::compare(const string & str), 此方法比较string类型的字符串
     
 * c++ string获取子字符串 substr(long p1, long length), 从p1开始，长度为length的子串
+
+# 36. Valid Sudoku
+* 使用HashTable
+* c++ 中 stl的hashmap为 unordered_map
+    - 自带迭代器
+    - key 为 (*it).first
+    - value 为 (*it).second
+    - 查找是否存在key    unordered_map::find(T key), 返回所在位置的迭代器，没有对应的key时返回end();
+* vector 的初始化指定大小的数组 *vector<T> a(n);*

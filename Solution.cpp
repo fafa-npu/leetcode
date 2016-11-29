@@ -2,6 +2,7 @@
 // Created by fa－apple on 2016/11/26.
 //
 
+#include <unordered_map>
 #include "Solution.h"
 
 /**
@@ -408,4 +409,25 @@ int Solution::strStr(string haystack, string needle) {
         }
     }
     return -1;
+}
+
+bool Solution::isValidSudoku(vector<vector<char>> & board) {
+    vector< unordered_map<char, bool>> sudoku(27);
+    for (size_t wIndex = 0; wIndex < 9; wIndex ++) {
+        for (size_t hIndex = 0; hIndex < 9; hIndex ++) {
+            char currentChar = board[wIndex][hIndex];
+            if (currentChar != '.') {
+                if (sudoku[wIndex].find(currentChar) == sudoku[wIndex].end()
+                        && sudoku[9 + hIndex].find(currentChar) == sudoku[8 + hIndex].end()
+                        && sudoku[18 + wIndex/3 * 3 + hIndex / 3].find(currentChar) == sudoku[18 + wIndex/3 * 3 + hIndex / 3].end()) {
+                    sudoku[wIndex][currentChar] = true;
+                    sudoku[9 + hIndex][currentChar] = true;
+                    sudoku[18 + wIndex/3 * 3 + hIndex / 3][currentChar] = true;
+                }else {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }
