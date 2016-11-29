@@ -383,3 +383,14 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
     return lSum;
 
 }
+
+int Solution::removeDuloicates(vector<int> & nums){
+    // excellent resolution.
+    int i = 0;
+    for (int n : nums)
+        if (!i || n > nums[i-1])
+            nums[i++] = n;
+    return i;
+//    nums.erase(unique(nums.begin(), nums.end()), nums.end());
+//    return nums.size();
+}
