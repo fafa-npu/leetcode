@@ -394,3 +394,18 @@ int Solution::removeDuloicates(vector<int> & nums){
 //    nums.erase(unique(nums.begin(), nums.end()), nums.end());
 //    return nums.size();
 }
+
+int Solution::strStr(string haystack, string needle) {
+    size_t haystackLength = haystack.length();
+    size_t needleLength = needle.length();
+    if (needleLength > haystackLength) {
+        return -1;
+    }
+    for (int index = 0; index < haystackLength - needleLength + 1; index ++) {
+        string tmpStr =  haystack.substr(index, needleLength);
+        if (tmpStr.compare(needle) == 0) {
+            return index;
+        }
+    }
+    return -1;
+}
