@@ -431,3 +431,30 @@ bool Solution::isValidSudoku(vector<vector<char>> & board) {
     }
     return true;
 }
+
+string Solution::countAndSay(int n) {
+    size_t roundIndex = 1, charIndex = 0;
+    size_t seqLength = 0;
+    string seq = "1";
+    string tmpSeq;
+    char currentChar;
+    size_t currentCharCnt = 0;
+    while (roundIndex < n) {
+        tmpSeq = "";
+        seqLength = seq.length();
+        charIndex = 0;
+        while (charIndex < seqLength) {
+            currentChar = seq.at(charIndex++);
+            currentCharCnt = 1;
+            while (charIndex < seqLength && seq.at(charIndex) == currentChar) {
+                currentCharCnt ++;
+                charIndex ++;
+            }
+            tmpSeq.push_back(currentCharCnt + '0');
+            tmpSeq.push_back(currentChar);
+        }
+        seq = tmpSeq;
+        roundIndex ++;
+    }
+    return seq;
+}

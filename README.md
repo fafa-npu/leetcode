@@ -21,3 +21,10 @@
     - value 为 (*it).second
     - 查找是否存在key    unordered_map::find(T key), 返回所在位置的迭代器，没有对应的key时返回end();
 * vector 的初始化指定大小的数组 *vector<T> a(n);*
+
+# 38. Count and Say
+* 很简单的题目，详见代码
+* 问题： 
+    - 执行效率低
+    - 思维混乱，表现在代码中就是逻辑不清晰
+    - 用先想清楚或在纸上画清楚流程再开始写代码
