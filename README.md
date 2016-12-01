@@ -1,5 +1,19 @@
 此项目用于记录本人leetcode刷题的代码
 
+# 22. Generate Parentheses
+* 方法：
+    - n = 1时，结果为 "()"
+    - 假设n = i时，结果集合为R<sub>i</sub> = {a,b,c....xxx}, 则n = i+1时的结果集合R<sub>i+1</sub>的求法为：
+        - 取R<sub>i</sub>中的string，对每个string中的每个位置都插入一个"()"得到tmpStr, 如果R<sub>i+1</sub>中不存在tmpStr，则将tmpStr加入R<sub>i+1</sub>中
+        - R<sub>i+1</sub>即为 n = i+1时的结果
+* 注意：
+    - vector中没有find
+    - 将set复制到vector中的方法
+        - *std::copy(input.begin(), input.end(), std::back_inserter(output));*
+        - *std::vector<double> output(input.size());*  
+          *std::copy(input.begin(), input.end(), output.begin());*
+        - 不可以直接使用*std::copy(input.begin(), input.end(), output.begin());*
+
 # 26. remove duplicates from sorted array.
 * 最便捷的方法:使用stl的unique函数和vector的erase，两行即可得到结果，可是效率不高。
 * 效率高的方法:使用两个指针。

@@ -472,3 +472,26 @@ void Solution::rotate(vector<vector<int>> &matrix) {
         }
     }
 }
+
+vector<string> Solution::generateParenthesis(int n) {
+    set<string> result, tmpParenthesis;
+    for (size_t i = 0; i < n; i++) {
+        tmpParenthesis.clear();
+        if (i == 0) {
+            tmpParenthesis.insert("()");
+        } else {
+            for (string str : result) {
+                for (size_t indexOfStr = 0; indexOfStr < str.length(); indexOfStr++) {
+                    string tmpStr = str.substr(0, indexOfStr) + "()" + str.substr(indexOfStr, str.length()-indexOfStr);
+                    if (tmpParenthesis.find(tmpStr) == tmpParenthesis.end()) {
+                        tmpParenthesis.insert(tmpStr);
+                    }
+                }
+            }
+        }
+        result = tmpParenthesis;
+    }
+    vector<string> resultVec(result.size());
+    copy(result.begin(), result.end(), resultVec.begin());
+    return resultVec;
+}
