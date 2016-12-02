@@ -497,87 +497,33 @@ vector<string> Solution::generateParenthesis(int n) {
 }
 
 vector<vector<int>> Solution::threeSum(vector<int> &nums) {
-    map<int, int> tmpMap;
-    for (int num : nums) {
-        if (tmpMap.find(num) == tmpMap.end() )  {
-            tmpMap[num] = 1;
-        }else if (tmpMap[num] == 1) {
-            tmpMap[num] = 2;
-        }else if (num == 0 && tmpMap[0] != 3) {
-            tmpMap[0] = 3;
-        }
-    }
-    nums.clear();
-    for (map<int,int>::iterator it = tmpMap.begin(); it != tmpMap.end(); it++) {
-        if ((*it).second == 1) {
-            nums.push_back((*it).first);
-        }else if ((*it).second == 2){
-            nums.push_back((*it).first);
-            nums.push_back((*it).first);
-        }else {
-            nums.push_back((*it).first);
-            nums.push_back((*it).first);
-            nums.push_back((*it).first);
-        }
-    }
     vector<vector<int>> resultVec;
-    if (nums.size() < 3) {
-        return resultVec;
-    }
-    size_t numsLength = nums.size();
-    set<vector<int>> result;
-    set<int> firstNums;
-    set<vector<int>> firstAndSecondNums;
-    for (size_t i = 0; i < numsLength - 2; i++) {
-        if (firstNums.find(nums[i]) != firstNums.end()) {
-            continue;
-        }
-        firstNums.insert(nums[i]);
-        for (size_t j = i + 1; j < numsLength - 1; j++) {
-            int a = nums[i];
-            int b = nums[j];
-            if (a > b) {
-                int tmp;
-                tmp = a;
-                a = b;
-                b = tmp;
-            }
-            vector<int > firstAndSecondNum = {a,b};
-            if (firstAndSecondNums.find(firstAndSecondNum) != firstAndSecondNums.end()) {
-                continue;
-            }
-            firstAndSecondNums.insert(firstAndSecondNum);
-            for (size_t k = j + 1; k < numsLength; k++) {
-                if (nums[i] + nums[j] + nums[k] == 0) {
-                    int a = nums[i];
-                    int b = nums[j];
-                    int c = nums[k];
-                    int tmp;
-                    if (a > b) {
-                        tmp = a;
-                        a = b;
-                        b = tmp;
-                    }
-                    if (a > c) {
-                        tmp = a;
-                        a = c;
-                        c = tmp;
-                    }
-                    if (b > c) {
-                        tmp = b;
-                        b = c;
-                        c = tmp;
-                    }
-                    vector<int> tmpVec = {a,b,c};
-                    if (result.find(tmpVec) == result.end()) {
-                        result.insert(tmpVec);
-                    }
-                    break;
+    std::sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++) {
+        int target = -nums[i];
+        size_t front = i + 1;
+        size_t back = nums.size() - 1;
+        while (front < back) {
+            if (nums[front] + nums[back] == target) {
+                resultVec.push_back({nums[i], nums[front], nums[back]});
+                front ++;
+                back --;
+                while (nums[front] == nums[front - 1] && front < back) {
+                    front ++;
                 }
+                while (nums[back] == nums[back + 1] && front < back) {
+                    back --;
+                }
+            } else if (nums[front] + nums[back] > target) {
+                back --;
+            } else if (nums[front] + nums[back] < target) {
+                front ++;
             }
+        }
+        while (i + 1 != nums.size() && nums[i] == nums[i + 1]) {
+            i++;
         }
     }
 
-    copy(result.begin(), result.end(), back_inserter(resultVec));
     return resultVec;
 }
