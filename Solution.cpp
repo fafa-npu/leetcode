@@ -2,9 +2,6 @@
 // Created by fa－apple on 2016/11/26.
 //
 
-#include <unordered_map>
-#include <algorithm>
-#include <limits.h>
 #include "Solution.h"
 
 /**
@@ -528,4 +525,46 @@ vector<vector<int>> Solution::threeSum(vector<int> &nums) {
     }
 
     return resultVec;
+}
+
+bool Solution::isMatch(string s, string p) {
+    size_t pIndex, sIndex = 0;
+    char cur, next;
+    while (pIndex < p.length()) {
+        cur = p.at(pIndex);
+        if (pIndex + 1 != p.length()) {
+            next = p[pIndex + 1];
+            if (next != '*') {
+                if (cur == '.') {
+                    sIndex++;
+                } else {
+                    if (cur != s[sIndex]) {
+                        return false;
+                    }
+                }
+            } else {
+                if (cur == '.') {
+                    cur = s[sIndex];
+                }
+                while (cur == s[sIndex] && sIndex < s.length()) {
+                    sIndex++;
+                }
+            }
+        } else {
+            if (cur == '.') {
+                sIndex++;
+            } else {
+                if (cur == s[sIndex]) {
+                    sIndex ++;
+                }else {
+                    return false;
+                }
+            }
+        }
+    }
+    if (sIndex == s.length()) {
+        return true;
+    } else {
+        return false;
+    }
 }

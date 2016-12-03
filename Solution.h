@@ -5,7 +5,8 @@
 #ifndef LEETCODE_SOLUTION_H
 #define LEETCODE_SOLUTION_H
 #include <string>
-
+#include <unordered_map>
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <set>
@@ -20,8 +21,6 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-
-
 
 class Solution {
 public :
@@ -221,6 +220,30 @@ public :
      * @return
      */
     vector<vector<int>> threeSum(vector<int> & nums);
+
+    /**
+     * Implement regular expression matching with support for '.' and '*'.
+     *  '.' Matches any single character.
+        '*' Matches zero or more of the preceding element.
+
+        The matching should cover the entire input string (not partial).
+
+        The function prototype should be:
+        bool isMatch(const char *s, const char *p)
+
+        Some examples:
+        isMatch("aa","a") → false
+        isMatch("aa","aa") → true
+        isMatch("aaa","aa") → false
+        isMatch("aa", "a*") → true
+        isMatch("aa", ".*") → true
+        isMatch("ab", ".*") → true
+        isMatch("aab", "c*a*b") → true
+     * @param s
+     * @param p
+     * @return
+     */
+    bool isMatch(string s, string p);
 
 };
 
