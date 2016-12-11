@@ -2,6 +2,7 @@
 // Created by fa－apple on 2016/11/26.
 //
 
+#include <climits>
 #include "Solution.h"
 
 /**
@@ -528,43 +529,21 @@ vector<vector<int>> Solution::threeSum(vector<int> &nums) {
 }
 
 bool Solution::isMatch(string s, string p) {
-    size_t pIndex, sIndex = 0;
-    char cur, next;
-    while (pIndex < p.length()) {
-        cur = p.at(pIndex);
-        if (pIndex + 1 != p.length()) {
-            next = p[pIndex + 1];
-            if (next != '*') {
-                if (cur == '.') {
-                    sIndex++;
-                } else {
-                    if (cur != s[sIndex]) {
-                        return false;
-                    }
-                }
+    size_t m = s.length();
+    size_t n = p.length();
+    vector<vector<bool>> f(m + 1, vector<bool>(n + 1, false));
+    f[0][0] = true;
+    for (size_t j = 1; j <= n; j++) {
+        f[0][j] = j > 1 && '*' == p[j-1] && f[0][j-2];
+    }
+    for (size_t i = 1; i<= m; i++) {
+        for (size_t j = 1; j <= n; j ++) {
+            if (p[j - 1] == '*') {
+                f[i][j] = f[i][j-2] || (s[i-1] == p[j-2] || p[j-2] == '.') && f[i-1][j];
             } else {
-                if (cur == '.') {
-                    cur = s[sIndex];
-                }
-                while (cur == s[sIndex] && sIndex < s.length()) {
-                    sIndex++;
-                }
-            }
-        } else {
-            if (cur == '.') {
-                sIndex++;
-            } else {
-                if (cur == s[sIndex]) {
-                    sIndex ++;
-                }else {
-                    return false;
-                }
+                f[i][j] = f[i-1][j-1] && (s[i-1] == p[j-1] || p[j-1] == '.');
             }
         }
     }
-    if (sIndex == s.length()) {
-        return true;
-    } else {
-        return false;
-    }
+    return f[m][n];
 }
