@@ -547,3 +547,39 @@ bool Solution::isMatch(string s, string p) {
     }
     return f[m][n];
 }
+
+int Solution::maxArea(vector<int> &height) {
+    /* time limit exceeded.
+    // 穷举法
+    size_t i = 0, j = 0;
+    int maxArea = 0;
+    for (i = 0; i < height.size() - 1; i++) {
+        for (j = i+1; j < height.size(); j++) {
+            int h1 = height[i];
+            int h2 = height[j];
+            int area = 0;
+            if (h1 < h2) {
+               area = h1 * (j - i);
+            }else {
+                area = h2 * (j - i);
+            }
+            if (area > maxArea) {
+                maxArea = area;
+            }
+        }
+    }
+    return maxArea;
+     */
+    int front = 0, back = height.size() - 1;
+    int maxArea = 0;
+    while (front < back) {
+        if (height[front] < height[back]){
+            maxArea = std::max(maxArea,height[front] * (back - front));
+            front ++;
+        }else {
+            maxArea = std::max(maxArea,height[back] * (back - front));
+            back --;
+        }
+    }
+    return maxArea;
+}

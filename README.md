@@ -9,6 +9,16 @@
         - 令 x = p[j-2]
         - x重复0次, f[i][j-2] 
         - x重复1次或多次, (s[i-1] == p[j-1] || p[j-1] == '.') && f[i-1][j]
+        
+# 11. Container With Most Water
+* 穷举
+* 双指针法
+    1. 取指针front，back分别指向数组的前后
+    2. 计算front与back的两个数所能组成的area
+    3. 若front所指的值小于back所指的值，则front后移，反之back前移
+    4. 重复2，直到front == back
+    ![双指针法图解](https://leetcode.com/media/original_images/11_Container_Water.gif)
+* 注意， 使用stl的max/min算法时要注意，输入的两个参数必须类型一致，size_t和int就无法比较。
 
 # 15. 3Sum
 * 先将数组排序，顺序遍历数组作为第一个数字
