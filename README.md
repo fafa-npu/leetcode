@@ -1,4 +1,15 @@
 此项目用于记录本人leetcode刷题的代码
+
+# 5. Longest Palindromic Substring
+* Dynamic Programming
+    - p[i][j] = 
+        - true, if S<sub>i</sub>...S<sub>j</sub> is palindrome.
+        - false
+    - p[i][j] = p[i+1][j-1] && S<sub>i</sub> == S<sub>j</sub>
+    - p[i,i] = true
+    - p[i, i+1] = S<sub>i</sub> == S<sub>i+1</sub>
+    将所有的p[i,i]和p[i, i+1]初始化，然后生成所有的三个字符的回文，依次往下
+    
 # 10. Regular Expression Matching
 * Dynamic Programming
     - s 为待匹配字符串， p为re表达式

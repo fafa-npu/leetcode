@@ -583,3 +583,32 @@ int Solution::maxArea(vector<int> &height) {
     }
     return maxArea;
 }
+
+string Solution::longestPalindrome(string s) {
+    size_t length = s.length();
+    bool hasPalindrome = false;
+    string longestPalindrome;
+    vector<vector<bool>> p(length, vector<bool>(length, false));
+    for (size_t index = 0; index < length - 1; index++) {
+        p[index][index] = true;
+        p[index][index+1] = s.at(index) == s.at(index+1);
+        if (p[index][index+1]) {
+            hasPalindrome = true;
+            longestPalindrome = s.substr(index, 2);
+        }
+    }
+    if (!hasPalindrome) {
+        longestPalindrome = s.substr(0,1);
+    }
+
+    p[length-1][length-1] = true;
+    for (size_t pCnt = 2; pCnt < length; pCnt++) {
+        for (size_t index = 0; index < length - pCnt; index ++) {
+            p[index][index + pCnt] = p[index + 1][index+pCnt -1] && s.at(index) == s.at(index + pCnt);
+            if (p[index][index+pCnt]) {
+                longestPalindrome = s.substr(index, pCnt+1);
+            }
+        }
+    }
+    return longestPalindrome;
+}
