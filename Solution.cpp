@@ -585,6 +585,7 @@ int Solution::maxArea(vector<int> &height) {
 }
 
 string Solution::longestPalindrome(string s) {
+    /* dp，TLE...
     size_t length = s.length();
     bool hasPalindrome = false;
     string longestPalindrome;
@@ -611,4 +612,41 @@ string Solution::longestPalindrome(string s) {
         }
     }
     return longestPalindrome;
+     */
+    int length = s.length();
+    int longestLen = 0;
+    int front = 0, back = 0;
+    int longestFront, longestBack;
+    for (int index = 0; index < length; index ++) {
+        front = back = index;
+        while (front >= 0 && back < length) {
+            if (s.at(front) == s.at(back)) {
+                front --;
+                back ++;
+            } else {
+                break;
+            }
+        }
+        if (longestLen < back - front - 1) {
+            longestLen = back - front - 1;
+            longestFront = front + 1;
+            longestBack = back - 1;
+        }
+        front = index;
+        back = index + 1;
+        while (front >= 0 && back < length) {
+            if (s.at(front) == s.at(back)) {
+                front --;
+                back ++;
+            } else {
+                break;
+            }
+        }
+        if (longestLen < back - front - 1) {
+            longestLen = back - front - 1;
+            longestFront = front + 1;
+            longestBack = back - 1;
+        }
+    }
+    return s.substr(longestFront, longestBack - longestFront + 1);
 }

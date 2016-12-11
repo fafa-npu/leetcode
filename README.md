@@ -9,6 +9,9 @@
     - p[i,i] = true
     - p[i, i+1] = S<sub>i</sub> == S<sub>i+1</sub>
     将所有的p[i,i]和p[i, i+1]初始化，然后生成所有的三个字符的回文，依次往下
+* 遍历string中可以作为中心的2n-1个位置，取以每个位置作为中心的最大回文。
+* 注意：
+    size_t 是 unsigned 类型的，所以用来作为string的index且做--操作时，不可以用>=0为临界条件。
     
 # 10. Regular Expression Matching
 * Dynamic Programming
