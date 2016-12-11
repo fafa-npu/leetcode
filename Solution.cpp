@@ -529,6 +529,20 @@ vector<vector<int>> Solution::threeSum(vector<int> &nums) {
 }
 
 bool Solution::isMatch(string s, string p) {
+    /*
+     * 递归解法
+    if (p.empty()) {
+        return s.empty();
+    }
+
+    if ('*' == p[1]) {
+        return (isMatch(s, p.substr(2)) || !s.empty() && (s[0] == p[0] || p[0] == '.') && isMatch(s.substr(1), p) );
+    } else {
+        return (!s.empty() && (s[0] == p[0] || p[0] == '.') && isMatch(s.substr(1), p.substr(1)) );
+    }
+     */
+
+    //  dp解法
     size_t m = s.length();
     size_t n = p.length();
     vector<vector<bool>> f(m + 1, vector<bool>(n + 1, false));
