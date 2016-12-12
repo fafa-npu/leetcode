@@ -723,3 +723,30 @@ int Solution::binarySearch(vector<int> &nums, int target) {
     }
     return -1;
 }
+
+vector<int> Solution::searchRange(vector<int> &nums, int target) {
+    int front = 0, back = nums.size() - 1;
+    int start = 0, end = 0;
+    vector<int> result{-1, -1};
+    while (front <= back) {
+        int mid = front + (back - front) / 2;
+        if (nums[mid] > target) {
+            back = mid - 1;
+        } else if (nums[mid] < target) {
+            front = mid + 1;
+        } else {
+            start = end = mid;
+            while (start - 1 >= 0 && nums[start - 1] == nums[mid]) {
+                start --;
+            }
+            while (end + 1 < nums.size() && nums[end + 1] == nums[mid]) {
+                end ++;
+            }
+            result.clear();
+            result.push_back(start);
+            result.push_back(end);
+            break;
+        }
+    }
+    return result;
+}
