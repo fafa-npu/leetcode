@@ -43,6 +43,9 @@
     - set中元素的排列是顺序的
     - multiset相对于set，元素可以重复
     
+# 16. 3Sum Closest
+使用双指针法，先对数组进行排序，然后从两边向中间逼近。
+
 # 22. Generate Parentheses
 * 方法：
     - n = 1时，结果为 "()"

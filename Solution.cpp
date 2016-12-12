@@ -664,3 +664,32 @@ string Solution::longestPalindrome(string s) {
     }
     return s.substr(longestFront, longestBack - longestFront + 1);
 }
+
+int Solution::threeSumClosest(vector<int> &nums, int target) {
+    sort(nums.begin(), nums.end());
+    size_t front = 0, middle = 1, back = nums.size() - 1;
+    int sum = nums[front] + nums[middle] + nums[back];
+    int closestSum = sum;
+    int minDiff = abs(target - sum);
+    while (front < back - 1) {
+        middle = front + 1;
+        while (middle < back) {
+            sum = nums[front] + nums[middle] + nums[back];
+            if (target - sum == 0) {
+                return target;
+            }
+            if (minDiff > abs(target - sum)) {
+                minDiff = abs(target - sum);
+                closestSum = sum;
+            }
+            if (target - sum > 0) {
+                middle ++;
+            } else {
+                back --;
+            }
+        }
+        front ++;
+        back = nums.size() - 1;
+    }
+    return closestSum;
+}
