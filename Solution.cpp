@@ -693,3 +693,33 @@ int Solution::threeSumClosest(vector<int> &nums, int target) {
     }
     return closestSum;
 }
+
+int Solution::searchInsert(vector<int> &nums, int target) {
+    int front = 0, back = nums.size() - 1;
+    while (front <= back) {
+        int mid = front + (back - front) / 2;
+        if (nums[mid] < target) {
+            front = mid + 1;
+        } else if (nums[mid] > target){
+            back = mid - 1;
+        } else {
+            return mid;
+        }
+    }
+    return front + (back - front) / 2;
+}
+
+int Solution::binarySearch(vector<int> &nums, int target) {
+    int front = 0, back = nums.size() - 1;
+    while (front <= back) {
+        int mid = front + (back - front) / 2;
+        if (nums[mid] < target) {
+            front = mid + 1;
+        } else if (nums[mid] > target){
+            back = mid - 1;
+        } else {
+            return mid;
+        }
+    }
+    return -1;
+}

@@ -73,6 +73,12 @@
     
 * c++ string获取子字符串 substr(long p1, long length), 从p1开始，长度为length的子串
 
+# 35. Search Insert Position
+* 二分查找
+* 注意
+    - 使用二分查找时，循环的判断条件为 <=
+    - *front = mid + 1*
+    - *back = mid - 1*
 # 36. Valid Sudoku
 * 使用HashTable
 * c++ 中 stl的hashmap为 unordered_map
