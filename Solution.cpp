@@ -750,3 +750,30 @@ vector<int> Solution::searchRange(vector<int> &nums, int target) {
     }
     return result;
 }
+
+double Solution::findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
+    size_t m = nums1.size(), n = nums2.size();
+    if (m < n) {
+        swap(nums1, nums2);
+        swap(m, n);
+    }
+    int front = 0, back = n * 2;
+    while (front <= back)  {
+        int mid2 = (front + back) / 2;
+        int mid1 = m + n - mid2;
+
+        double l1 = mid1 == 0 ? INT_MIN : nums1[(mid1 - 1) / 2];
+        double l2 = mid2 == 0 ? INT_MIN : nums2[(mid2 - 1) / 2];
+        double r1 = mid1 == 2 * m ? INT_MAX : nums1[mid1 / 2];
+        double r2 = mid2 == 2 * n ? INT_MAX : nums2[mid2 / 2];
+
+        if (l1 > r2) {
+            front = mid2 + 1;
+        } else if (l2 > r1) {
+            back = mid2 - 1;
+        } else {
+            return ( (max(l1, l2) + min(r1, r2)) / 2);
+        }
+    }
+    return -1;
+}
