@@ -777,3 +777,20 @@ double Solution::findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) 
     }
     return -1;
 }
+
+vector<vector<int>> Solution::permute(vector<int> &nums) {
+    if (nums.size() == 1) {
+        return vector<vector<int>>{{nums[0]}};
+    }
+    vector<vector<int>> result;
+    for (int n: nums) {
+        vector<int> tmpNums(nums);
+        tmpNums.erase(remove(tmpNums.begin(), tmpNums.end(), n), tmpNums.end());
+        for (vector<int> row : permute(tmpNums)) {
+            row.insert(row.begin(), n);
+            result.push_back(row);
+        }
+    }
+
+    return result;
+}
