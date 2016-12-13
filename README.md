@@ -4,6 +4,7 @@
 * Star
 * 暴力解法， apparently won't be accepted.
 * 二分查找
+
     ----------------------------------------------------
             left    |    right
         A[0]...A[i] | A[i+1]...A[m-1]
