@@ -368,6 +368,16 @@ public :
     vector<vector<int>> combinationSum(vector<int>& candidates, int target);
     vector<vector<int>> combinationSum(vector<int> &, int, vector<int>&, int);
 
+    /**
+     *
+    Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
+        For example,
+        Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6.
+     * @param height
+     * @return
+     */
+    int trap(vector<int>& height);
+
 };
 
 

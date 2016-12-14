@@ -135,6 +135,10 @@
             vector::reverse(size_t size);
             std::reverse(vec.begin(), vec.end();
     - 
+
+# 32. Trapping Rain Water
+* 计算最底层的容量，然后各高度减1，递归计算最底层容量，知道所有高度减完。（TLE）
+
     
 # 46. Permutations
 * 采用递归的方法

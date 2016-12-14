@@ -818,3 +818,26 @@ vector<vector<int>> Solution::combinationSum(vector<int> &candidates, int target
     }
     return result;
 }
+
+int Solution::trap(vector<int> &height) {
+
+    int cap = 0;
+    vector<int> stack;
+    bool isAllZero = true;
+    for (int index = 0; index < height.size(); index++) {
+
+            if (height[index] > 0) {
+                if (stack.size() != 0) {
+                    cap += (index - stack.back() - 1);
+                    stack.pop_back();
+                }
+                stack.push_back(index);
+                height[index] -- ;
+                isAllZero = false;
+            }
+    }
+    if (isAllZero) {
+        return 0;
+    }
+    return cap + trap(height);
+}
