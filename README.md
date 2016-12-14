@@ -126,9 +126,21 @@
     - 思维混乱，表现在代码中就是逻辑不清晰
     - 用先想清楚或在纸上画清楚流程再开始写代码
     
+# 39. Combination Sum
+* 递归
+* 回溯
+* 注意：
+    - vector中的元素翻转
+        --
+            vector::reverse(size_t size);
+            std::reverse(vec.begin(), vec.end();
+    - 
+    
 # 46. Permutations
 * 采用递归的方法
 * 动态规划(待续)？
+* 回溯法
+
 # 48. Rotate Image
 * 注意点：
     - 每个点与其对应旋转的其它三个点之间的旋转关系

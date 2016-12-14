@@ -794,3 +794,27 @@ vector<vector<int>> Solution::permute(vector<int> &nums) {
 
     return result;
 }
+
+vector<vector<int>> Solution::combinationSum(vector<int> &candidates, int target) {
+    vector<vector<int>> result;
+    vector<int> combination;
+    result = combinationSum(candidates, target, combination, 0);
+    return result;
+}
+
+vector<vector<int>> Solution::combinationSum(vector<int> &candidates, int target, vector<int> & combiantion, int begin ) {
+    vector<vector<int>> result;
+    if (target == 0) {
+        return vector<vector<int>>{combiantion};
+    }
+    for (size_t index = begin; index < candidates.size(); index ++) {
+        combiantion.push_back(candidates[index]);
+        if (target >= candidates[index]) {
+            for (vector<int> row : combinationSum(candidates, target - candidates[index], combiantion, index)) {
+                result.push_back(row);
+            }
+        }
+        combiantion.pop_back();
+    }
+    return result;
+}
