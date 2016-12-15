@@ -821,6 +821,7 @@ vector<vector<int>> Solution::combinationSum(vector<int> &candidates, int target
 
 int Solution::trap(vector<int> &height) {
 
+    /** 这种方法太暴力
     int cap = 0;
     vector<int> stack;
     bool isAllZero = true;
@@ -840,4 +841,26 @@ int Solution::trap(vector<int> &height) {
         return 0;
     }
     return cap + trap(height);
+     */
+    int left = 0, right = height.size() - 1;
+    int cap = 0;
+    int maxLeft = 0, maxRight = 0;
+    while (left <= right) {
+        if (height[left] <= height[right]) {
+            if (maxLeft <= height[left]) {
+                maxLeft = height[left];
+            } else {
+                cap += maxLeft - height[left];
+            }
+            left ++;
+        } else {
+            if (maxRight <= height[right]) {
+                maxRight = height[right];
+            } else {
+                cap += maxRight - height[right];
+            }
+            right -- ;
+        }
+    }
+    return cap;
 }
