@@ -819,6 +819,34 @@ vector<vector<int>> Solution::combinationSum(vector<int> &candidates, int target
     return result;
 }
 
+vector<vector<int>> Solution::combinationSum2(vector<int> &candidates, int target) {
+    vector<int> combination;
+    sort(candidates.begin(), candidates.end());
+    return combinationSum2(candidates, target, combination, 0);
+}
+
+vector<vector<int>> Solution::combinationSum2(vector<int> &candidates, int target, vector<int> &combination,
+                                              int begin) {
+    vector<vector<int>> result;
+    if (target == 0) {
+        result.push_back(combination);
+        return result;
+    }
+    for (int index = begin; index < candidates.size(); index ++) {
+        if (index != 0 && index != begin && candidates[index] == candidates[index - 1]) { // 去除重复
+            continue;
+        }
+        if (candidates[index] <= target) {
+            combination.push_back(candidates[index]);
+            for (vector<int> row : combinationSum2(candidates, target - candidates[index], combination, index + 1)) {
+                result.push_back(row);
+            }
+            combination.pop_back();
+        }
+    }
+    return result;
+}
+
 int Solution::trap(vector<int> &height) {
 
     /** 这种方法太暴力
