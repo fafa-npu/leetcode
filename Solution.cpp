@@ -960,3 +960,39 @@ vector<vector<string>> Solution::groupAnagrams(vector<string> & strs){
     }
     return group;
 }
+
+vector<string> Solution::letterCombinations(string digits) {
+    unordered_map<char, string> digitsMap {
+            {'2', "abc"},
+            {'3', "def"},
+            {'4', "ghi"},
+            {'5', "jkl"},
+            {'6', "mno"},
+            {'7', "pqrs"},
+            {'8', "tuv"},
+            {'9', "wxyz"}
+    };
+    vector<string> result;
+    if (digits.size() == 0) {
+        return result;
+    }
+    if (digits.size() == 1) {
+        for (auto c : digitsMap[digits[0]]) {
+            string str;
+            str.push_back(c);
+            result.push_back(str);
+        }
+        return result;
+    }
+    string tmpStr = digits;
+    tmpStr.erase(tmpStr.begin());
+
+    for (string str : letterCombinations(tmpStr)) {
+        for (int i = 0; i < digitsMap[digits[0]].length(); i++) {
+            string s = str;
+            s.insert(s.begin(),digitsMap[digits[0]][i]);
+            result.push_back(s);
+        }
+    }
+    return result;
+}

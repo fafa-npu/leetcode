@@ -73,6 +73,9 @@
 # 16. 3Sum Closest
 使用双指针法，先对数组进行排序，然后从两边向中间逼近。
 
+# 17. Letter Combinations of a Phone Number
+* 回溯
+
 # 22. Generate Parentheses
 * 方法：
     - n = 1时，结果为 "()"
