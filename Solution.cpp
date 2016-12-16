@@ -932,5 +932,17 @@ bool Solution::isValidSudoku(vector<vector<char>> &board, int i, int j, char c) 
         }
     }
     return true;
+}
 
+vector<int> Solution::plusOne(vector<int> &digits) {
+    for (vector<int>::reverse_iterator it = digits.rbegin(); it != digits.rend(); it++) {
+        if (*it == 9) {
+            *it = 0;
+        } else {
+            *it += 1;
+            return digits;
+        }
+    }
+    digits.insert(digits.begin(), 1);
+    return digits;
 }
