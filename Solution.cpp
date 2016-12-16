@@ -89,11 +89,14 @@ bool Solution::isValid(string s) {
     set<char> pre = {'(', '{', '['};
     set<char> post = {')', '}', ']'};
     size_t strLength = s.length();
+    char tmpC;
     for (size_t index = 0; index < strLength; index ++) {
         if (tmpVec.size() == 0) {
-            tmpVec.insert(tmpVec.begin(), s.at(index));
+            tmpC = s.at(index);
+            tmpVec.insert(tmpVec.begin(), tmpC);
         }else if (pre.find(s.at(index)) != pre.end()){
-             tmpVec.insert(tmpVec.begin(), s.at(index));
+            tmpC = s.at(index);
+            tmpVec.insert(tmpVec.begin(), tmpC);
         }else if (post.find(s.at(index)) != post.end()) {
             vector<char>::iterator it = tmpVec.begin();
             char currentChar = *it;
@@ -102,21 +105,24 @@ bool Solution::isValid(string s) {
                     if (currentChar == '(') {
                         tmpVec.erase(it);
                     }else {
-                        tmpVec.insert(tmpVec.begin(), s.at(index));
+                        tmpC = s.at(index);
+                        tmpVec.insert(tmpVec.begin(), tmpC);
                     }
                     break;
                 case '}':
                     if (currentChar == '{') {
                         tmpVec.erase(it);
                     }else {
-                        tmpVec.insert(tmpVec.begin(), s.at(index));
+                        tmpC = s.at(index);
+                        tmpVec.insert(tmpVec.begin(), tmpC);
                     }
                     break;
                 case ']':
                     if (currentChar == '[') {
                         tmpVec.erase(it);
                     }else {
-                        tmpVec.insert(tmpVec.begin(), s.at(index));
+                        tmpC = s.at(index);
+                        tmpVec.insert(tmpVec.begin(), tmpC);
                     }
                     break;
             }
@@ -322,7 +328,8 @@ size_t Solution::lengthOfLongestSubstring(string s) {
             i++;
             continue;
         } else {
-            setCharSlidingWindow.insert(s[j]);
+            int c = s[j];
+            setCharSlidingWindow.insert(c);
             j++;
             length = std::max(length, j - i);
         }
@@ -891,4 +898,39 @@ int Solution::trap(vector<int> &height) {
         }
     }
     return cap;
+}
+
+void Solution::solveSudoku(vector<vector<char>> &board) {
+    solveSudoku(board, 0,0);
+}
+
+bool Solution::solveSudoku(vector<vector<char>> &board, int i, int j) {
+    if (i == 9) return true;
+    if (j == 9) return solveSudoku(board, i + 1, 0);
+    if (board[i][j] != '.') return solveSudoku(board, i, j+1);
+    for (char c = '1'; c <= '9'; c++) {
+        if (isValidSudoku(board, i, j, c)) {
+            board[i][j] = c;
+            if (solveSudoku(board, i, j+1)) return true;
+            board[i][j] = '.';
+        }
+    }
+    return false;
+}
+
+bool Solution::isValidSudoku(vector<vector<char>> &board, int i, int j, char c) {
+    for (int x = 0; x < 9; x++) {
+        if (board[i][x] == c || board[x][j] == c) {
+            return false;
+        }
+    }
+    for (int x = i / 3 * 3; x < i/3*3 + 3; x++) {
+        for (int y = j/3*3; y < j/3*3 + 3; y ++) {
+            if (board[x][y] == c) {
+                return false;
+            }
+        }
+    }
+    return true;
+
 }

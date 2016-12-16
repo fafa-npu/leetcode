@@ -119,6 +119,12 @@
     - 查找是否存在key    unordered_map::find(T key), 返回所在位置的迭代器，没有对应的key时返回end();
 * vector 的初始化指定大小的数组 *vector<T> a(n);*
 
+# 37. Solve Sudoku
+* 回溯法
+* 在回溯中判断当前棋盘是否valid时，
+    - 使用36的方法重新遍历会非常耗时间。
+    - 正确的做法是，只判断当前加入的数字是否valid就可以.
+
 # 38. Count and Say
 * 很简单的题目，详见代码
 * 问题： 

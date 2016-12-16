@@ -399,6 +399,15 @@ public :
      */
     int trap(vector<int>& height);
 
+    /**
+     *  Write a program to solve a Sudoku puzzle by filling the empty cells.
+        Empty cells are indicated by the character '.'.
+     * @param board
+     */
+    void solveSudoku(vector<vector<char>>& board);
+    bool solveSudoku(vector<vector<char>> &board, int i, int j);
+    bool isValidSudoku(vector<vector<char>> & board, int i, int j, char c);
+
 };
 
 
