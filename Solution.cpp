@@ -946,3 +946,17 @@ vector<int> Solution::plusOne(vector<int> &digits) {
     digits.insert(digits.begin(), 1);
     return digits;
 }
+
+vector<vector<string>> Solution::groupAnagrams(vector<string> & strs){
+    unordered_map<string, vector<string>> mapAnagrams;
+    for (string str : strs) {
+        string strSorted = str;
+        sort(strSorted.begin(), strSorted.end());
+        mapAnagrams[strSorted].push_back(str);
+    }
+    vector<vector<string>> group;
+    for (unordered_map<string, vector<string>>::iterator it = mapAnagrams.begin(); it != mapAnagrams.end(); it++) {
+        group.push_back(it->second);
+    }
+    return group;
+}
