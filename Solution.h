@@ -490,6 +490,15 @@ public :
     ListNode * mergeKLists(vector<ListNode*> & lists) ;
     ListNode * mergeTwoList(ListNode * l1, ListNode * l2);
 
+    /**
+     * 50. Pow(x, n)
+     * Implement pow(x, n).
+     * @param x
+     * @param n
+     * @return
+     */
+    double myPow(double x, int n);
+
 };
 
 

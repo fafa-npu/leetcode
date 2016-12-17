@@ -188,6 +188,9 @@
 
 # 49. Group Anagrams
 * 将给定字符串排序，以排序后的string做hash table.
+
+# 50. Pow(x, n)
+* 递归调用，二分查找
         
 # 66. Plus One
 * 迭代器返向遍历
