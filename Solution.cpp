@@ -1081,3 +1081,13 @@ void Solution::nextPermutation(vector<int> &nums) {
     std::reverse(it, nums.end());
     return;
 }
+
+ListNode * Solution::mergeKLists(vector<ListNode *> &lists) {
+    if (lists.size() == 0) return NULL;
+    while (lists.size() > 1 ) {
+        lists[1] = mergeTwoLists(lists[0], lists[1]);
+        lists.erase(lists.begin());
+    }
+    return lists[0];
+}
+

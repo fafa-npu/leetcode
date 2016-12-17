@@ -89,6 +89,9 @@
         - *std::vector<double> output(input.size());*  
           *std::copy(input.begin(), input.end(), output.begin());*
         - 不可以直接使用*std::copy(input.begin(), input.end(), output.begin());*
+        
+# 23. Merge k Sorted Lists
+* 1. 每两个做一次merge操作，直到剩余一个list
 
 # 26. remove duplicates from sorted array.
 * 最便捷的方法:使用stl的unique函数和vector的erase，两行即可得到结果，可是效率不高。

@@ -481,6 +481,15 @@ public :
      */
     void nextPermutation(vector<int>& nums);
 
+    /**
+     * 23. Merge k Sorted Lists
+        Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+     * @param lists
+     * @return
+     */
+    ListNode * mergeKLists(vector<ListNode*> & lists) ;
+    ListNode * mergeTwoList(ListNode * l1, ListNode * l2);
+
 };
 
 
