@@ -827,6 +827,7 @@ vector<vector<int>> Solution::combinationSum(vector<int> &candidates, int target
 }
 
 vector<vector<int>> Solution::combinationSum2(vector<int> &candidates, int target) {
+
     vector<int> combination;
     sort(candidates.begin(), candidates.end());
     return combinationSum2(candidates, target, combination, 0);
@@ -1031,4 +1032,29 @@ int Solution::search(vector<int> & nums, int target){
         }
     }
     return -1;
+}
+
+vector<vector<int>> Solution::permuteUnique(vector<int> &nums) {
+    vector<vector<int>> result;
+    sort(nums.begin(), nums.end());  // 为什么要排序？？
+    result =  permuteUnique(nums, 0);
+    return result;
+}
+vector<vector<int>> Solution::permuteUnique(vector<int> nums, int begin) {
+    vector<vector<int>> result;
+    if (begin == nums.size() - 1) {
+        result.push_back(vector<int>{nums[begin]});
+        return result;
+    }
+
+    for (int i = begin; i < nums.size(); i ++) {
+        if (i != begin && nums[i] == nums[begin]) continue;
+        swap(nums[begin], nums[i]);
+        for (vector<int> row: permuteUnique(nums, begin + 1)) {
+            row.insert(row.begin(), nums[begin]);
+            result.push_back(row);
+        }
+//        swap(nums[begin], nums[i]);  // 为什么这里不能恢复？？？
+    }
+    return result;
 }
