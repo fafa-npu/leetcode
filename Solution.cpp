@@ -1058,3 +1058,26 @@ vector<vector<int>> Solution::permuteUnique(vector<int> nums, int begin) {
     }
     return result;
 }
+
+void Solution::nextPermutation(vector<int> &nums) {
+    int i = 0, k = 0;
+    bool isMax = true;
+    for (int index = 0; index < nums.size() - 1; index++) {
+         if (nums[index] < nums[index + 1]) {
+             if (index > i)
+             i = index;
+             isMax = false;
+         }
+        if (nums[index + 1] > nums[i]) {
+            k = index + 1;
+        }
+    }
+    if (isMax) {
+        std::reverse(nums.begin(), nums.end());
+        return;
+    }
+    swap(nums[i], nums[k]);
+    vector<int>::iterator it = nums.begin() + i + 1;
+    std::reverse(it, nums.end());
+    return;
+}

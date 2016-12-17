@@ -103,6 +103,15 @@
     
 * c++ string获取子字符串 substr(long p1, long length), 从p1开始，长度为length的子串
 
+# 31. Next Permutation
+--
+    1. 寻找最大的i，使得nums[i] < nums[i + 1];
+    2. 若无法找到，则返回反转后的数组
+    3. 寻找最大的k，使得nums[i] < nums[k]
+    4. swap(nums[i], nums[k]}
+    5. 反转nums(i + 1, nums.end)
+    6. nums即为所求解
+
 # 33. Search in Rotated Sorted Array
 * 先用二分查找找出rotate的位置，再用二分查找寻找当前数字的位置。
 * 一直rotate开始的位置后，用二分查找查相应地数字时，要把mid和realMid区分开来。
