@@ -103,6 +103,10 @@
     
 * c++ string获取子字符串 substr(long p1, long length), 从p1开始，长度为length的子串
 
+# 33. Search in Rotated Sorted Array
+* 先用二分查找找出rotate的位置，再用二分查找寻找当前数字的位置。
+* 一直rotate开始的位置后，用二分查找查相应地数字时，要把mid和realMid区分开来。
+
 # 34. Search for Range
 * 先二分查找到target，然后再根据查找到的位置向左向右扩张
 

@@ -996,3 +996,39 @@ vector<string> Solution::letterCombinations(string digits) {
     }
     return result;
 }
+
+int Solution::search(vector<int> & nums, int target){
+    int front = 0, back = nums.size() - 1;
+    int middle;
+    int minIndex = 0;
+
+    while (front <= back) {
+        middle = front + (back - front) / 2;
+        if (middle != 0) {
+            if (nums[middle] < nums[middle - 1]){
+                minIndex = middle;
+                break;
+            }
+        }
+        if (nums[middle] >= nums[back]) {
+            front = middle + 1 ;
+        } else {
+            back = middle - 1;
+        }
+
+    }
+    front = 0;
+    back = nums.size() - 1;
+    while (front <= back ) {
+        int mid = (back + front) / 2;
+        middle = (mid + minIndex) % nums.size();
+        if (nums[middle] == target) {
+            return middle;
+        } else if (nums[middle] > target) {
+            back = mid - 1;
+        } else {
+            front = mid + 1;
+        }
+    }
+    return -1;
+}
