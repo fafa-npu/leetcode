@@ -499,7 +499,7 @@ public :
      */
     double myPow(double x, int n);
 
-    /**
+    /** 58. Length of Last Word
      * Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
         If the last word does not exist, return 0.
         Note: A word is defined as a character sequence consists of non-space characters only.
@@ -511,6 +511,18 @@ public :
      */
     int lengthOfLastWord(string s) ;
 
+    /**
+     * 67. Add Binary
+        Given two binary strings, return their sum (also a binary string).
+        For example,
+            a = "11"
+            b = "1"
+            Return "100".
+     * @param a
+     * @param b
+     * @return
+     */
+    string addBinary(string a, string b);
 };
 
 

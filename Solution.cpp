@@ -1119,3 +1119,30 @@ int Solution::lengthOfLastWord(string s) {
     return length;
 }
 
+string Solution::addBinary(string a, string b) {
+    string result;
+    int carry = 0;
+    int currentBit;
+    int aLength = a.size();
+    int bLength = b.size();
+    if (aLength > bLength) { // 使a变为短的一方
+        swap(a, b);
+        swap(aLength, bLength);
+    }
+    for (int i = 1; i <= aLength; i++) {
+        int intA = a[aLength - i] - '0';
+        int intB = b[bLength - i] - '0';
+        currentBit = (intA + intB + carry) % 2;
+        carry = (intA && intB || intA && carry || intB && carry);
+        result.insert(result.begin(), currentBit + '0');
+    }
+    for (int i = bLength - aLength - 1; i >= 0; i--) {
+        currentBit = (b[i] - '0' + carry) % 2;
+        carry = (b[i] - '0') * carry;
+        result.insert(result.begin(), currentBit + '0');
+    }
+    if (carry) {
+        result.insert(result.begin(), carry + '0');
+    }
+    return result;
+}
