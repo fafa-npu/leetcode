@@ -207,7 +207,7 @@
  *或 
  
         设置三个flag数组，其中
-            flag1[] 代表相应列是否有queen
+            flag1[] 代表相应列是否有queen 
             flag2[] 代表45°直线是否有queen
             flag3[] 代表135°直线是否有queen
              | | |                / / /             \ \ \
@@ -218,6 +218,9 @@
              O O O               O O O               O O O
              | | |              / / /                 \ \ \
             3 columns        5 45° diagonals     5 135° diagonals    (when n is 3)
+ 
+ # 52. N-Queens II
+ * 不需要返回整个board，所以不需要维护board
 
 # 58. Length of Last Word
 * 从后往前数

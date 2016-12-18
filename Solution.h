@@ -557,6 +557,15 @@ public :
     vector<vector<string>> solveNQueens(int n);
     bool isValidQueens(vector<string>, int i, int j);
     vector<vector<string>> solveNQueens(vector<string> _queens,int n, int row);
+
+    /**
+     *Follow up for N-Queens problem.
+        Now, instead outputting board configurations, return the total number of distinct solutions.
+     * @param n
+     * @return
+     */
+    int totalNQueens(int n);
+    void totalNQueens(vector<bool> & flag, int n, int row, int & num);
 };
 
 

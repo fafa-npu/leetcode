@@ -1201,3 +1201,24 @@ vector<vector<string>> Solution::solveNQueens(vector<string> _queens, int n, int
     }
     return result;
 }
+
+int Solution::totalNQueens(int n) {
+    vector<bool> flag(5*n - 2, true);
+    int num = 0;
+    totalNQueens(flag, n, 0, num);
+    return num;
+}
+
+void Solution::totalNQueens(vector<bool> &flag, int n, int row, int &num) {
+    if (row == n) {
+        num ++;
+        return;
+    }
+    for (int col = 0; col < n; col ++) {
+        if (flag[col] && flag[n + row + col] && flag[3*n -1 + row - col + n]) {
+            flag[col] = flag[n + row + col] = flag[ 4 * n + row - col - 1] = false;
+            totalNQueens(flag, n, row + 1, num);
+            flag[col] = flag[n + row + col] = flag[ 4 * n + row - col - 1] = true;
+        }
+    }
+}
