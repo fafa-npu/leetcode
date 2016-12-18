@@ -1100,7 +1100,8 @@ double Solution::myPow(double x, int n) {
             return myPow(x*x , n/2);
         }
     } else {
-        return myPow(1/x, -n);
+        if (n == INT_MIN) return (1/x * myPow(x, n+1));
+        else return myPow(1/x, -n);
     }
 }
 
