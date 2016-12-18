@@ -1146,3 +1146,15 @@ string Solution::addBinary(string a, string b) {
     }
     return result;
 }
+
+int Solution::climbStairs(int n) {
+    if (n == 0) return 1;
+    if (n == 1) return 1;
+    vector<int> stairs(n + 1, 0);
+    stairs[0] = 1;
+    stairs[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        stairs[i] = stairs[i - 1] + stairs[i - 2];
+    }
+    return stairs[n];
+}

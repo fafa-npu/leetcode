@@ -211,3 +211,13 @@
 # 67. Add Binary
 * 从后往前加
 * 注意进位
+
+# 70. Climbing Stairs
+* 等同于斐波那契数列
+* 动态规划
+ 
+        1. stairs[i]为攀登i层可能的方法
+        2. stairs[0] = 0
+           stairs[1] = 1
+           stairs[2] = 2
+        3. stairs[i] = stairs[i-1] + stairs[i-2]
