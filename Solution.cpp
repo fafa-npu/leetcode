@@ -1105,3 +1105,17 @@ double Solution::myPow(double x, int n) {
     }
 }
 
+int Solution::lengthOfLastWord(string s) {
+    int length = 0;
+    int back = s.size() - 1;
+    while (back >= 0 && s[back] == ' ' ) {
+        back --;
+    }
+    if (back < 0) return 0;
+    while (back >= 0 && s[back] != ' ') {
+        length ++;
+        back --;
+    }
+    return length;
+}
+
