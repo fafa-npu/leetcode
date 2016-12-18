@@ -192,6 +192,33 @@
 # 50. Pow(x, n)
 * 递归调用，二分查找
 
+# 51. N-Queens
+* 回溯法
+* n-queens合法的条件为
+        
+        令 (row, col)为当前放置皇后的坐标
+        1. for(int i = 0; i < n; i++) queens[i][col] != 'Q'
+        2. for(int j = 0; j < n; j++) queens[row][j] != 'Q';
+        3. for(int i = 0; i < n; i++) 
+                queens[x-i][y-i] != 'Q'
+              &amp;&amp; queens[x+i][y+i] != 'Q'
+              &amp;&amp; queens[x-i][y+i] != 'Q'
+              &amp;&amp; queens[x+i][y-i] != 'Q'
+ *或 
+ 
+        设置三个flag数组，其中
+            flag1[] 代表相应列是否有queen
+            flag2[] 代表45°直线是否有queen
+            flag3[] 代表135°直线是否有queen
+             | | |                / / /             \ \ \
+             O O O               O O O               O O O
+             | | |              / / / /             \ \ \ \
+             O O O               O O O               O O O
+             | | |              / / / /             \ \ \ \ 
+             O O O               O O O               O O O
+             | | |              / / /                 \ \ \
+            3 columns        5 45° diagonals     5 135° diagonals    (when n is 3)
+
 # 58. Length of Last Word
 * 从后往前数
 * 注意最后是空格时的状况

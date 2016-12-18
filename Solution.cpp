@@ -1158,3 +1158,46 @@ int Solution::climbStairs(int n) {
     }
     return stairs[n];
 }
+
+bool Solution::isValidQueens(vector<string> queens, int i, int j) {
+    int row = i, col = j;
+    int n = queens.size();
+    for (int index = 0; index < n; index ++ ) {
+        if (index != col && queens[row].at(index) == 'Q' || index != row && queens[index].at(col) == 'Q'){
+            return false;
+        }
+        if (index != 0) {
+            if (i - index >= 0 && j - index >= 0 && queens[i - index][j - index] == 'Q'
+                || i + index < n && j + index < n && queens[i + index][j + index] == 'Q'
+                || i + index < n && j - index >= 0 && queens[i + index][j - index] == 'Q'
+                || i - index >= 0 && j + index < n && queens[i - index][j + index] == 'Q'
+                    ) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+vector<vector<string>> Solution::solveNQueens(int n) {
+    vector<string> initQueens(n, string(n,'.'));
+    vector<vector<string>> result =  solveNQueens(initQueens,n, 0);
+    return result;
+}
+vector<vector<string>> Solution::solveNQueens(vector<string> _queens, int n, int row) {
+    vector<vector<string> > result;
+    if (row == n){
+        result.push_back(_queens);
+        return result;
+    }
+    for (int i = 0; i < n; i++) {
+        _queens[row][i] = 'Q';
+        if (isValidQueens(_queens, row, i)) {
+            for (vector<string> queens : solveNQueens(_queens, n, row + 1)) {
+                result.push_back(queens);
+            }
+        }
+        _queens[row][i] = '.';
+    }
+    return result;
+}
