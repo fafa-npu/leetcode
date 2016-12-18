@@ -221,7 +221,17 @@
  
  # 52. N-Queens II
  * 不需要返回整个board，所以不需要维护board
-
+ 
+ # 53. Maximum Subarray
+ * 动态规划法 O(n)
+        
+        ans = nums[0]
+        sum = 0 
+        for i = 0 : n - 1 
+            sum += nums[i]
+            ans = max(sum, ans)
+            sum = max(sum,0)
+        
 # 58. Length of Last Word
 * 从后往前数
 * 注意最后是空格时的状况

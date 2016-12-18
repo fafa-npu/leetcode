@@ -1222,3 +1222,16 @@ void Solution::totalNQueens(vector<bool> &flag, int n, int row, int &num) {
         }
     }
 }
+
+int Solution::maxSubArray(vector<int> &nums) {
+    int length = nums.size();
+    if (length == 0) return 0;
+    int ans = nums[0], sum = 0;
+
+    for (int i = 0; i < length; i++) {
+        sum += nums[i];
+        ans = max(ans, sum);
+        sum = max(sum, 0);
+    }
+    return ans;
+}
