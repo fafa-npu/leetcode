@@ -1235,3 +1235,40 @@ int Solution::maxSubArray(vector<int> &nums) {
     }
     return ans;
 }
+
+
+vector<vector<int>> Solution::generateMatrix(int n) {
+    vector<vector<int>> result(n, vector<int>(n, 0));
+    int step, num = 0;
+    int i = 0, j = 0;
+    for (int loop = 0; loop < (n + 1)/ 2; loop ++) {    // totally (n + 1) / 2 loops.
+        step = n - 2 * loop - 1;
+        if (step == 0) {
+            result[i][j] = ++num;
+            break;
+        }
+        i = j = loop;
+        while (step > 0) {            // 1. left to right
+            result[i][j++] = ++num;
+            step -- ;
+        }
+        step = n - 2 * loop - 1;
+        while (step > 0) {            // 2. top to bottom
+            result[i++][j] = ++num;
+            step --;
+        }
+        step = n - 2 * loop - 1;
+        while (step > 0) {            // 3. right to left
+            result[i][j--] = ++num;
+            step --;
+        }
+        step = n - 2 * loop - 1;
+        while (step > 0) {            // 4. bottom to top
+            result[i--][j] = ++num;
+            step --;
+        }
+        i ++;
+        j ++;
+    }
+    return result;
+}
