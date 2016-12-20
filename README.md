@@ -246,6 +246,10 @@
         p[i][j]为到达(i,j)所需的步数。
         p[i][j] = p[i-j][j] + p[i][j-1]
 
+# 63. Unique Paths II
+* 同上， 动态规划
+* 若当前位置为1， 则paths count = 0
+
 # 66. Plus One
 * 迭代器返向遍历
     --
