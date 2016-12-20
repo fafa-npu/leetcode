@@ -286,3 +286,24 @@
            stairs[1] = 1
            stairs[2] = 2
         3. stairs[i] = stairs[i-1] + stairs[i-2]
+        
+# 73. Set Matrix Zeroes
+* O(m + n) space
+            
+            需要一个额外的空间存储哪一行哪一列置0.
+    
+* O(1) space
+        
+            令
+            第一行的所有数字作为其所在列是否存在0的指示位，
+            第一列的所有数字作为其所在行是否存在0的指示位。 
+            遍历整个矩阵，如果当前数字为0，则置当前行和当前列的第一个数字为0
+            注意，nums[0][0]位置的数字是row0与col0的重合，所以应设置另外一个变量单独记录row0或col0
+          
+# 74. Search a 2D Matrix 
+* binary search
+        
+        length = m * n;
+        for (i : length) 
+            row = i / n;
+            col = i * n;

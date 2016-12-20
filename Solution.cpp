@@ -1346,3 +1346,52 @@ int Solution::minPathSum(vector<vector<int>> &grid) {
     }
     return cur[m - 1];
 }
+
+void Solution::setZeroes(vector<vector<int>> &matrix) {
+    int m = matrix.size();
+    int n = matrix[0].size();
+    vector<bool> record(m + n, false);
+    for (int i = 0; i < m; i ++) {
+        for (int j = 0; j < n; j++) {
+            if (matrix[i][j] == 0) {
+                record[i] = true;
+                record[j + m] = true;
+            }
+        }
+    }
+    for (int i = 0; i < m; i++) {
+        if (record[i]) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    for (int j = 0; j < n; j++) {
+        if (record[j + m]) {
+            for (int i = 0; i < m; i++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+bool Solution::searchMatrix(vector<vector<int>> &matrix, int target) {
+    int m = matrix.size();
+    if (m == 0) return false;
+    int n = matrix[0].size();
+    int front = 0, back = m * n - 1;
+    while (front <= back) {
+        int mid = front + (back - front) / 2;
+        int row = mid / n;
+        int col = mid % n;
+        if (matrix[row][col] == target) {
+            return true;
+        }
+        if (matrix[row][col] > target) {
+            back = mid - 1;
+        } else {
+            front = mid + 1;
+        }
+    }
+    return false;
+}
