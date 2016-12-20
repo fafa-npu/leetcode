@@ -252,6 +252,15 @@
 * 若当前位置为1， 则paths count = 0
 * 注意当（0，0）位置为1时。
 
+# 64. Minimum Path Sum
+* 动态规划
+       
+       sum[i][j] 保存到达当前位置最小的sum
+       则，
+       sum[i][j] = currentNum + min(sum[i - 1][j], sum[i][j - 1]
+* 注意， 由于当前位置的sum仅与左和上方的sum有关系，因此，可以使用两个vector代替sum
+  进而，可以使用一个vector代替sum，只保存当前位置上方的sum和当前位置左下方的sum, 详见[dicuss](https://discuss.leetcode.com/topic/15269/10-lines-28ms-o-n-space-dp-solution-in-c-with-explanations)
+
 # 66. Plus One
 * 迭代器返向遍历
     --
