@@ -240,7 +240,20 @@
         |-----
         具体的：
             设置 u,b, l, r 四个边界，每个边界中的元素遍历完后都执行一次 ++ 或 -- 操作
-        
+            
+# 55. Jump Games
+* 方法一
+    * 0是可能会造成无法到达的关键因素。
+    * 对nums中出现的每一个0，假设其所在的位置为index，若对于[0,index-1]内的所有i，不存在nums[i]使得nums[i] - (index - i) > 0， 则返回false
+* 方法二
+    * 贪心
+    * 遍历整个数组，计算所能到达的最大的位置
+    * Here is a brilliant method:
+            
+            for (int i = 0, reach = 0; i < n && i <= reach) 
+                reach = max(i+A[i], reach)
+            return i == n
+
 # 58. Length of Last Word
 * 从后往前数
 * 注意最后是空格时的状况

@@ -1461,3 +1461,20 @@ void Solution::sortColors(vector<int> &nums) {
         }
     }
 }
+
+bool Solution::canJump(vector<int> &nums) {
+    if (nums.size() == 1) return true;
+    for (int index = 0; index < nums.size() - 1; index ++) {
+        if (nums[index] == 0) {
+            bool canReach = false;
+            for (int tmpIndex = 0; tmpIndex < index; tmpIndex++) {
+                if (nums[tmpIndex] - (index - tmpIndex) > 0) {
+                    canReach = true;
+                    break;
+                }
+            }
+            if (! canReach) return false;
+        }
+    }
+    return true;
+}
