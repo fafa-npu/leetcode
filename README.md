@@ -231,6 +231,15 @@
             sum += nums[i]
             ans = max(sum, ans)
             sum = max(sum,0)
+ 
+ # 54. Spiral Matrix
+ * 从外向内循环，每层按如下方式遍历
+        
+        ---- |
+        |    |
+        |-----
+        具体的：
+            设置 u,b, l, r 四个边界，每个边界中的元素遍历完后都执行一次 ++ 或 -- 操作
         
 # 58. Length of Last Word
 * 从后往前数

@@ -1414,3 +1414,31 @@ int Solution::sqrt(int x) {
     }
     return -1;
 }
+
+vector<int> Solution::spiralOrder(vector<vector<int>> & matrix) {
+    int rows = matrix.size();
+    if (rows == 0) return {};
+    int cols = matrix[0].size();
+    vector<int> result(rows * cols);
+    int u = 0, b = rows - 1, l = 0, r = cols - 1;
+    int index = 0;
+    while (true)  {
+        for (int col = l; col <= r; col ++) {
+            result[index++] = matrix[u][col];
+        }
+        if (++u > b) break;
+        for (int row = u; row <= b; row ++) {
+            result[index++] = matrix[row][r];
+        }
+        if (--r < l) break;
+        for (int col = r; col >= l; col --) {
+            result[index++] = matrix[b][col];
+        }
+        if (--b < u) break;
+        for (int row = b; row >= u; row --) {
+            result[index++] = matrix[row][l];
+        }
+        if (++l > r) break;
+    }
+    return result;
+}
