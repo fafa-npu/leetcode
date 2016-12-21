@@ -658,6 +658,15 @@ public :
      * @return
      */
     bool searchMatrix(vector<vector<int>> & matrix, int target);
+
+    /**
+     * 69. Sqrt(x)
+     *Implement int sqrt(int x).
+        Compute and return the square root of x.
+     * @param x
+     * @return
+     */
+    int sqrt(int x);
 };
 
 

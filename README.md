@@ -277,6 +277,13 @@
 * 从后往前加
 * 注意进位
 
+# 69. Sqrt(x)
+* binary search
+* 注意： 边界值
+* target找到的条件
+    
+        nums == target / nums;
+
 # 70. Climbing Stairs
 * 等同于斐波那契数列
 * 动态规划

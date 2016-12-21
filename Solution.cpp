@@ -1395,3 +1395,22 @@ bool Solution::searchMatrix(vector<vector<int>> &matrix, int target) {
     }
     return false;
 }
+
+int Solution::sqrt(int x) {
+    if (x == 0) return 0;
+    int front = 1, back = x;
+    while (front <= back) {
+        int mid = front + (back - front) / 2;
+        if (mid == x / mid){
+            return mid;
+        }
+        if (mid < x / mid) {
+            if (mid + 1 > x / (mid + 1))
+                return mid;
+            front = mid + 1;
+        } else {
+            back = mid - 1;
+        }
+    }
+    return -1;
+}
