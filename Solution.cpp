@@ -1442,3 +1442,22 @@ vector<int> Solution::spiralOrder(vector<vector<int>> & matrix) {
     }
     return result;
 }
+
+void Solution::sortColors(vector<int> &nums) {
+    int length = nums.size();
+    if (length == 1) return;
+    int flag0 = 0, flag2 = length - 1;
+    int index = 1;
+    while (index <= flag2) {
+        if (nums[index] == 0) {
+            swap(nums[flag0], nums[index]);
+            flag0 ++;
+            index ++;
+        } else if (nums[index] == 2) {
+            swap(nums[flag2], nums[index]);
+            flag2 --;
+        } else {
+            index ++;
+        }
+    }
+}

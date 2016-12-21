@@ -323,3 +323,26 @@
         for (i : length) 
             row = i / n;
             col = i * n;
+            
+# 75. Sort Colors
+* 设置两个标志位a, b 分别代表正在排序的0和2的下一个位置。
+
+        具体地：
+        flag0 = 0
+        flag2 = nums.size()- 1
+        index = 0
+        while (index <= flag2)
+            if (nums[index] == 0) 
+                swap(nums[index],nums[flag0]
+                index++
+                flag0++
+            else if (nums[index] == 2)
+                swap(nums[index], nums[flag2])
+                flag2--
+            else 
+                index ++
+* 为什么 在nums[index] == 0 的时候index++ ，而nums[index] == 2的时候不能index++，可否将0中的index++移到2中去？
+    - 不可以
+    1. 当nums[index] == 2时，swap之后，index所指向的元素是一个新的元素，此时如果执行index++操作，会把swap过来的元素忽略，所以在2中不能进行index++操作。
+    2. 当nums[index] == 0时，flag0 <= index始终成立，所以flag0所指的位置必定为1，故不需要重新判断，可以执行自增操作。
+    3. 若0中不进行自增操作，可能会造成flag0 > index的情况，比如nums为 (0,0,1)时，此时flag0越界，因此0中必须执行自增操作。
