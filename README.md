@@ -253,7 +253,22 @@
             for (int i = 0, reach = 0; i < n && i <= reach) 
                 reach = max(i+A[i], reach)
             return i == n
-
+            
+# 56. Merge Intervals
+* 先对所有的范围对按照第一个数字的大小进行排序
+* 对排序后的结果，如果当前范围对的后一个数字小于等于下一个范围对的前一个数字，则合并。
+* 排序：
+        
+        sort(myVector.begin(), myVector.end(), myFunction);
+        
+* merge:
+        
+        1. 将intervals[0]添加到result
+        2. 顺序遍历intervals中剩余的元素
+            if (result.back.end < intervals[i].start)
+                result.push_back(intervals[i])
+            else 
+                result.back.end = max(result.back.end, intervals[i].end)
 # 58. Length of Last Word
 * 从后往前数
 * 注意最后是空格时的状况

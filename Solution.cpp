@@ -1478,3 +1478,21 @@ bool Solution::canJump(vector<int> &nums) {
     }
     return true;
 }
+
+bool sortIntervalFunction(Interval i1, Interval i2) {
+    return i1.start < i2.start;
+}
+vector<Interval> Solution::merge(vector<Interval> &intervals) {
+    if (intervals.size() == 0) return {};
+    std::sort(intervals.begin(), intervals.end(), sortIntervalFunction);
+    vector<Interval> result;
+    result.push_back(intervals[0]);
+    for (int i = 1, rIndex = 0; i < intervals.size(); i++) {
+        if (result.back().end < intervals[i].start) {
+            result.push_back(intervals[i]);
+        }else {
+            result.back().end = max(result.back().end, intervals[i].end);
+        }
+    }
+    return result;
+}
