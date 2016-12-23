@@ -272,7 +272,15 @@
                 
 # 57. Insert Interval
 * 先排序
-*
+* 对intervals内的start从小到大遍历
+
+        1. if (newInterval.end < intervals[i].start)
+                遍历终止，将剩余的interval添加到result
+        2. if (newInterval.start < intervals[i].end)
+                newInterval = { min(newInterval.start, intervals[i].start), max(newIntervals.end, intervals[i].end) }
+        3. if (newInterval.end > intervals[i].start)
+                result.push_back(it)
+                
 # 58. Length of Last Word
 * 从后往前数
 * 注意最后是空格时的状况
@@ -280,6 +288,8 @@
 # 59. Spiral Matrix II
 * 螺旋矩阵
 * 从外向内，一层一层遍历。共有(n+1) / 2 层
+
+
 
 # 62. Unique Paths
 * 动态规划
