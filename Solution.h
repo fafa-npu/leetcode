@@ -729,6 +729,19 @@ public :
     int minPathSum(vector<vector<int>> & grid);
 
     /**
+        72. Edit Distance
+        Given two words word1 and word2, find the minimum number of steps required to convert word1 to word2. (each operation is counted as 1 step.)
+        You have the following 3 operations permitted on a word:
+        a) Insert a character
+        b) Delete a character
+        c) Replace a character
+     * @param word1
+     * @param word2
+     * @return
+     */
+    int minDistance(string word1, string word2);
+
+    /**
      * 73. Set Matrix Zeroes
         Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place.
      * @param matrix

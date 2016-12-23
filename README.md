@@ -351,7 +351,23 @@
            stairs[1] = 1
            stairs[2] = 2
         3. stairs[i] = stairs[i-1] + stairs[i-2]
-        
+
+# 72. Edit Distance
+* 动态规划
+
+        令 dp[i, j] 为 word1[0, i-1], word2[0, i-2]的minDistance
+        则：
+            dp[i][0] = i                   if word2 is ""
+            dp[0][j] = j                   if word1 is ""
+            dp[i][j] = 
+                dp[i-1][j-1] ,             if word1[i] == word2[j]
+                min (
+                    dp[i - 1][j - 1] + 1,  if replace
+                    dp[i - 1][j] + 1,      if delete a character from word1
+                    dp[i][j - 1] + 1,      if insert a character into word1
+                ) 
+* 由于dp[i][j]只与dp[i-1][j-1], dp[i-1][j], dp[i][j-1]有关，因此可以将dp由m*n 简化为m + 1或n + 1(逐行或逐列)          
+
 # 73. Set Matrix Zeroes
 * O(m + n) space
             

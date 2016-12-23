@@ -1571,3 +1571,31 @@ ListNode * Solution::rotateList(ListNode *head, int k) {
     list.back()->next = list[0];
     return *it;
 }
+
+int Solution::minDistance(string word1, string word2) {
+    int length1 = word1.length();
+    int length2 = word2.length();
+    if ( !(length1 && length2)) {
+        // lenght1 == 0 || length2 == 0
+        return length1 + length2;
+    }
+    vector<vector<int>> dp(length1 + 1, vector<int>(length2 + 1, 0));
+    for (int i = 1; i <= length1; i++) {
+        dp[i][0] = i;
+    }
+    for (int i = 1; i <= length2; i++) {
+        dp[0][i] = i;
+    }
+    for (int i = 1; i <= length1; i++) {
+        for (int j = 2; j <= length2; j++) {
+            if (word1[i - 1] == word2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            } else {
+                int minDp = std::min(dp[i - 1][j - 1] + 1, dp[i - 1][j] + 1);
+                dp[i][j] = std::min(minDp, dp[i][j - 1] + 1);
+            }
+        }
+    }
+    return dp[length1][length2];
+
+}
