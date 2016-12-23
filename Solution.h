@@ -659,6 +659,38 @@ public :
     vector<vector<int>> generateMatrix(int n);
 
     /**
+     * 60. Permutation Sequence
+        The set [1,2,3,…,n] contains a total of n! unique permutations.
+        By listing and labeling all of the permutations in order,
+        We get the following sequence (ie, for n = 3):
+        "123"
+        "132"
+        "213"
+        "231"
+        "312"
+        "321"
+        Given n and k, return the kth permutation sequence.
+        Note: Given n will be between 1 and 9 inclusive.
+     * @param n
+     * @param k
+     * @return
+     */
+    string getPermutation(int n, int k);
+    string nextPermutation(string s);
+
+    /**
+     * 61. Rotate List
+        Given a list, rotate the list to the right by k places, where k is non-negative.
+        For example:
+            Given 1->2->3->4->5->NULL and k = 2,
+            return 4->5->1->2->3->NULL.
+     * @param head
+     * @param k
+     * @return
+     */
+    ListNode * rotateList(ListNode * head, int k);
+
+    /**
      * 62. Unique Paths
         A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
         The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).

@@ -289,6 +289,13 @@
 * 螺旋矩阵
 * 从外向内，一层一层遍历。共有(n+1) / 2 层
 
+# 60. Permutation Sequence
+1. 使用next_permutation
+    TLE...
+2. 什么算法？？？ 看不懂啊
+
+# 61. Rotate List
+* 使用一个vector临时存储List，可以实现只遍历一次就rotate的目标。
 
 
 # 62. Unique Paths

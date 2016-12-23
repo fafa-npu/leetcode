@@ -1521,3 +1521,53 @@ vector<Interval> Solution::insert(vector<Interval> &intervals, Interval newInter
     }
     return result;
 }
+
+string Solution::nextPermutation(string s) {
+    int maxI = 0, maxJ = 0;
+    bool isMax = true;
+    for (int i = 0; i < s.length() - 1; i++) {
+        if (s[i] <= s[i + 1]) {
+            maxI = i;
+            isMax = false;
+        }
+        if (s[i+1] > s[maxI]) {
+            maxJ = i+1;
+        }
+    }
+    if (isMax) {
+        std::reverse(s.begin(), s.end());
+        return s;
+    }
+    swap(s[maxI], s[maxJ]);
+    sort(s.begin() + maxI + 1, s.end());
+    return s;
+}
+string Solution::getPermutation(int n, int k) {
+    string s(n, '0');
+
+    // 生成第一个permutation (1234...n)
+    for (int i = 0; i < n; i++) {
+        s[i] += (i + 1);
+    }
+
+    while (--k > 0) {
+        s = nextPermutation(s);
+    }
+    return s;
+}
+
+ListNode * Solution::rotateList(ListNode *head, int k) {
+    if (head == NULL) return NULL;
+    vector<ListNode *> list;
+    ListNode * node(head);
+    while (node != NULL) {
+        list.push_back(node);
+        node = node->next;
+    }
+    k = k % list.size();
+    if (k == 0) return head;
+    vector<ListNode *>::iterator it = list.end() - k;
+    (*(it-1))->next = NULL;
+    list.back()->next = list[0];
+    return *it;
+}
