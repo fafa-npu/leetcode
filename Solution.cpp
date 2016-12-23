@@ -1496,3 +1496,28 @@ vector<Interval> Solution::merge(vector<Interval> &intervals) {
     }
     return result;
 }
+
+vector<Interval> Solution::insert(vector<Interval> &intervals, Interval newInterval) {
+    int length = intervals.size();
+    vector<Interval> result;
+    if (length == 0) return {newInterval};
+    sort(intervals.begin(), intervals.end(), sortIntervalFunction);
+    vector<Interval>::iterator it = intervals.begin();
+    while (it != intervals.end()) {
+        if (it->start > newInterval.end) {
+            break;
+        }
+        if (newInterval.start > it->end) {
+            result.push_back(*it);
+        }else {
+            newInterval = {min(newInterval.start, it->start), max(newInterval.end, it->end)};
+        }
+        it ++;
+    }
+    result.push_back(newInterval);
+    while (it != intervals.end()) {
+        result.push_back(*it);
+        it++;
+    }
+    return result;
+}

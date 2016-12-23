@@ -269,6 +269,10 @@
                 result.push_back(intervals[i])
             else 
                 result.back.end = max(result.back.end, intervals[i].end)
+                
+# 57. Insert Interval
+* 先排序
+*
 # 58. Length of Last Word
 * 从后往前数
 * 注意最后是空格时的状况
