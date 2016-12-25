@@ -1599,3 +1599,36 @@ int Solution::minDistance(string word1, string word2) {
     return dp[length1][length2];
 
 }
+
+string Solution::convert(string s, int numRows) {
+    if (numRows == 1) return s;
+    int length = s.length();
+    string result;
+    for (int row = 1; row <= numRows; row++) {
+        if (row - 1 < length) {
+            result.push_back(s[row - 1]);
+        } else {
+            break;
+        }
+        int cur = row - 1;
+        while (true) {
+            cur += (2 * numRows - 2 * row);
+            if (cur < length) {
+                if (row != numRows) {
+                    result.push_back(s[cur]);
+                }
+            } else {
+                break;
+            }
+            cur += (2 * (row - 1));
+            if (cur < length) {
+                if (row - 1 != 0) {
+                    result.push_back(s[cur]);
+                }
+            }else {
+                break;
+            }
+        }
+    }
+    return result;
+}

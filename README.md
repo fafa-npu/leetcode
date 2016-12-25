@@ -51,6 +51,13 @@
         Δ=        n-1 n+1                     3n-3    3n-1                 5n-5
         Δ=2n-2    n                           3n-2                         5n-4
         */
+   
+   1. 观察上图，可以发现，每一行的排布是由规律的,从第一个数字开始，经过distance1后为第二个数字，再经过Distance2后为下一个数字，以此循环往复
+   
+          Distance1 = 2n - 2 - (2row - 1) = 2n - 2row
+          Distance2 = 2(row - 1)
+   2. 注意，第一行的Distance2为0， 最后一行的Distance1为0
+   
     
 # 10. Regular Expression Matching
 * Dynamic Programming
