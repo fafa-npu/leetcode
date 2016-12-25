@@ -39,6 +39,18 @@
 * 遍历string中可以作为中心的2n-1个位置，取以每个位置作为中心的最大回文。
 * 注意：
     size_t 是 unsigned 类型的，所以用来作为string的index且做--操作时，不可以用>=0为临界条件。
+
+# ZigZag Conversion
+        
+        /*n=numRows
+        Δ=2n-2    1                           2n-1                         4n-3
+        Δ=        2                     2n-2  2n                    4n-4   4n-2
+        Δ=        3               2n-3        2n+1              4n-5       .
+        Δ=        .           .               .               .            .
+        Δ=        .       n+2                 .           3n               .
+        Δ=        n-1 n+1                     3n-3    3n-1                 5n-5
+        Δ=2n-2    n                           3n-2                         5n-4
+        */
     
 # 10. Regular Expression Matching
 * Dynamic Programming
