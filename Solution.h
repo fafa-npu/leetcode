@@ -498,6 +498,19 @@ public :
     int trap(vector<int>& height);
 
     /**
+     * 43. Multiply Strings
+     * Given two numbers represented as strings, return multiplication of the numbers as a string.
+        Note:
+        The numbers can be arbitrarily large and are non-negative.
+        Converting the input string to integer is NOT allowed.
+        You should NOT use internal library such as BigInteger.
+     * @param num1
+     * @param num2
+     * @return
+     */
+    string multiply(string num1, string num2);
+
+    /**
      * 45. Jump Game II
      * Given an array of non-negative integers, you are initially positioned at the first index of the array.
         Each element in the array represents your maximum jump length at that position.

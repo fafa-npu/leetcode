@@ -1682,3 +1682,29 @@ vector<vector<int>> Solution::fourSum(vector<int> &nums, int target) {
     }
     return result;
 }
+
+string Solution::multiply(string num1, string num2) {
+    int length1 = num1.length();
+    int length2 = num2.length();
+    string result(length1 + length2 , '0');
+    int carry = 0;
+
+    for (int i = length1; i > 0; i-- ) {
+        carry = 0;
+        for (int j = length2; j > 0; j--) {
+            int num = (result[i + j - 1] - '0' + (num1[i - 1] - '0') * (num2[j - 1] - '0')) + carry;
+            carry = num / 10;
+            result[i + j - 1] = num % 10 + '0';
+        }
+        int cnt = i - 1;
+        while (carry != 0 && cnt >= 0) {
+            int num = carry + result[cnt] - '0';
+            carry = num / 10;
+            result[cnt] = num % 10 + '0';
+        }
+    }
+    while (result[0] == '0' && result.length() > 1) {
+        result.erase(result.begin());
+    }
+    return result;
+}
