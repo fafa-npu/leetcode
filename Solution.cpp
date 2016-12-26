@@ -1649,3 +1649,36 @@ int Solution::jump(vector<int> & nums) {
     }
     return step;
 }
+
+vector<vector<int>> Solution::fourSum(vector<int> &nums, int target) {
+    vector<vector<int>> result;
+    int length = nums.size();
+    if (length < 4) return result;
+    std::sort(nums.begin(), nums.end());
+    for (int i = 0; i < length - 3; i++) {
+        for (int j = i + 1; j < length - 2; j++) {
+            int front = j + 1;
+            int back = length - 1;
+            int tmpTarget = target - nums[i] - nums[j];
+            while (front < back) {
+                int sum = nums[front] + nums[back];
+                if (sum < tmpTarget) {
+                    front ++;
+                } else if (sum > tmpTarget){
+                    back --;
+                } else {
+                    int numFront = nums[front];
+                    int numBack = nums[back];
+                    result.push_back({nums[i], nums[j], numFront, numBack});
+                    while (front + 1 < back && nums[front] == nums[front + 1]) front++;
+                    front ++;
+                    while (back - 1 > front && nums[back] == nums[back - 1]) back --;
+                    back --;
+                }
+            }
+            while (j + 1 < length - 2 && nums[j] == nums[j + 1]) j++;
+        }
+        while (i + 1 < length - 3 && nums[i] == nums[i + 1]) i++;
+    }
+    return result;
+}

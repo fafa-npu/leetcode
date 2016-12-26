@@ -95,6 +95,9 @@
 # 17. Letter Combinations of a Phone Number
 * 回溯
 
+# 18. 4Sum
+在3Sum的基础上再加一层循环，使4Sum问题降维到3Sum问题，最终降维到2Sum问题。
+
 # 22. Generate Parentheses
 * 方法：
     - n = 1时，结果为 "()"
