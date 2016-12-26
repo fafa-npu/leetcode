@@ -186,6 +186,25 @@
 # 42. Trapping Rain Water
 * 1. 计算最底层的容量，然后各高度减1，递归计算最底层容量，知道所有高度减完。（TLE）
 * 2. 使用双指针法，从两边向中间走，每次走值小的那边;左右各记录一个最大值,遇见比最大值小的计算容量，遇见比最大值大的，把现在的值设为最大值。 
+
+# 45. Jump Game II
+* 广度优先搜索 + 贪心
+
+        令 step 为当前所需要走的步数， start为当前可到达的范围的起始位，end为当前可到达的范围的终止位。
+        则：
+            start = end = 0
+            step = 0
+            while(maxEnd < length - 1) 
+                step++
+                for (int i = start; i <= end; i++)
+                    maxEnd = end + 1
+                    if (i + nums[i] >= length - 1)
+                        return step
+                    maxEnd = max(maxEnd , i + nums[i])
+                start = end + 1
+                end = maxEnd
+            return step
+                
     
 # 46. Permutations
 * 动态规划(待续)？

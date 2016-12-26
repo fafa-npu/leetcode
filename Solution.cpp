@@ -1632,3 +1632,20 @@ string Solution::convert(string s, int numRows) {
     }
     return result;
 }
+
+int Solution::jump(vector<int> & nums) {
+    int step = 0, start = 0, end = 0, maxEnd = 0;
+    int length = nums.size();
+    while (maxEnd < length - 1) {
+        step ++;
+        for (int index = start; index <= end; index++) {
+            if (index + nums[index] >= length - 1) {
+                return step;
+            }
+            maxEnd = max(maxEnd, index + nums[index]);
+        }
+        start = end + 1;
+        end = maxEnd;
+    }
+    return step;
+}
