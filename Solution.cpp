@@ -1708,3 +1708,50 @@ string Solution::multiply(string num1, string num2) {
     }
     return result;
 }
+
+int Solution::longestValidParentheses(string s) {
+    int length = s.length();
+    if (length <= 1) return 0;
+    vector<int> longest(length, 0);
+    if (s[0] == '(' && s[1] == ')') longest[1] = 2;
+    int maxLongest = longest[1];
+    for (int index = 2; index < length; index++) {
+        if (s[index] == '(') {
+            longest[index] = 0;
+        } else {
+            if (s[index - 1] == '(') {
+                longest[index] = longest[index - 2] + 2;
+            } else {
+                if (index - longest[index - 1] - 1 >= 0 && s[index - longest[index - 1] - 1] == '(') {
+                    longest[index] = longest[index - 1] + 2 + (index - longest[index - 1] - 2 >= 0 ? longest[index - longest[index - 1] - 2] : 0);
+                }
+            }
+        }
+        maxLongest = max(maxLongest, longest[index]);
+    }
+    return maxLongest;
+}
+
+int Solution::longestValidParenthesesStack(string s) {
+    if (s.size() == 0) return 0;
+    vector<char> stack;
+    vector<int> cnt(s.size(), 0);
+    int index = 0;
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == '(') {
+            stack.push_back(s[i]);
+            index ++;
+        } else {
+            if (stack.size() > 0 && stack.back() == '(') {
+                stack.pop_back();
+                index --;
+                cnt[index] += cnt[index + 1] + 2;
+                cnt[index + 1] = 0;
+            } else  {
+                stack.push_back(s[i]);
+                index ++;
+            }
+        }
+    }
+    return *max_element(cnt.begin(), cnt.end());
+}

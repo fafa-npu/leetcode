@@ -136,7 +136,37 @@
     4. swap(nums[i], nums[k]}
     5. 反转nums(i + 1, nums.end)
     6. nums即为所求解
-
+    
+# 32. Longest Valid Parentheses
+* DP
+        
+        令 longest[i]为s[0]到s[i]中最长的合法圆括号的数目
+        则
+            1. longest[0] = 0
+            2. if s[i] == '('
+                    longest[i] = 0 
+               else           // s[i] == ')'
+                    if s[i - 1] == '('
+                        longest[i] = longest[i - 2] + 2;
+                    else      // s[i - 1] == ')' 
+                        if (s[i - longest[i - 1] - 1] == '(')
+                            longest[i] = 2 + longest[i - 1] + longest[ i - longest[i - 1] - 2]
+* Stack
+        
+        1. 创建一个stack
+        2. 创建一个数组cnt, cnt[i]代表在stack的第i层归并的括号数
+        3. 遍历s中的括号，将其添加到stack中
+            a. 如果当前元素为'('， 将其添加到栈顶，且index++
+            b. 如果当前元素为')' && 栈顶元素为'(', 
+                index-- 
+                cnt[index] += cnt[index + 1] + 2 
+            c. 如果当前元素为')' && (栈顶元素为')' || 栈为空), 
+                将其添加到栈顶， index++
+        4. 返回cnt中最大的值
+* 注意：
+    c++ 中， string::size() 和string::length()是同义的。
+    获取vector中最大的元素的*迭代器* std::max_element(vector::begin(), vector::end())
+                            
 # 33. Search in Rotated Sorted Array
 * 先用二分查找找出rotate的位置，再用二分查找寻找当前数字的位置。
 * 一直rotate开始的位置后，用二分查找查相应地数字时，要把mid和realMid区分开来。
