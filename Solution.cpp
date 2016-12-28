@@ -1522,38 +1522,27 @@ vector<Interval> Solution::insert(vector<Interval> &intervals, Interval newInter
     return result;
 }
 
-string Solution::nextPermutation(string s) {
-    int maxI = 0, maxJ = 0;
-    bool isMax = true;
-    for (int i = 0; i < s.length() - 1; i++) {
-        if (s[i] <= s[i + 1]) {
-            maxI = i;
-            isMax = false;
-        }
-        if (s[i+1] > s[maxI]) {
-            maxJ = i+1;
-        }
-    }
-    if (isMax) {
-        std::reverse(s.begin(), s.end());
-        return s;
-    }
-    swap(s[maxI], s[maxJ]);
-    sort(s.begin() + maxI + 1, s.end());
-    return s;
-}
 string Solution::getPermutation(int n, int k) {
-    string s(n, '0');
-
-    // 生成第一个permutation (1234...n)
-    for (int i = 0; i < n; i++) {
-        s[i] += (i + 1);
+    if (n == 0 || k == 0) return "";
+    string result("");
+    vector<int> factorial(n, 0);
+    string numSet("123456789");
+    factorial[0] = 1;
+    vector<int> X(n, 0);
+    for (int i = 1; i < n; i++) {
+        factorial[i] = factorial[i - 1] * i;
     }
-
-    while (--k > 0) {
-        s = nextPermutation(s);
+    for (int i = n; i > 0; i --) {
+        for (int x = i - 1 ; x >= 0; x--) {
+            if (x * factorial[i - 1] <= k - 1) {
+                result.push_back(numSet[x]);
+                numSet.erase(numSet.begin()+x);
+                k -= x * factorial[i - 1];
+                break;
+            }
+        }
     }
-    return s;
+    return result;
 }
 
 ListNode * Solution::rotateList(ListNode *head, int k) {
@@ -1747,7 +1736,7 @@ int Solution::longestValidParenthesesStack(string s) {
                 index --;
                 cnt[index] += cnt[index + 1] + 2;
                 cnt[index + 1] = 0;
-            } else  {
+            } else {
                 stack.push_back(s[i]);
                 index ++;
             }

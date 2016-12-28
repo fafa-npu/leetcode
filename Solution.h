@@ -752,7 +752,6 @@ public :
      * @return
      */
     string getPermutation(int n, int k);
-    string nextPermutation(string s);
 
     /**
      * 61. Rotate List
