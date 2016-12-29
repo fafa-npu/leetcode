@@ -1778,3 +1778,31 @@ string Solution::simplifyPath(string path) {
     }
     return result;
 }
+
+vector<vector<int>> Solution::combine(int n, int k) {
+    vector<int> nums;
+    for (int i = 1; i <= n; i++) {
+        nums.push_back(i);
+    }
+    return combine(nums,0, k);
+}
+vector<vector<int>> Solution::combine( vector<int> nums, int index, int k) {
+    vector<vector<int>> result;
+    vector<int> com;
+    if (k == 1) {
+        for (int i = index; i < nums.size(); i++) {
+            com.push_back(nums[i]);
+            result.push_back(com);
+            com.clear();
+        }
+        return result;
+    }
+    int cur = nums.back();
+    for (int i = index; i < nums.size() - k + 1; i++ ) {
+        for (auto com : combine(nums, i + 1, k - 1)) {
+            com.push_back(nums[i]);
+            result.push_back(com);
+        }
+    }
+    return result;
+}

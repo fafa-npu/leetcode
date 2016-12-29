@@ -468,6 +468,7 @@
     3. "/.../"      -> "/..." 
 * c++中分割字符串：
     getline(string s, string & tmp, char spliter);
+    
 # 72. Edit Distance
 * 动态规划
 
@@ -527,3 +528,28 @@
     1. 当nums[index] == 2时，swap之后，index所指向的元素是一个新的元素，此时如果执行index++操作，会把swap过来的元素忽略，所以在2中不能进行index++操作。
     2. 当nums[index] == 0时，flag0 <= index始终成立，所以flag0所指的位置必定为1，故不需要重新判断，可以执行自增操作。
     3. 若0中不进行自增操作，可能会造成flag0 > index的情况，比如nums为 (0,0,1)时，此时flag0越界，因此0中必须执行自增操作。
+    
+# 77. Combinations
+* 回溯法
+* 遍历
+    遍历所有的组合，取出其中符合条件的排列
+    具体地：
+            
+            vector<vector<int>> combine(int n, int k) {
+                vector<vector<int>> result;
+                vector<int> p(k, 0);
+                int i = 0;
+                while (i >= 0) {
+                    p[i]++;
+                    if (p[i] > n) {
+                        i--;
+                    } else if (i == k - 1){ 
+                        result.push_back(p);
+                    } else {
+                        ++i;
+                        p[i] = p[i - 1];
+                    }
+                }
+                return result;
+            }
+* 要善于用传值和传引用以及传下标的方式
