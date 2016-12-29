@@ -460,6 +460,14 @@
            stairs[2] = 2
         3. stairs[i] = stairs[i-1] + stairs[i-2]
 
+# 71. Simplify Path
+* Stack
+* 注意：
+    1. "/../"       -> "/"
+    2. "/home//fa/" -> "/home/fa"
+    3. "/.../"      -> "/..." 
+* c++中分割字符串：
+    getline(string s, string & tmp, char spliter);
 # 72. Edit Distance
 * 动态规划
 

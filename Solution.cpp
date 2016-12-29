@@ -3,6 +3,7 @@
 //
 
 #include <climits>
+#include <stack>
 #include "Solution.h"
 
 /**
@@ -1743,4 +1744,37 @@ int Solution::longestValidParenthesesStack(string s) {
         }
     }
     return *max_element(cnt.begin(), cnt.end());
+}
+
+string Solution::simplifyPath(string path) {
+
+    vector<string> stackPath;
+    string s;
+    for (int i = 0; i < path.length(); i++) {
+        while (path[i] == '/' && i < path.length()) {
+            i++;
+        }
+        while (path[i] != '/' && i < path.length()) {
+            s += path[i];
+            i++;
+        }
+        if (s == "..") {
+            if (stackPath.size() > 0) {
+                stackPath.pop_back();
+            }
+        }else if ( s != "." && s.size() > 0) {
+            stackPath.push_back(s);
+        }
+        s.clear();
+    }
+    if (stackPath.size() == 0) {
+        return "/";
+    }
+    string result;
+    while (stackPath.size() != 0) {
+        result += "/";
+        result += stackPath.front();
+        stackPath.erase(stackPath.begin());
+    }
+    return result;
 }

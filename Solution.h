@@ -883,6 +883,23 @@ public :
     int sqrt(int x);
 
     /**
+     * 71. Simplify Path
+        Given an absolute path for a file (Unix-style), simplify it.
+            For example,
+            path = "/home/", => "/home"
+            path = "/a/./b/../../c/", => "/c"
+            click to show corner cases.
+        Corner Cases:
+            Did you consider the case where path = "/../"?
+            In this case, you should return "/".
+            Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
+            In this case, you should ignore redundant slashes and return "/home/foo".
+     * @param path
+     * @return
+     */
+    string simplifyPath(string path);
+
+    /**
      * 75. Sort Colors
         Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
         Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
