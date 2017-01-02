@@ -1806,3 +1806,16 @@ vector<vector<int>> Solution::combine( vector<int> nums, int index, int k) {
     }
     return result;
 }
+
+vector<vector<int>> Solution::subsets(vector<int> &nums) {
+    if (nums.size() == 0) return {{}};
+        int curNum = nums.front();
+        vector<int> tmpNums(nums.begin() + 1, nums.end());
+        vector<vector<int>> preResult = subsets(tmpNums);
+        vector<vector<int>> result(preResult);
+        for (auto line : preResult) {
+            line.push_back(curNum);
+            result.push_back(line);
+        }
+        return result;
+}

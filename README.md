@@ -553,3 +553,12 @@
                 return result;
             }
 * 要善于用传值和传引用以及传下标的方式
+
+# 78. Subsets
+* backtracking
+
+        假设集合A = B + a， 其中B为集合，a为一个元素。
+        则 A 的所有子集为 
+            Subset(A) = Subset(B) + a * Subset(B);
+            其中Subset(B)为B的所有子集的集合， a * Subset(B) 为 B的在B的所有子集中加入a后所组成的集合
+ 
