@@ -568,7 +568,7 @@
     
         int i = 0;
         for (auto n : nums) {
-            if (n < 2 || n > nums[i - 2]) {
+            if (i < 2 || n > nums[i - 2]) {
                 nums[i++] = n;
             }
         }
