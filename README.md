@@ -573,3 +573,6 @@
             }
         }
         return i;
+
+# 100. Same Tree.
+* DFS
