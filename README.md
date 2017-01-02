@@ -562,3 +562,14 @@
             Subset(A) = Subset(B) + a * Subset(B);
             其中Subset(B)为B的所有子集的集合， a * Subset(B) 为 B的在B的所有子集中加入a后所组成的集合
  
+# 80. Remove Duplicates from Sorted Array II
+* 此题不只要计算长度，还有保证得到的新的array的前n位为去除重复后的array。
+* 与 Remove Duplicates from Sorted Array I相同的解法:
+    
+        int i = 0;
+        for (auto n : nums) {
+            if (n < 2 || n > nums[i - 2]) {
+                nums[i++] = n;
+            }
+        }
+        return i;

@@ -1819,3 +1819,13 @@ vector<vector<int>> Solution::subsets(vector<int> &nums) {
         }
         return result;
 }
+
+int Solution::removeDuplicatesII(vector<int> &nums) {
+    if (nums.empty()) return 0;
+    int cnt = 0, n = nums.size();
+    for (int i = 2; i < n; i++) {
+        if (nums[i] == nums[i - 2 - cnt]) cnt ++;
+        else nums[i - cnt] = nums[i];
+    }
+    return n - cnt;
+}
