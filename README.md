@@ -573,6 +573,11 @@
             }
         }
         return i;
+        
+# 83. Remove Duplicates from Sorted List
+* 判断当前node的值和下一个node的值是否相等
+    * 是 curNode->next = curNode->next->next;
+    * 否 curNode = curNode->next;
 
 # 100. Same Tree.
 * DFS

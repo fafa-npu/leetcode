@@ -1836,3 +1836,14 @@ bool Solution::isSameTree(TreeNode *p, TreeNode *q) {
     if (p->val != q->val) return false;
     return (isSameTree(p->left, q->left) && isSameTree(p->right, q->right));
 }
+
+ListNode * Solution::deleteDuplicates(ListNode *head) {
+    ListNode * curNode = head;
+    while (curNode != NULL) {
+        while (curNode->next != NULL && curNode->val == curNode->next->val) {
+            curNode->next = curNode->next->next;
+        }
+        curNode = curNode->next;
+    }
+    return head;
+}

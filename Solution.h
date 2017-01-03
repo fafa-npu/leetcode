@@ -979,6 +979,17 @@ public :
     int removeDuplicatesII(vector<int> & nums);
 
     /**
+     * 83. Remove Duplicates from Sorted List
+        Given a sorted linked list, delete all duplicates such that each element appear only once.
+        For example,
+        Given 1->1->2, return 1->2.
+        Given 1->1->2->3->3, return 1->2->3.
+     * @param head
+     * @return
+     */
+    ListNode * deleteDuplicates(ListNode * head);
+
+    /**
      * 100. Same Tree.
      * Given two binary trees, write a function to check if they are equal or not.
         Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
