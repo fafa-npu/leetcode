@@ -583,6 +583,9 @@
 * 判断当前node的值和下一个node的值是否相等
     * 是 curNode->next = curNode->next->next;
     * 否 curNode = curNode->next;
+    
+# 88. Merge Two Sorted Arrays
+* 从后向前排列
 
 # 94. Binary Tree Inorder Traversal
         
@@ -612,5 +615,6 @@
     }
 * Stack
     * 不使用unordered_map 
+    
 # 100. Same Tree.
 * DFS
