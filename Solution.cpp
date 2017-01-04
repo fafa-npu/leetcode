@@ -1847,3 +1847,33 @@ ListNode * Solution::deleteDuplicates(ListNode *head) {
     }
     return head;
 }
+
+ListNode * Solution::deleteDuplicatesII(ListNode *head) {
+    ListNode * curNode = head;
+    ListNode * preNode = NULL;
+    ListNode * newHead = NULL;
+    while (curNode != NULL) {
+        bool isDuplicate = false;
+        while (curNode -> next != NULL && curNode->val == curNode->next->val) {
+            isDuplicate = true;
+            curNode = curNode->next;
+        }
+        if (isDuplicate){
+            curNode = curNode->next;
+            continue;
+        } else {
+            if (newHead == NULL) {
+                newHead = curNode;
+                preNode = newHead;
+            } else {
+                preNode->next = curNode;
+                preNode = curNode;
+            }
+            curNode = curNode->next;
+        }
+    }
+    if (preNode != NULL) {
+        preNode->next = curNode;
+    }
+    return newHead;
+}

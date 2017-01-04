@@ -574,6 +574,10 @@
         }
         return i;
         
+# 82. Remove Duplicates from Sorted List II
+* 注意边界条件
+    * 1,1,1,2
+    * 1,2,2
 # 83. Remove Duplicates from Sorted List
 * 判断当前node的值和下一个node的值是否相等
     * 是 curNode->next = curNode->next->next;
