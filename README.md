@@ -578,10 +578,39 @@
 * 注意边界条件
     * 1,1,1,2
     * 1,2,2
+    
 # 83. Remove Duplicates from Sorted List
 * 判断当前node的值和下一个node的值是否相等
     * 是 curNode->next = curNode->next->next;
     * 否 curNode = curNode->next;
 
+# 94. Binary Tree Inorder Traversal
+        
+* Stack and unsorted_map  使用map标记curNode的left child 是否一倍访问过。
+        
+        
+    vector<int> Solution::inorderTraversal(TreeNode *root) {
+        vector<int> inorderTraversal;
+        if (!root) return inorderTraversal;
+        stack<TreeNode *> stackNode;
+        unordered_map<TreeNode *, bool> mapNode;
+        stackNode.push(root);
+        while (!stackNode.empty()) {
+            TreeNode * curNode = stackNode.top();
+            if (curNode->left && !mapNode[curNode]) {
+                stackNode.push(curNode->left);
+                mapNode[curNode] = true;  
+            } else {
+                inorderTraversal.push_back(curNode->val);
+                stackNode.pop();
+                if (curNode->right) {
+                    stackNode.push(curNode->right);
+                }
+            }
+        }
+        return inorderTraversal;
+    }
+* Stack
+    * 不使用unordered_map 
 # 100. Same Tree.
 * DFS

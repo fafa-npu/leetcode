@@ -1877,3 +1877,25 @@ ListNode * Solution::deleteDuplicatesII(ListNode *head) {
     }
     return newHead;
 }
+
+vector<int> Solution::inorderTraversal(TreeNode *root) {
+    vector<int> inorderTraversal;
+    if (!root) return inorderTraversal;
+    stack<TreeNode *> stackNode;
+    unordered_map<TreeNode *, bool> mapNode;
+    stackNode.push(root);
+    while (!stackNode.empty()) {
+        TreeNode * curNode = stackNode.top();
+        if (curNode->left && !mapNode[curNode]) {
+            stackNode.push(curNode->left);
+            mapNode[curNode] = true;
+        } else {
+            inorderTraversal.push_back(curNode->val);
+            stackNode.pop();
+            if (curNode->right) {
+                stackNode.push(curNode->right);
+            }
+        }
+    }
+    return inorderTraversal;
+}

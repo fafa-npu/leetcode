@@ -1001,6 +1001,23 @@ public :
     ListNode * deleteDuplicates(ListNode * head);
 
     /**
+     *    94. Binary Tree Inorder Traversal
+        Given a binary tree, return the inorder traversal of its nodes' values.
+        For example:
+        Given binary tree [1,null,2,3],
+           1
+            \
+             2
+            /
+           3
+        return [1,3,2].
+        Note: Recursive solution is trivial, could you do it iteratively?
+     * @param root
+     * @return
+     */
+    vector<int> inorderTraversal(TreeNode * root);
+
+    /**
      * 100. Same Tree.
      * Given two binary trees, write a function to check if they are equal or not.
         Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
