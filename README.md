@@ -587,6 +587,13 @@
 # 88. Merge Two Sorted Arrays
 * 从后向前排列
 
+# 89. Gray Code
+
+    假设以二进制为0时的值作为格雷码的0
+    G:格雷码   B:二进制码
+    则
+        G(n) = (B(n) / 2 ) XOR B(n)
+
 # 94. Binary Tree Inorder Traversal
         
 * Stack and unsorted_map  使用map标记curNode的left child 是否一倍访问过。

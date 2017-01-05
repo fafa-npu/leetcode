@@ -1917,3 +1917,12 @@ void Solution::merge(vector<int> &nums1, int m, vector<int> &nums2, int n) {
         }
     }
 }
+
+vector<int> Solution::grayCode(int n) {
+    int cnt = 1 << n;
+    vector<int> gray;
+    for (int i = 0; i < cnt; i++) {
+        gray.push_back((i / 2) ^ i);
+    }
+    return gray;
+}
