@@ -1959,3 +1959,14 @@ bool Solution::exist(vector<vector<char>> &board, int row, int col, string word,
     visitBoard[row][col] = false;
     return false;
 }
+
+int Solution::numTrees(int n) {
+    vector<int> g(n+1, 0);
+    g[0] = g[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            g[i] += g[j - 1] * g[i - j];
+        }
+    }
+    return g[n];
+}
