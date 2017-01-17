@@ -1995,6 +1995,7 @@ vector<TreeNode *> genTrees(int start, int end) {
 }
 
 vector<TreeNode *> Solution::generateTreesRecursive(int n) {
+    if (n == 0) return vector<TreeNode *>();
     return genTrees(1,n);
 }
 
