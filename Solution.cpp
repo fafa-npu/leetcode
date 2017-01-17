@@ -1970,3 +1970,34 @@ int Solution::numTrees(int n) {
     }
     return g[n];
 }
+
+vector<TreeNode *> genTrees(int start, int end) {
+    vector<TreeNode *> result;
+    if (start == end) {
+        result.push_back(new TreeNode(start));
+        return result;
+    }
+    if (start > end) {          // 边界情况：当下述循环的index为start或end时，其lnode/rnode即为NULL
+        result.push_back(NULL);
+        return result;
+    }
+    for (int index = start; index <= end; index++) {
+        for (auto lTree : genTrees(start, index - 1)) {
+            for (auto rTree : genTrees(index + 1, end)) {
+                TreeNode * root = new TreeNode(index);
+                root->left = lTree;
+                root->right = rTree;
+                result.push_back(root);
+            }
+        }
+    }
+    return result;
+}
+
+vector<TreeNode *> Solution::generateTreesRecursive(int n) {
+    return genTrees(1,n);
+}
+
+vector<TreeNode * > Solution::generateTrees(int n) {
+
+}

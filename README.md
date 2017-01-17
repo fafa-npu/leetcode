@@ -628,6 +628,25 @@
 * Stack
     * 不使用unordered_map 
     
+# 95. Unique Binary Search Trees II
+* 生成n个数字组成的所有二叉搜索树
+1. Recursive
+        
+       令vector<TreeNode *> genTree(start, end) 生成由[start,end]间所有的数字所组成的BST的集合   
+       则    
+       genTree(start, end) = genTree(start, start - 1) + genTree(start + 1, end)  
+                           + genTree(start, start) + genTree(start + 2, end)
+                           + ....
+                           + genTree(start, i - 1) + genTree(i + 1, end)
+                           + ...
+                           + genTree(start, end - 1) + genTree(end + 1, end)
+       其中,
+            genTree(start, i - 1) 为左子树
+            genTree(i + 1, end) 为右子树
+       start > end时为两侧的边界状况，表示当前子树为NULL
+       start == end 时代表当前节点无子节点， 返回 set(new TreeNode(start));
+2. DP
+    
 # 96. Unique Binary Search Trees
 * 计算n个数字组成的二叉搜索树的数目
 * 二叉搜索树（BST）

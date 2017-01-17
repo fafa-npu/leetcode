@@ -1068,6 +1068,23 @@ public :
     vector<int> inorderTraversal(TreeNode * root);
 
     /**
+     * 95. Unique Binary Search Trees II
+     * Given an integer n, generate all structurally unique BST's (binary search trees) that store values 1...n.
+        For example,
+        Given n = 3, your program should return all 5 unique BST's shown below.
+
+           1         3     3      2      1
+            \       /     /      / \      \
+             3     2     1      1   3      2
+            /     /       \                 \
+           2     1         2                 3
+     * @param n
+     * @return
+     */
+    vector<TreeNode *> generateTrees(int n); // 动态规划方法
+    vector<TreeNode *> generateTreesRecursive(int n); // 递归方法
+
+    /**
      * 96. Unique Binary Search Trees
         Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
         For example,
