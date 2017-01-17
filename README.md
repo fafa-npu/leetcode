@@ -598,6 +598,10 @@
     G:格雷码   B:二进制码
     则
         G(n) = (B(n) / 2 ) XOR B(n)
+        
+# 90. Subset II
+* 与subset 相比，要考虑重复元素的情况
+
 
 # 94. Binary Tree Inorder Traversal
         

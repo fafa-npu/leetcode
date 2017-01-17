@@ -2002,3 +2002,25 @@ vector<TreeNode *> Solution::generateTreesRecursive(int n) {
 vector<TreeNode * > Solution::generateTrees(int n) {
 
 }
+
+vector<vector<int>> Solution::subsetsWithDup(vector<int> &nums) {
+    vector<vector<int>> result = {{}};
+    if (nums.empty()) return result;
+    int numLength = nums.size();
+    std::sort(nums.begin(), nums.end());
+    for (int index = 0; index < numLength; index ++) {
+        int cnt = 1;
+        while (index + 1 < numLength && nums[index] == nums[index + 1]) {
+            index ++;
+            cnt++;
+        }
+        vector<vector<int>> resultCopy(result);
+        for (auto line : resultCopy) {
+            for (int tmpCnt = 0; tmpCnt < cnt; tmpCnt++) {
+                line.push_back(nums[index]);
+                result.push_back(line);
+            }
+        }
+    }
+    return result;
+}
