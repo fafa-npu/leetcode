@@ -2080,3 +2080,23 @@ ListNode * Solution::reverseBetween(ListNode *head, int m, int n) {
     }
     return head;
 }
+
+bool Solution::isScramble(string s1, string s2) {
+    if (s1.compare(s2) == 0) return true;
+    unordered_map<char, int> cmap;
+    for (auto c : s1) {
+        cmap[c] += 1;
+    }
+    for (auto c : s2) {
+        cmap[c] -= 1;
+    }
+    for (auto ele : cmap) {
+        if (ele.second != 0) return false;
+    }
+    int length = s1.size();
+    for (int index  = 1; index < length; index ++) {
+        if (isScramble(s1.substr(0, index), s2.substr(0, index)) && isScramble(s1.substr(index), s2.substr(index))) return true;
+        if (isScramble(s1.substr(0, index), s2.substr(length - index)) && isScramble(s1.substr(index), s2.substr(0, length - index))) return true;
+    }
+    return false;
+}

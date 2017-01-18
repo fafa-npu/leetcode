@@ -598,6 +598,19 @@
 2. 方案二： 使用双指针，建立两个临时链表。
         遍历给定链表，小于x的节点追加到list1, 大于x的节点追加到list2， 最后把list2追加到list1后边
         
+# 87. Scramble String
+1. Recursive
+
+        若 s1 == s2 则 s1 s2 位scramble
+        
+        令i为[1, length - 1] 中的任意一个数，若
+            1. s1(0, i) 与 s2(0, i) 为 scramble 且 s1(i, length) 与 s2(i, length) 为scramble
+        或  2. s1(0, i) 与 s2(length - i, length) 为 scramble 且 s1(length - i, length) 与 s2(0, i) 为scramble
+        以上两个条件任意一个成立，则s1,s2为 scramble
+        
+        为了减少运算量，可以采用剪枝操作，去除元素不一致的项
+        
+
     
 # 88. Merge Two Sorted Arrays
 * 从后向前排列
