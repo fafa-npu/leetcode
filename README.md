@@ -589,6 +589,16 @@
     * 是 curNode->next = curNode->next->next;
     * 否 curNode = curNode->next;
     
+# 86. Partition List
+* 使用双指针
+* 链表操作
+1. 方案一： 使用双指针，p1指向当前排序后的小于x的最后的节点， p2指向当前遍历节点。
+            
+    缺陷： 需考虑各种便捷条件
+2. 方案二： 使用双指针，建立两个临时链表。
+        遍历给定链表，小于x的节点追加到list1, 大于x的节点追加到list2， 最后把list2追加到list1后边
+        
+    
 # 88. Merge Two Sorted Arrays
 * 从后向前排列
 

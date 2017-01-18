@@ -2024,3 +2024,37 @@ vector<vector<int>> Solution::subsetsWithDup(vector<int> &nums) {
     }
     return result;
 }
+
+ListNode * Solution::partition(ListNode *head, int x) {
+    if (head == NULL) return head;
+    ListNode * pre = NULL;
+    ListNode * cur = head;
+    if (head->val < x) {
+        pre = head;
+    }
+    while (cur->next != NULL) {
+        if (cur->next->val < x ) {
+            if (cur != pre) {
+                if (pre == NULL) {
+                    pre = cur->next;
+                    cur->next = cur->next->next;
+                    pre->next = head;
+                    head = pre;
+//                    pre = pre->next;
+                } else {
+                    ListNode *tmpNode = cur->next;
+                    cur->next = cur->next->next;
+                    tmpNode->next = pre->next;
+                    pre->next = tmpNode;
+                    pre = pre->next;
+                }
+            } else {
+                cur = cur->next;
+                pre = pre->next;
+            }
+        }else {
+            cur = cur->next;
+        }
+    }
+    return head;
+}
