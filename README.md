@@ -612,6 +612,12 @@
 # 90. Subset II
 * 与subset 相比，要考虑重复元素的情况
 
+# 92. Reverse Linked List II
+1. 方法一： 使用vector
+    
+   为了避免m，n与vector中的下标冲突，将vector[0]置为NULL
+2. 方法二： 单链表遍历
+    
 
 # 94. Binary Tree Inorder Traversal
         

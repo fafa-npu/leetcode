@@ -2058,3 +2058,25 @@ ListNode * Solution::partition(ListNode *head, int x) {
     }
     return head;
 }
+
+ListNode * Solution::reverseBetween(ListNode *head, int m, int n) {
+    if (m == n) return head;
+    vector<ListNode *> nodeVector;
+    nodeVector.push_back(NULL);
+    ListNode * curNode = head;
+    while (curNode != NULL) {
+        nodeVector.push_back(curNode);
+        curNode = curNode->next;
+    }
+    nodeVector.push_back(NULL);
+    if (m == 1) {
+        head = nodeVector[n];
+    } else {
+        nodeVector[m - 1] -> next = nodeVector[n];
+    }
+    nodeVector[m] -> next = nodeVector[n + 1];
+    for (int index = m + 1 ; index <= n; index ++) {
+       nodeVector[index] -> next = nodeVector[index - 1];
+    }
+    return head;
+}
