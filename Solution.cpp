@@ -2100,3 +2100,29 @@ bool Solution::isScramble(string s1, string s2) {
     }
     return false;
 }
+
+int Solution::maxDepth(TreeNode *root) {
+    if (root == NULL) return 0;
+    return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+}
+
+TreeNode * Solution::sortedArrayToBST(const vector<int> &nums, int start, int end) {
+    if (end < start) {
+        return NULL;
+    }
+    TreeNode * root;
+    if (start == end){
+        root = new TreeNode(nums[start]);
+        return root;
+    }
+    int rootIndex = (start + (end - start + 1) / 2);
+    root = new TreeNode(nums[rootIndex]);
+    TreeNode * left = sortedArrayToBST(nums, start, rootIndex - 1);
+    TreeNode * right = sortedArrayToBST(nums, rootIndex + 1, end);
+    root->left = left;
+    root->right = right;
+    return root;
+}
+TreeNode * Solution::sortedArrayToBST(vector<int> &nums) {
+    return sortedArrayToBST(nums, 0, nums.size() - 1);
+}

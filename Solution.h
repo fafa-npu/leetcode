@@ -1198,6 +1198,24 @@ public :
      */
     bool isSameTree(TreeNode * p, TreeNode * q);
 
+    /**
+     * 104. Maximum Depth of Binary Tree
+        Given a binary tree, find its maximum depth.
+        The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+     * @param root
+     * @return
+     */
+    int maxDepth(TreeNode * root);
+
+    /**
+     * 108. Convert Sorted Array to Binary Search Tree
+        Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+     * @param nums
+     * @return
+     */
+    TreeNode * sortedArrayToBST(vector<int> & nums);
+    TreeNode * sortedArrayToBST(const vector<int> & nums, int start, int end);
+
 };
 
 
