@@ -2126,3 +2126,29 @@ TreeNode * Solution::sortedArrayToBST(const vector<int> &nums, int start, int en
 TreeNode * Solution::sortedArrayToBST(vector<int> &nums) {
     return sortedArrayToBST(nums, 0, nums.size() - 1);
 }
+
+int Solution::maxProfit(vector<int> &prices) {
+    if (prices.empty()) return 0;
+    int size = prices.size();
+    int maxProfit = 0;
+    int lowestPrice = prices[0];
+    for (int index = 1; index < size; index++) {
+        maxProfit = max(maxProfit, prices[index] - lowestPrice);
+        lowestPrice = min(lowestPrice, prices[index]);
+    }
+    return maxProfit;
+}
+
+int Solution::maxProfitII(vector<int> &prices) {
+    int maxProfit = 0;
+    int size = prices.size();
+    for (int index = 0; index < size - 1; index++) {
+        if (prices[index + 1] > prices[index]) {
+            maxProfit += (prices[index + 1] - prices[index]);
+        }
+    }
+    return maxProfit;
+}
+
+int Solution::maxProfitIII(vector<int> &prices) {
+}

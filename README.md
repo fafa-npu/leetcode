@@ -710,3 +710,28 @@
 
 # 108. Convert Sorted Array to Binary Search Tree
 * 递归
+
+# 121. Best Time to Buy and Sell Stock
+* 只做一次交易
+
+# 122. Best Time to Buy and Sell Stock II
+* 可以做任意多次交易，但每次最多只做一笔交易。即在买入之前必须清空手中的股票。
+* 贪心
+
+# 123. Best Time to Buy and Sell Stock III
+* 最多做两次交易
+* 动态规划
+    
+        令 p[k, i] 为对prices[0:ii]进行k次交易所得的最大收入
+        则
+            p[k, i] = max(
+                        p[k, i-1],
+                        prices[i] - prices[j] + p[k - 1, j]
+                        )
+                    = max(
+                        p[k, i-1],
+                        prices[i] + max(p[k - 1, j] - prices[j]) j 属于 [0,i - 1]
+                        )
+                        
+            p[0, i] = 0
+            p[k, 0] = 0
