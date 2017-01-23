@@ -704,6 +704,21 @@
 # 100. Same Tree.
 * DFS
 
+# 101. Symmetric Tree
+* 使用队列
+    1. 建立两个队列q1, q2，分别存储当前根节点的左子树和右子树
+    2. 将root节点的left child添加入q1， right child 添加到q2
+    3. 取出q1的第一个节点为left, q2的第一个节点为right, 并从原始队列中弹出
+    4. 比较left和right是否相等
+        1. 若相等，则按以下顺序添加q1, q2
+               
+               q1.push(left->left)
+               q1.push(left->right)
+               q2.push(right->right)
+               q2.push(right->left)
+          重复步骤3,直到q1和q2都为空
+        2. 若不相等，返回false
+
 # 104. Maximum Depth of Binary Tree
 * DFS 深度优先搜索
 * 递归

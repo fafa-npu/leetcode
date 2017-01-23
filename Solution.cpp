@@ -4,6 +4,7 @@
 
 #include <climits>
 #include <stack>
+#include <queue>
 #include "Solution.h"
 
 /**
@@ -2151,4 +2152,26 @@ int Solution::maxProfitII(vector<int> &prices) {
 }
 
 int Solution::maxProfitIII(vector<int> &prices) {
+    return 0;
+}
+
+bool Solution::isSymmetric(TreeNode *root) {
+    if (root == NULL) return true;
+    queue<TreeNode *> tl, tr;
+    tl.push(root->left);
+    tr.push(root->right);
+    while (!tl.empty() && !tr.empty()) {
+        TreeNode * left = tl.front();
+        tl.pop();
+        TreeNode * right = tr.front();
+        tr.pop();
+        if (left == NULL && right == NULL) continue;
+        if (left == NULL || right == NULL) return false;
+        if (left->val != right->val) return false;
+        tl.push(left->left);
+        tl.push(left->right);
+        tr.push(right->right);
+        tr.push(right->left);
+    }
+    return true;
 }
