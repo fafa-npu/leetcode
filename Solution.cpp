@@ -2203,3 +2203,37 @@ vector<vector<int>> Solution::levelOrder(TreeNode *root) {
     }
     return result;
 }
+
+vector<vector<int>> Solution::zigzagLevelOrder(TreeNode *root) {
+
+    vector<TreeNode *> levelNode;
+    vector<TreeNode *> nextLevelNode;
+    vector<int> singleLevelOrder;
+    vector<vector<int>> result;
+    if (root == NULL) return result;
+    levelNode.push_back(root);
+    bool shouldReverse = false;
+    while (!levelNode.empty() ) {
+
+        TreeNode * curNode = levelNode.front();
+        levelNode.erase(levelNode.begin());
+        singleLevelOrder.push_back(curNode->val);
+        if (curNode->left != NULL) {
+            nextLevelNode.push_back(curNode->left);
+        }
+        if (curNode->right != NULL) {
+            nextLevelNode.push_back(curNode->right);
+        }
+        if (levelNode.empty()) {
+            if (shouldReverse) {
+                reverse(singleLevelOrder.begin(), singleLevelOrder.end());
+            }
+            shouldReverse = !shouldReverse;
+            result.push_back(singleLevelOrder);
+            singleLevelOrder.clear();
+            levelNode = nextLevelNode;
+            nextLevelNode.clear();
+        }
+    }
+    return result;
+}
