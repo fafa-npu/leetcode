@@ -2175,3 +2175,31 @@ bool Solution::isSymmetric(TreeNode *root) {
     }
     return true;
 }
+
+vector<vector<int>> Solution::levelOrder(TreeNode *root) {
+    vector<TreeNode *> levelNode;
+    vector<TreeNode *> nextLevelNode;
+    vector<int> singleLevelOrder;
+    vector<vector<int>> result;
+    if (root == NULL) return result;
+    levelNode.push_back(root);
+    while (!levelNode.empty() ) {
+
+        TreeNode * curNode = levelNode.front();
+        levelNode.erase(levelNode.begin());
+        singleLevelOrder.push_back(curNode->val);
+        if (curNode->left != NULL) {
+            nextLevelNode.push_back(curNode->left);
+        }
+        if (curNode->right != NULL) {
+            nextLevelNode.push_back(curNode->right);
+        }
+        if (levelNode.empty()) {
+            result.push_back(singleLevelOrder);
+            singleLevelOrder.clear();
+            levelNode = nextLevelNode;
+            nextLevelNode.clear();
+        }
+    }
+    return result;
+}
