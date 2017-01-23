@@ -2237,3 +2237,36 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode *root) {
     }
     return result;
 }
+
+vector<vector<int>> Solution::levelOrderBottom(TreeNode *root) {
+    vector<TreeNode * > curLevelNode;
+    vector<TreeNode *> nextLevelNode;
+    stack<vector<TreeNode *>> stackLevels;
+    vector<vector<int>> result;
+    if (root == NULL) return result;
+    curLevelNode.push_back(root);
+    while (!curLevelNode.empty()) {
+        stackLevels.push(curLevelNode);
+        int size = curLevelNode.size();
+        for (int index = 0; index < size; index++) {
+            if (curLevelNode[index]->left != NULL) {
+                nextLevelNode.push_back(curLevelNode[index]->left);
+            }
+            if (curLevelNode[index]->right != NULL) {
+                nextLevelNode.push_back(curLevelNode[index]->right);
+            }
+        }
+        curLevelNode = nextLevelNode;
+        nextLevelNode.clear();
+    }
+    while (!stackLevels.empty()) {
+        vector<TreeNode *> &curLevel = stackLevels.top();
+        vector<int> level;
+        for (TreeNode * node : curLevel) {
+            level.push_back(node->val);
+        }
+        result.push_back(level);
+        stackLevels.pop();
+    }
+    return result;
+}
