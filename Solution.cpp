@@ -2270,3 +2270,19 @@ vector<vector<int>> Solution::levelOrderBottom(TreeNode *root) {
     }
     return result;
 }
+
+TreeNode * Solution::buildTree(vector<int> &preorder, vector<int> &inorder) {
+    return buildTree(preorder, inorder, 0, preorder.size() - 1, 0, inorder.size() - 1);
+}
+
+TreeNode * Solution::buildTree(vector<int> &preorder, vector<int> &inorder, int pStart, int pEnd, int iStart,
+                               int iEnd) {
+    if (pStart == pEnd) return new TreeNode(preorder[pStart]);
+    if (pStart > pEnd) return NULL;
+    int curVal = preorder[pStart];
+    TreeNode * root = new TreeNode(curVal);
+    int leftChildLength = std::find(inorder.begin(), inorder.end(), curVal) - inorder.begin() - iStart;
+    root->left = buildTree(preorder, inorder, pStart + 1, pStart + leftChildLength , iStart, iStart + leftChildLength - 1);
+    root->right = buildTree(preorder, inorder, pStart + leftChildLength + 1, pEnd, iStart + leftChildLength + 1, iEnd);
+    return root;
+}

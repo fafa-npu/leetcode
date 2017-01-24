@@ -1273,6 +1273,18 @@ public :
     int maxDepth(TreeNode * root);
 
     /**
+     * 105. Construct Binary Tree from Preorder and Inorder Traversal
+        Given preorder and inorder traversal of a tree, construct the binary tree.
+        Note:
+        You may assume that duplicates do not exist in the tree.
+     * @param preorder
+     * @param inorder
+     * @return
+     */
+    TreeNode * buildTree(vector<int> & preorder, vector<int> & inorder);
+    TreeNode * buildTree(vector<int> & preorder, vector<int> & inorder, int pStart, int pEnd, int iStart, int iEnd);
+
+    /**
      * 107. Binary Tree Level Order Traversal II
         Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
         For example:
