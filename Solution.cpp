@@ -2286,3 +2286,18 @@ TreeNode * Solution::buildTree(vector<int> &preorder, vector<int> &inorder, int 
     root->right = buildTree(preorder, inorder, pStart + leftChildLength + 1, pEnd, iStart + leftChildLength + 1, iEnd);
     return root;
 }
+
+TreeNode * Solution::buildTreeII(vector<int> &inorder, vector<int> &postorder) {
+    return buildTreeII(inorder, postorder, 0, postorder.size() - 1, 0, inorder.size() - 1);
+}
+
+TreeNode * Solution::buildTreeII(vector<int> & inorder, vector<int> & postorder, int pStart, int pEnd, int iStart, int iEnd){
+    if (pStart > pEnd) return NULL;
+    if (pStart == pEnd) return new TreeNode(postorder[pStart]);
+    int curVal = postorder[pEnd];
+    TreeNode * root = new TreeNode(curVal);
+    int leftChildLength = std::find(inorder.begin(), inorder.end(), curVal) - inorder.begin() - iStart;
+    root->left = buildTreeII(inorder, postorder, pStart, pStart + leftChildLength - 1, iStart, iStart + leftChildLength - 1);
+    root->right = buildTreeII(inorder, postorder, pStart + leftChildLength, pEnd - 1, iStart + leftChildLength + 1, iEnd);
+    return root;
+}

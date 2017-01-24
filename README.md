@@ -732,6 +732,9 @@
 # 105. Construct Binary Tree from Preorder and Inorder Traversal
 * 采用递归的方法
 
+# 106. Construct Binary Tree from Inorder and Postorder Traversal
+* 递归方法
+
 # 107. Binary Tree Level Order Traversal II
 * BFS and Stack
 

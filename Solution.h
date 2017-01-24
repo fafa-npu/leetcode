@@ -1285,6 +1285,17 @@ public :
     TreeNode * buildTree(vector<int> & preorder, vector<int> & inorder, int pStart, int pEnd, int iStart, int iEnd);
 
     /**
+     *106. Construct Binary Tree from Inorder and Postorder Traversal
+        Given inorder and postorder traversal of a tree, construct the binary tree.
+        Note:
+        You may assume that duplicates do not exist in the tree.
+     * @param inorder
+     * @param postorder
+     * @return
+     */
+    TreeNode * buildTreeII(vector<int> & inorder, vector<int> & postorder);
+    TreeNode * buildTreeII(vector<int> & inorder, vector<int> & postorder, int pStart, int pEnd, int iStart, int iEnd);
+    /**
      * 107. Binary Tree Level Order Traversal II
         Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
         For example:
