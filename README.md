@@ -741,6 +741,12 @@
 # 108. Convert Sorted Array to Binary Search Tree
 * 递归
 
+# 110. Balanced Binary Tree
+* 采用递归的方式
+    
+        若一个树为BST，则其左子树和右子树的高度相差不超过1，且左子树和右子树均为BST。
+        根节点为NULL的树是BST
+
 # 121. Best Time to Buy and Sell Stock
 * 只做一次交易
 

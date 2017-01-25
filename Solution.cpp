@@ -2301,3 +2301,12 @@ TreeNode * Solution::buildTreeII(vector<int> & inorder, vector<int> & postorder,
     root->right = buildTreeII(inorder, postorder, pStart + leftChildLength, pEnd - 1, iStart + leftChildLength + 1, iEnd);
     return root;
 }
+
+int Solution::getHeightOfTree(TreeNode *root) {
+    if (root == NULL) return 0;
+    else return 1 + std::max(getHeightOfTree(root->left), getHeightOfTree(root->right));
+}
+bool Solution::isBalanced(TreeNode *root) {
+    if (root == NULL) return true;
+    return (std::abs(getHeightOfTree(root->right) - getHeightOfTree(root->left)) <= 1 && isBalanced(root->right) && isBalanced(root->left));
+}

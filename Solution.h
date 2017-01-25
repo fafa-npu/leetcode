@@ -1295,6 +1295,7 @@ public :
      */
     TreeNode * buildTreeII(vector<int> & inorder, vector<int> & postorder);
     TreeNode * buildTreeII(vector<int> & inorder, vector<int> & postorder, int pStart, int pEnd, int iStart, int iEnd);
+
     /**
      * 107. Binary Tree Level Order Traversal II
         Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
@@ -1325,6 +1326,15 @@ public :
     TreeNode * sortedArrayToBST(vector<int> & nums);
     TreeNode * sortedArrayToBST(const vector<int> & nums, int start, int end);
 
+    /**
+     * 110. Balanced Binary Tree
+        Given a binary tree, determine if it is height-balanced.
+        For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1
+     * @param root
+     * @return
+     */
+    bool isBalanced(TreeNode * root) ;
+    int getHeightOfTree(TreeNode * root);
 
     /**
      * 121. Best Time to Buy and Sell Stock
