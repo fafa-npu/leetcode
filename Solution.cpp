@@ -2310,3 +2310,33 @@ bool Solution::isBalanced(TreeNode *root) {
     if (root == NULL) return true;
     return (std::abs(getHeightOfTree(root->right) - getHeightOfTree(root->left)) <= 1 && isBalanced(root->right) && isBalanced(root->left));
 }
+
+TreeNode * Solution::sortedListToBST(ListNode *head) {
+    vector<int> vecList;
+    while (head != NULL) {
+        vecList.push_back(head->val);
+        head = head->next;
+    }
+    return sortedArrayToBST(vecList, 0, vecList.size());
+}
+TreeNode * Solution::sortedListToBSTII(ListNode *head) {
+    if (head == NULL)
+        return  NULL;
+    ListNode * node = head;
+    int length = 0;
+    while (node != NULL) {
+        length ++;
+        node = node -> next;
+    }
+    return generateBST(length, head);
+}
+TreeNode * Solution::generateBST(int n, ListNode *&list) {
+    if (n == 0) return NULL;
+    TreeNode * leftChild = generateBST( n / 2, list);
+    TreeNode * root = new TreeNode(list->val);
+    list = list->next;
+    TreeNode * rightChild = generateBST(n - n / 2 - 1, list);
+    root->left = leftChild;
+    root->right = rightChild;
+    return  root;
+}

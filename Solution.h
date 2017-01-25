@@ -1327,6 +1327,16 @@ public :
     TreeNode * sortedArrayToBST(const vector<int> & nums, int start, int end);
 
     /**
+     * 109. Convert Sorted List to Binary Search Tree
+        Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.
+     * @param head
+     * @return
+     */
+    TreeNode * sortedListToBST(ListNode * head);  // using sortedArrayToBST
+    TreeNode * sortedListToBSTII(ListNode * head);   // using list
+    TreeNode * generateBST(int n, ListNode * &list);
+
+    /**
      * 110. Balanced Binary Tree
         Given a binary tree, determine if it is height-balanced.
         For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1

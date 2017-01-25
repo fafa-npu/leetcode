@@ -741,6 +741,10 @@
 # 108. Convert Sorted Array to Binary Search Tree
 * 递归
 
+# 109. Convert Sorted List to Binary Search Tree
+1. 方法一：将list 转化为sorted array
+2. 方法二：直接使用list
+
 # 110. Balanced Binary Tree
 * 采用递归的方式
     
