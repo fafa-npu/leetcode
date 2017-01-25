@@ -2348,3 +2348,9 @@ int Solution::minDepth(TreeNode *root) {
     if (root->right == NULL) return 1 + minDepth(root->left);
     return 1 + std::min(minDepth(root->left), minDepth(root->right));
 }
+
+bool Solution::hasPathSum(TreeNode *root, int sum) {
+    if (root == NULL) return false;
+    if (root->left == NULL && root->right == NULL && root->val == sum) return true;
+    return hasPathSum(root->left, sum - root->val) || hasPathSum(root->right, sum - root->val);
+}

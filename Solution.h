@@ -1356,6 +1356,25 @@ public :
     int minDepth(TreeNode * root);
 
     /**
+     * 112. Path Sum
+        Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+        For example:
+        Given the below binary tree and sum = 22,
+                      5
+                     / \
+                    4   8
+                   /   / \
+                  11  13  4
+                 /  \      \
+                7    2      1
+        return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+     * @param root
+     * @param sum
+     * @return
+     */
+    bool hasPathSum(TreeNode * root, int sum);
+
+    /**
      * 121. Best Time to Buy and Sell Stock
         Say you have an array for which the ith element is the price of a given stock on day i.
         If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
