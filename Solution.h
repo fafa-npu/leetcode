@@ -1347,6 +1347,15 @@ public :
     int getHeightOfTree(TreeNode * root);
 
     /**
+     * 111. Minimum Depth of Binary Tree
+        Given a binary tree, find its minimum depth.
+        The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+     * @param root
+     * @return
+     */
+    int minDepth(TreeNode * root);
+
+    /**
      * 121. Best Time to Buy and Sell Stock
         Say you have an array for which the ith element is the price of a given stock on day i.
         If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.

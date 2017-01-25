@@ -750,6 +750,10 @@
     
         若一个树为BST，则其左子树和右子树的高度相差不超过1，且左子树和右子树均为BST。
         根节点为NULL的树是BST
+        
+#. 111. Minimum Depth of Binary Tree
+* BFT
+* DFT
 
 # 121. Best Time to Buy and Sell Stock
 * 只做一次交易
