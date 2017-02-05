@@ -39,6 +39,7 @@ struct Interval {
     Interval(int s, int e):start(s),end(e){}
 };
 
+
 class Solution {
 public :
     /**
@@ -50,6 +51,32 @@ public :
             cout << list->val << " ";
             list = list->next;
         }
+    }
+
+    /**
+     * 使用迭代的方法进行深度优先遍历
+     * @param root
+     */
+    vector<int> iterateDfs(TreeNode * root) {
+        vector<int> result;
+        if (root == NULL)
+            return result;
+        std::stack<TreeNode * > treeStack;
+        treeStack.push(root);
+        while (!treeStack.empty()) {
+            auto node = treeStack.top();
+            treeStack.pop();
+            result.push_back(node->val);
+            std::cout << node->val << " ";
+            if (node->right != NULL) {
+                treeStack.push(node->right);
+            }
+
+            if (node->left != NULL) {
+                treeStack.push(node->left);
+            }
+        }
+        return result;
     }
 
     /**
@@ -1375,6 +1402,57 @@ public :
     bool hasPathSum(TreeNode * root, int sum);
 
     /**
+     *113. Path Sum II
+        Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+        For example:
+        Given the below binary tree and sum = 22,
+                      5
+                     / \
+                    4   8
+                   /   / \
+                  11  13  4
+                 /  \    / \
+                7    2  5   1
+        return
+        [
+           [5,4,11,2],
+           [5,8,4,5]
+        ]
+     * @param root
+     * @param sum
+     * @return
+     */
+    vector<vector<int>> pathSum(TreeNode * root, int sum) ;
+
+    /**
+     * 114. Flatten Binary Tree to Linked List
+        Given a binary tree, flatten it to a linked list in-place.
+
+        For example,
+        Given
+
+                 1
+                / \
+               2   5
+              / \   \
+             3   4   6
+        The flattened tree should look like:
+           1
+            \
+             2
+              \
+               3
+                \
+                 4
+                  \
+                   5
+                    \
+                     6
+     * @param root
+     */
+    void flatten(TreeNode * root);
+
+    /**
      * 121. Best Time to Buy and Sell Stock
         Say you have an array for which the ith element is the price of a given stock on day i.
         If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
@@ -1415,6 +1493,7 @@ public :
      * @return
      */
     int maxProfitIII(vector<int> & prices);
+
 
 
 };

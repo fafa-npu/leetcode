@@ -2354,3 +2354,55 @@ bool Solution::hasPathSum(TreeNode *root, int sum) {
     if (root->left == NULL && root->right == NULL && root->val == sum) return true;
     return hasPathSum(root->left, sum - root->val) || hasPathSum(root->right, sum - root->val);
 }
+
+vector<vector<int>> Solution::pathSum(TreeNode *root, int sum) {
+    vector<vector<int>> result;
+    if (root == NULL) return result;
+    if (root->left == NULL && root->right == NULL) {
+        if (root->val == sum) {
+            result.push_back({root->val});
+        }
+        return result;
+    }
+    vector<vector<int>> leftResult = pathSum(root->left, sum - root->val);
+    if (! leftResult.empty()) {
+        for (auto list : leftResult) {
+            list.insert(list.begin(),root->val);
+            result.push_back(list);
+        }
+    }
+    vector<vector<int>> rightResult = pathSum(root->right, sum - root->val);
+    if ( !rightResult.empty()) {
+        for (auto list : rightResult) {
+            list.insert(list.begin(),root->val);
+            result.push_back(list);
+        }
+    }
+    return result;
+}
+
+void Solution::flatten(TreeNode *root) {
+    if (root == NULL)
+        return;
+    TreeNode * curNode = NULL, * preNode = NULL;
+    std::stack<TreeNode *> rightNodeStack;
+    rightNodeStack.push(root);
+    while (!rightNodeStack.empty()) {
+        curNode = rightNodeStack.top();
+        rightNodeStack.pop();
+        if (preNode != NULL) {
+            preNode->right = curNode;
+        }
+        while (curNode != NULL) {
+            preNode = curNode;
+            TreeNode * leftNode = curNode->left;
+            TreeNode * rightNode = curNode->right;
+            if (rightNode != NULL) {
+                rightNodeStack.push(rightNode);
+            }
+            curNode->right = leftNode;
+            curNode->left = NULL;
+            curNode = leftNode;
+        }
+    }
+}

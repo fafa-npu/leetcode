@@ -758,6 +758,16 @@
 # 112. Path Sum
 * DFT
 
+# 113. Path Sum II
+* DFT
+
+# 114. Flatten Binary Tree to Linked List
+* 非递归 && 不是用stack的方法
+    
+    1. 将当前节点的右子树追加到当前节点的左子树的最右节点
+    2. 将当前节点的左子树放置到右子树的位置，左子树置为NULL
+    3. 将当前节点下沉到其右子节点，重复以上操作
+
 # 121. Best Time to Buy and Sell Stock
 * 只做一次交易
 
