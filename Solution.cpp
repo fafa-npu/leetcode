@@ -2417,7 +2417,7 @@ void traversal(TreeLinkNode * root, vector<vector<TreeLinkNode *>> & vecVecNode 
     traversal(root->left, vecVecNode, level + 1);
     traversal(root->right, vecVecNode, level + 1);
 }
-void Solution::populate(TreeLinkNode * root) {
+void Solution::connect(TreeLinkNode * root) {
     if (root == NULL) {
         return;
     }
@@ -2429,4 +2429,21 @@ void Solution::populate(TreeLinkNode * root) {
         }
         vecNode.back()->next = NULL;
     }
+}
+
+vector<vector<int>> Solution::generate(int numRows) {
+    if (numRows == 0) return {};
+    vector<vector<int>> pascal(numRows, vector<int>());
+    pascal[0].push_back(1);
+    int row = 1;
+    while (row < numRows) {
+        pascal[row].push_back(1);
+        for (int col = 1; col < row; col ++) {
+            pascal[row].push_back(pascal[row - 1][col - 1] + pascal[row - 1][col]);
+        }
+        pascal[row].push_back(1);
+        row ++;
+    }
+
+    return pascal;
 }

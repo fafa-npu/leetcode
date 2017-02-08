@@ -16,12 +16,14 @@ using namespace std;
 /**
  * Definitation of TreeLink Node.
  */
+/**
+* Definition for binary tree with next pointer.
+ */
 struct TreeLinkNode {
-    TreeLinkNode * left;
-    TreeLinkNode * right;
-    TreeLinkNode * next;
+  int val;
+  TreeLinkNode *left, *right, *next;
+  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
-
 /**
  * Definition for singly-linked list.
  */
@@ -1489,7 +1491,33 @@ public :
              / \  / \
             4->5->6->7 -> NULL
      */
-     void populate(TreeLinkNode * root);
+     void connect(TreeLinkNode * root);
+
+    /**
+     * 117. Populating Next Right Pointers in Each Node II
+     * 与116相比，给定的树不是full的
+     * @param root
+     */
+    void connectII(TreeLinkNode * root);
+
+    /**
+     * 118. Pascal's Triangle
+        Given numRows, generate the first numRows of Pascal's triangle.
+
+        For example, given numRows = 5,
+        Return
+
+        [
+             [1],
+            [1,1],
+           [1,2,1],
+          [1,3,3,1],
+         [1,4,6,4,1]
+        ]
+     * @param numRows
+     * @return
+     */
+    vector<vector<int>> generate(int numRows);
 
     /**
      * 121. Best Time to Buy and Sell Stock

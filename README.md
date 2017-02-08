@@ -783,6 +783,12 @@
             root = root->left;
         }
 
+# 117. Populating Next Right Pointers in Each Node II
+* 方法1. 同上
+* 方法2. 迭代
+        
+# 118. Pascal's Triangle 
+* 迭代
 
 # 121. Best Time to Buy and Sell Stock
 * 只做一次交易
