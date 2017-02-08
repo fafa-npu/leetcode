@@ -767,6 +767,22 @@
     1. 将当前节点的右子树追加到当前节点的左子树的最右节点
     2. 将当前节点的左子树放置到右子树的位置，左子树置为NULL
     3. 将当前节点下沉到其右子节点，重复以上操作
+    
+# 116. Populating Next Rihgt Pointers in Each Node
+* 方法1. 遍历整个树，将整个树按层划分，存储在一个vector array中
+* 方法2. 迭代法
+    
+        while (root->left) {
+            *p = root;
+            while (p) {
+                p->left->next = p->right;
+                if (p->next)
+                    p->right->next = p->next->left;
+                p = p->next; 
+            }
+            root = root->left;
+        }
+
 
 # 121. Best Time to Buy and Sell Stock
 * 只做一次交易
@@ -778,9 +794,7 @@
 # 123. Best Time to Buy and Sell Stock III
 * 最多做两次交易
 * 动态规划
-    
-        令 p[k, i] 为对prices[0:ii]进行k次交易所得的最大收入
-        则
+    令 p[k, i] 为对prices[0:ii]进行k次交易所得的最大收入 则
             p[k, i] = max(
                         p[k, i-1],
                         prices[i] - prices[j] + p[k - 1, j]

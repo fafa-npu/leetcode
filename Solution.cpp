@@ -2406,3 +2406,27 @@ void Solution::flatten(TreeNode *root) {
         }
     }
 }
+
+void traversal(TreeLinkNode * root, vector<vector<TreeLinkNode *>> & vecVecNode , int level) {
+    if (root == NULL) return;
+    if (level >= vecVecNode.size()) {
+        std::vector<TreeLinkNode * > vec;
+        vecVecNode.push_back(vec);
+    }
+    vecVecNode[level].push_back(root);
+    traversal(root->left, vecVecNode, level + 1);
+    traversal(root->right, vecVecNode, level + 1);
+}
+void Solution::populate(TreeLinkNode * root) {
+    if (root == NULL) {
+        return;
+    }
+    vector<vector<TreeLinkNode *>> vecVecNode;
+    traversal(root, vecVecNode, 0);
+    for (auto vecNode : vecVecNode) {
+        for (int index = 0 ; index < vecNode.size() - 1; index++) {
+            vecNode[index]->next = vecNode[index+1];
+        }
+        vecNode.back()->next = NULL;
+    }
+}
