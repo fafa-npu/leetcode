@@ -1503,7 +1503,6 @@ public :
     /**
      * 118. Pascal's Triangle
         Given numRows, generate the first numRows of Pascal's triangle.
-
         For example, given numRows = 5,
         Return
 
@@ -1518,6 +1517,18 @@ public :
      * @return
      */
     vector<vector<int>> generate(int numRows);
+
+    /**
+     * 119. Pascal's Triangle II
+        Given an index k, return the kth row of the Pascal's triangle.
+        For example, given k = 3,
+        Return [1,3,3,1].
+        Note:
+        Could you optimize your algorithm to use only O(k) extra space?
+     * @param rowInde
+     * @return
+     */
+    vector<int> getRow(int rowInde);
 
     /**
      * 121. Best Time to Buy and Sell Stock

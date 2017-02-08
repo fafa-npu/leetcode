@@ -2447,3 +2447,17 @@ vector<vector<int>> Solution::generate(int numRows) {
 
     return pascal;
 }
+
+vector<int> Solution::getRow(int rowIndex) {
+    vector<int> pascalRow(1,1);
+    for (int row = 1; row <= rowIndex; row ++) {
+        int pre = 1, cur = 1;
+        for (int col = 1; col < row; col++) {
+            pre = pascalRow[col];
+            pascalRow[col] += cur  ;
+            cur = pre;
+        }
+        pascalRow.push_back(1);
+    }
+    return pascalRow;
+}

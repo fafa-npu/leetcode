@@ -790,6 +790,9 @@
 # 118. Pascal's Triangle 
 * 迭代
 
+# 119. Pascal's Triangle II
+* 仅保留一行
+
 # 121. Best Time to Buy and Sell Stock
 * 只做一次交易
 
