@@ -826,3 +826,7 @@
                         
             p[0, i] = 0
             p[k, 0] = 0
+            
+# 144. Binary Tree Preorder Traversal
+* 递归
+* 迭代

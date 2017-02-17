@@ -2226,7 +2226,7 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode *root) {
         }
         if (levelNode.empty()) {
             if (shouldReverse) {
-                reverse(singleLevelOrder.begin(), singleLevelOrder.end());
+                std::reverse(singleLevelOrder.begin(), singleLevelOrder.end());
             }
             shouldReverse = !shouldReverse;
             result.push_back(singleLevelOrder);
@@ -2471,4 +2471,34 @@ int Solution::minimumTotal(vector<vector<int>> &triangle) {
         }
     }
     return vecMin[0];
+}
+
+vector<int> Solution::preorderTraversal(TreeNode *root) {
+    vector<int> result;
+    if (root == NULL) return result;
+    result.push_back(root->val);
+    for (auto n : preorderTraversal(root->left)) {
+        result.push_back(n);
+    }
+    for (auto n : preorderTraversal(root->right)) {
+        result.push_back(n);
+
+    return result;
+}
+
+vector<int> Solution::preorderTraversalIte(TreeNode *root) {
+    std::stack<TreeNode *> tmpStack;
+    std::vector<int> result;
+    if (root == NULL) return result;
+    tmpStack.push(root);
+    while (!tmpStack.empty()) {
+        TreeNode * curNode = tmpStack.top();
+        tmpStack.pop();
+        result.push_back(curNode->val);
+        if (curNode->right)
+        tmpStack.push(curNode->right);
+        if (curNode->left)
+        tmpStack.push(curNode->left);
+    }
+    return result;
 }
