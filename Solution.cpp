@@ -2558,3 +2558,11 @@ int Solution::sumNumbers(TreeNode *root) {
     }
     return sum;
 }
+
+int Solution::singleNumber(vector<int> &nums) {
+    int result = 0;
+    for (int n : nums) {
+        result ^= n;
+    }
+    return result;
+}

@@ -1628,6 +1628,17 @@ public :
     int sumNumbers(TreeNode * root);
     void dfsTraversal(TreeNode * root, std::stack<int> nodeStack, std::vector<int> & nums);
     int getIntFromStack(std::stack<int> nodeStack);
+
+    /**
+     * 136. Single Number
+     * Given an array of integers, every element appears twice except for one. Find that single one.
+        Note:
+        Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+     * @param nums
+     * @return
+     */
+    int singleNumber(vector<int> & nums);
+
     /**
      * 144. Binary Tree Preorder Traversal
      * Given a binary tree, return the preorder traversal of its nodes' values.

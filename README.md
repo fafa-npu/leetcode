@@ -833,6 +833,11 @@
 # 129. Sum Root to Leaf Numbers
 * 深度优先搜索
 
+# 136. Single Number
+* hashtable , 会使用额外的存储空间
+* 位操作
+    * A xor A = 0
+    
 # 144. Binary Tree Preorder Traversal
 * 递归
 * 迭代
