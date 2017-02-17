@@ -2461,3 +2461,14 @@ vector<int> Solution::getRow(int rowIndex) {
     }
     return pascalRow;
 }
+
+
+int Solution::minimumTotal(vector<vector<int>> &triangle) {
+    vector<int> vecMin(triangle[triangle.size() - 1]);
+    for (int layer = triangle.size() - 2; layer >= 0; layer --) {
+        for (int index = 0; index < triangle[layer].size(); index ++) {
+            vecMin[index] = triangle[layer][index] + std::min(vecMin[index], vecMin[index + 1]);
+        }
+    }
+    return vecMin[0];
+}

@@ -793,6 +793,17 @@
 # 119. Pascal's Triangle II
 * 仅保留一行
 
+# 120. Triangle
+* dynamic programming
+* 从下往上的动态规划
+
+        for (layer = n - 2; layer >= 0; layer --) { // 从倒数第二行开始
+            for (index = 0; index < triangle[layer].size(); index++) {
+                min[i] = triangle[layer][i] + min(min[i], min[i + 1]);
+            }
+            returen min[0];
+        }
+
 # 121. Best Time to Buy and Sell Stock
 * 只做一次交易
 
