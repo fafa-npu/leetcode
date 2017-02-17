@@ -1593,6 +1593,42 @@ public :
     int maxProfitIII(vector<int> & prices);
 
     /**
+     * 125. Valid Palindrome
+        Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+        For example,
+        "A man, a plan, a canal: Panama" is a palindrome.
+        "race a car" is not a palindrome.
+
+        Note:
+        Have you consider that the string might be empty? This is a good question to ask during an interview.
+
+        For the purpose of this problem, we define empty string as valid palindrome
+     * @param s
+     * @return
+     */
+    bool isPalindrome(string s);
+
+
+    /**
+     * 129. Sum Root to Leaf Numbers
+     * Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
+        An example is the root-to-leaf path 1->2->3 which represents the number 123.
+        Find the total sum of all root-to-leaf numbers.
+        For example,
+            1
+           / \
+          2   3
+        The root-to-leaf path 1->2 represents the number 12.
+        The root-to-leaf path 1->3 represents the number 13.
+        Return the sum = 12 + 13 = 25.
+     * @param root
+     * @return
+     */
+    int sumNumbers(TreeNode * root);
+    void dfsTraversal(TreeNode * root, std::stack<int> nodeStack, std::vector<int> & nums);
+    int getIntFromStack(std::stack<int> nodeStack);
+    /**
      * 144. Binary Tree Preorder Traversal
      * Given a binary tree, return the preorder traversal of its nodes' values.
 
@@ -1611,23 +1647,6 @@ public :
      */
     vector<int> preorderTraversal(TreeNode * root); // recursive
     vector<int> preorderTraversalIte(TreeNode * root); // iteratively
-
-    /**
-     * 125. Valid Palindrome
-        Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
-
-        For example,
-        "A man, a plan, a canal: Panama" is a palindrome.
-        "race a car" is not a palindrome.
-
-        Note:
-        Have you consider that the string might be empty? This is a good question to ask during an interview.
-
-        For the purpose of this problem, we define empty string as valid palindrome
-     * @param s
-     * @return
-     */
-    bool isPalindrome(string s);
 
 
 

@@ -830,6 +830,9 @@
 # 125. Valid Palindrome
 * 回文检查
 
+# 129. Sum Root to Leaf Numbers
+* 深度优先搜索
+
 # 144. Binary Tree Preorder Traversal
 * 递归
 * 迭代

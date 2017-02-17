@@ -2493,16 +2493,16 @@ vector<int> Solution::preorderTraversalIte(TreeNode *root) {
     if (root == NULL) return result;
     tmpStack.push(root);
     while (!tmpStack.empty()) {
-        TreeNode * curNode = tmpStack.top();
+        TreeNode *curNode = tmpStack.top();
         tmpStack.pop();
         result.push_back(curNode->val);
         if (curNode->right)
-        tmpStack.push(curNode->right);
+            tmpStack.push(curNode->right);
         if (curNode->left)
-        tmpStack.push(curNode->left);
+            tmpStack.push(curNode->left);
     }
     return result;
-
+}
 
 
 bool Solution::isPalindrome(string s) {
@@ -2522,4 +2522,39 @@ bool Solution::isPalindrome(string s) {
         }
     }
     return true;
+}
+
+int Solution::getIntFromStack(std::stack<int> nodeStack) {
+    int times = 1;
+    int result = 0;
+    while (!nodeStack.empty()) {
+        result += nodeStack.top() * times;
+        times *= 10;
+        nodeStack.pop();
+    }
+    return result;
+}
+void Solution::dfsTraversal(TreeNode * root, std::stack<int> nodeStack, std::vector<int> & nums) {
+    nodeStack.push(root->val);
+    if (root->left == NULL && root->right == NULL) {
+        nums.push_back(getIntFromStack(nodeStack));
+    } else {
+        if (root->left != NULL) {
+            dfsTraversal(root->left, nodeStack, nums);
+        }
+        if (root->right != NULL) {
+            dfsTraversal(root->right, nodeStack, nums);
+        }
+    }
+}
+int Solution::sumNumbers(TreeNode *root) {
+    std::stack<int> nodeStack;
+    std::vector<int> nums;
+    if (root == NULL) return 0;
+    dfsTraversal(root, nodeStack, nums);
+    int sum = 0;
+    for (int n : nums) {
+        sum += n;
+    }
+    return sum;
 }
