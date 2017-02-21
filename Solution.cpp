@@ -2589,3 +2589,33 @@ vector<int> Solution::postorderTraversal(TreeNode *root) {
     }
     return result;
 }
+
+ListNode * Solution::insertionSortList(ListNode *head) {
+    if (head == NULL) {
+        return NULL;
+    }
+    ListNode * curNode = head;
+    ListNode * newHead = NULL;
+    ListNode * tmp = NULL;
+    while (curNode != NULL) {
+        if (newHead == NULL) {
+            tmp = curNode->next;
+            curNode->next = NULL;
+            newHead = curNode;
+        } else if (curNode->val <= newHead->val) {
+            tmp = curNode->next;
+            curNode->next = newHead;
+            newHead = curNode;
+        }else {
+            ListNode * pointNode = newHead;
+            while (pointNode->next != NULL && curNode->val > pointNode->next->val) {
+                pointNode = pointNode->next;
+            }
+            tmp = curNode->next;
+            curNode->next = pointNode->next;
+            pointNode->next = curNode;
+        }
+        curNode = tmp;
+    }
+    return newHead;
+}

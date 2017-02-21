@@ -845,3 +845,7 @@
 # 145. Binary Tree Postorder Traversal 
 * 递归
 * 使用临时变量记录当前节点的右孩子是否访问过，如果未访问，则将右孩子入栈
+
+# 147. Insertion Sort List
+* 插入排序
+* 新建一个new_head，使得new_head->next = head， 可以大大简化一些判断操作。
