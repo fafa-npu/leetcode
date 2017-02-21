@@ -2619,3 +2619,32 @@ ListNode * Solution::insertionSortList(ListNode *head) {
     }
     return newHead;
 }
+
+ListNode * Solution::detectCycle(ListNode *head) {
+    ListNode * sp = head;
+    ListNode * fp = head;
+    bool hasCycle = false;
+    while (true) {
+        if (sp && fp && fp->next) {
+            sp = sp->next;
+            fp = fp->next->next;
+        } else {
+            hasCycle = false;
+            break;
+        }
+        if (sp != NULL && sp == fp) {
+            hasCycle = true;
+            break;
+        }
+    }
+    if (hasCycle) {
+        sp = head;
+        while (sp != fp) {
+            sp = sp->next;
+            fp = fp->next;
+        }
+        return sp;
+    } else {
+        return NULL;
+    }
+}
