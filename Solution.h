@@ -1659,6 +1659,13 @@ public :
     vector<int> preorderTraversal(TreeNode * root); // recursive
     vector<int> preorderTraversalIte(TreeNode * root); // iteratively
 
+    /**
+     * 145. Binary Tree Postorder Traversal
+     * @param root
+     * @return
+     */
+    vector<int> postorderTraversal(TreeNode * root);// iteratively
+
 
 
 };

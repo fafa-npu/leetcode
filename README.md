@@ -841,3 +841,7 @@
 # 144. Binary Tree Preorder Traversal
 * 递归
 * 迭代
+
+# 145. Binary Tree Postorder Traversal 
+* 递归
+* 使用临时变量记录当前节点的右孩子是否访问过，如果未访问，则将右孩子入栈

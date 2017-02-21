@@ -2566,3 +2566,26 @@ int Solution::singleNumber(vector<int> &nums) {
     }
     return result;
 }
+
+vector<int> Solution::postorderTraversal(TreeNode *root) {
+    vector<int> result;
+    stack<TreeNode *> treeStack;
+    TreeNode * curNode = root;
+    TreeNode * lastVisit = NULL;
+    while (curNode || !treeStack.empty()) {
+        while (curNode) {
+            treeStack.push(curNode);
+            curNode = curNode->left;
+        }
+        curNode = treeStack.top();
+        if (curNode->right == NULL || lastVisit == curNode->right) {
+            result.push_back(curNode->val);
+            treeStack.pop();
+            lastVisit = curNode;
+            curNode = NULL;
+        } else {
+            curNode = curNode->right;
+        }
+    }
+    return result;
+}
