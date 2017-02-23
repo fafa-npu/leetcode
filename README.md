@@ -858,3 +858,11 @@
 
 # 167. Two Sum II - Input array is sorted
 * 从小到大遍历给定数组，使用二分查找搜索sum-curnum
+
+# 169. Majority Element
+* 排序
+* 随机化
+* 位操作
+* 分治
+* hash
+

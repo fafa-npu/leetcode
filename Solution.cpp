@@ -2667,3 +2667,23 @@ vector<int> Solution::twoSum(vector<int> &numbers, int target) {
     }
     return {};
 }
+
+int Solution::majorityELement(vector<int> &nums) {
+//    sort(nums.begin(), nums.end());
+//    return nums[nums.size() >> 1];
+    int length = nums.size();
+    srand(time(NULL));
+    while (true) {
+        int index = rand() % length;
+        int candidate = nums[index];
+        int cnt = 0;
+        for (int i = 0; i < length; i++) {
+            if (nums[i] == candidate) {
+                cnt ++;
+            }
+        }
+        if (cnt > length / 2) {
+            return candidate;
+        }
+    }
+}
