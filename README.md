@@ -856,6 +856,17 @@
 # 155. Min Stack 
 * 使用vector或stack存储min
 
+# 160. Intersection of Two Linked Lists
+* 双指针
+
+        p1 = headA
+        p2 = headB
+        while (p1 != p2) {
+            p1 = p1 ? p1->next : headB;
+            p2 = p2 ? p2->next : headA;
+        }
+        return p1;
+
 # 167. Two Sum II - Input array is sorted
 * 从小到大遍历给定数组，使用二分查找搜索sum-curnum
 
@@ -865,4 +876,5 @@
 * 位操作
 * 分治
 * hash
+
 
