@@ -2648,3 +2648,22 @@ ListNode * Solution::detectCycle(ListNode *head) {
         return NULL;
     }
 }
+
+vector<int> Solution::twoSum(vector<int> &numbers, int target) {
+    int length = numbers.size();
+    for (int index = 0; index <= length - 2; index ++) {
+        int numToFind = target - numbers[index];
+        int l = index + 1, r = length - 1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if (numbers[mid] == numToFind) {
+                return {index + 1, mid + 1};
+            } else if (numbers[mid] > numToFind) {
+                r = mid - 1;
+            } else {
+                l = mid + 1;
+            }
+        }
+    }
+    return {};
+}

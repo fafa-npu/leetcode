@@ -1683,6 +1683,64 @@ public :
      */
     ListNode * detectCycle(ListNode * head);
 
+    /**
+     * 155. Min Stack
+     * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+        push(x) -- Push element x onto stack.
+        pop() -- Removes the element on top of the stack.
+        top() -- Get the top element.
+        getMin() -- Retrieve the minimum element in the stack.
+        Example:
+        MinStack minStack = new MinStack();
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        minStack.getMin();   --> Returns -3.
+        minStack.pop();
+        minStack.top();      --> Returns 0.
+        minStack.getMin();   --> Returns -2.
+     */
+    class MinStack {
+    private:
+        stack<int> mainStack;
+        stack<int> minStack;
+    public:
+        MinStack() {
+
+        }
+        void push(int x) {
+            mainStack.push(x);
+            if (minStack.empty()) {
+                minStack.push(x);
+            } else {
+                int curMin = min(minStack.top(), x);
+                minStack.push(curMin);
+            }
+        }
+        void pop() {
+            mainStack.pop();
+            minStack.pop();
+        }
+        int top() {
+            return mainStack.top();
+        }
+        int getMin() {
+            return minStack.top();
+        }
+    };
+
+    /**
+     * 167. Two Sum II - Input array is sorted
+     *Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
+        The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.
+        You may assume that each input would have exactly one solution and you may not use the same element twice.
+        Input: numbers={2, 7, 11, 15}, target=9
+        Output: index1=1, index2=2
+     * @param numbers
+     * @param target
+     * @return
+     */
+    vector<int> twoSum(vector<int> & numbers, int target);
 };
 
 

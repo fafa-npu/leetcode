@@ -852,3 +852,9 @@
 # 147. Insertion Sort List
 * 插入排序
 * 新建一个new_head，使得new_head->next = head， 可以大大简化一些判断操作。
+
+# 155. Min Stack 
+* 使用vector或stack存储min
+
+# 167. Two Sum II - Input array is sorted
+* 从小到大遍历给定数组，使用二分查找搜索sum-curnum
