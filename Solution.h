@@ -1730,28 +1730,6 @@ public :
     };
 
     /**
-     * 167. Two Sum II - Input array is sorted
-     *Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
-        The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.
-        You may assume that each input would have exactly one solution and you may not use the same element twice.
-        Input: numbers={2, 7, 11, 15}, target=9
-        Output: index1=1, index2=2
-     * @param numbers
-     * @param target
-     * @return
-     */
-    vector<int> twoSum(vector<int> & numbers, int target);
-
-    /**
-     * 169. Majority Element
-     * Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
-    You may assume that the array is non-empty and the majority element always exist in the array.
-     * @param nums
-     * @return
-     */
-    int majorityELement(vector<int> & nums);
-
-    /**
      *160. Intersection of Two Linked Lists
      * Write a program to find the node at which the intersection of two singly linked lists begins.
     For example, the following two linked lists:
@@ -1773,6 +1751,44 @@ public :
      * @return
      */
     ListNode * getIntersectionNode (ListNode * headA, ListNode * headB);
+
+    /**
+     * 162. Find Peak Element
+     * A peak element is an element that is greater than its neighbors.
+        Given an input array where num[i] ≠ num[i+1], find a peak element and return its index.
+        The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+        You may imagine that num[-1] = num[n] = -∞.
+        For example, in array [1, 2, 3, 1], 3 is a peak element and your function should return the index number 2.
+     * @param nums
+     * @return
+     */
+    int findPeakElement(vector<int> & nums);
+    int findPeakElement(vector<int> & nums, int l, int r);
+
+    /**
+     * 167. Two Sum II - Input array is sorted
+     *Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
+        The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.
+        You may assume that each input would have exactly one solution and you may not use the same element twice.
+        Input: numbers={2, 7, 11, 15}, target=9
+        Output: index1=1, index2=2
+     * @param numbers
+     * @param target
+     * @return
+     */
+    vector<int> twoSum(vector<int> & numbers, int target);
+
+    /**
+     * 169. Majority Element
+     * Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+    You may assume that the array is non-empty and the majority element always exist in the array.
+     * @param nums
+     * @return
+     */
+    int majorityELement(vector<int> & nums);
+
+
+
 };
 
 

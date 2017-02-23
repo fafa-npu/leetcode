@@ -866,6 +866,10 @@
             p2 = p2 ? p2->next : headA;
         }
         return p1;
+        
+# 162. Find Peak Element
+* binary search
+* 对于nums[i] 和 nums[i + 1]，由于nums[-1] = nums[n] = -无穷，如果nums[i] > nums[i + 1]，则在[low, i]必定存在一个peak，反之，在[i + 1, high]必定存在一个peak
 
 # 167. Two Sum II - Input array is sorted
 * 从小到大遍历给定数组，使用二分查找搜索sum-curnum
