@@ -881,4 +881,8 @@
 * 分治
 * hash
 
+#191. Number of  1 Bits
+* n & (n - 1) 将n中第一个不为1的bit置为0
+
+
 

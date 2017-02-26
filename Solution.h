@@ -1765,6 +1765,7 @@ public :
     int findPeakElement(vector<int> & nums);
     int findPeakElement(vector<int> & nums, int l, int r);
 
+
     /**
      * 167. Two Sum II - Input array is sorted
      *Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
@@ -1787,6 +1788,14 @@ public :
      */
     int majorityELement(vector<int> & nums);
 
+    /**
+     * 191. Number of 1 Bits
+     *Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
+        For example, the 32-bit integer ’11' has binary representation 00000000000000000000000000001011, so the function should return 3.
+     * @param n
+     * @return
+     */
+    int hammingWeight(uint32_t n);
 
 
 };
