@@ -2722,3 +2722,20 @@ int Solution::hammingWeight(uint32_t n) {
     }
     return cnt;
 }
+
+int maxDeep(TreeNode * root) {
+    if (root == NULL) {
+        return 0;
+    }
+    return max(maxDeep(root->right), maxDeep(root->left)) + 1;
+}
+int maxEdges(TreeNode * root){
+    if (root == NULL || root->right == NULL && root->left == NULL) {
+        return 0;
+    }
+    return max(maxDeep(root->left) + maxDeep(root->right),
+        max(maxEdges(root->right), maxEdges(root->left)));
+}
+int Solution::diameterOfBinaryTree(TreeNode *root) {
+    return maxEdges(root);
+}
