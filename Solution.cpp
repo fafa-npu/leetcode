@@ -2739,3 +2739,29 @@ int maxEdges(TreeNode * root){
 int Solution::diameterOfBinaryTree(TreeNode *root) {
     return maxEdges(root);
 }
+
+TreeNode * Solution::convertBST(TreeNode *root) {
+    if (root == NULL) {
+        return NULL;
+    }
+    if (root->left == NULL && root->right == NULL) {
+        return root;
+    }
+    if (root->right != NULL) {
+        convertBST(root->right);
+        TreeNode * mostLeftInRight = root->right;
+        while (mostLeftInRight->left) {
+            mostLeftInRight = mostLeftInRight->left;
+        }
+        root->val += mostLeftInRight->val;
+    }
+    if (root->left != NULL) {
+        TreeNode * mostRightInLeft = root->left;
+        while (mostRightInLeft->right) {
+            mostRightInLeft = mostRightInLeft->right;
+        }
+        mostRightInLeft->val += root->val;
+        convertBST(root->left);
+    }
+    return root;
+}
