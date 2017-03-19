@@ -5,6 +5,7 @@
 #include <climits>
 #include <stack>
 #include <queue>
+#include <ctime>
 #include "Solution.h"
 
 /**
@@ -2764,4 +2765,66 @@ TreeNode * Solution::convertBST(TreeNode *root) {
         convertBST(root->left);
     }
     return root;
+}
+
+
+bool neededUpdate(vector<vector<int>> & matrix, int rows, int cols, int row, int col) {
+
+    if (matrix[row][col] == 0) {
+        return false;
+    }
+    if (col - 1 >= 0 ) {
+        if (matrix[row][col] > matrix[row][col - 1]){
+            return false;
+        }
+    }
+    if (col + 1 < cols) {
+        if (matrix[row][col] > matrix[row][col + 1]){
+            return false;
+        }
+    }
+    if (row - 1 >= 0) {
+        if (matrix[row][col] > matrix[row - 1][col]){
+            return false;
+        }
+    }
+    if (row + 1 < rows) {
+        if (matrix[row][col] > matrix[row + 1][col]){
+            return false;
+        }
+    }
+    return true;
+}
+bool updateFinished(vector<vector<int>> & matrix, int rows, int cols) {
+    for (int row = 0; row < rows; row ++) {
+        for (int col = 0; col < cols; col ++) {
+            if (neededUpdate(matrix, rows, cols, row, col)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+void Solution::updateMatrix(vector<vector<int>> & matrix, int rows, int cols) {
+    for (int row = 0; row < rows; row ++) {
+        for (int col = 0; col < cols; col ++){
+            if (neededUpdate(matrix, rows, cols, row, col)) {
+                matrix[row][col] += 1;
+            }
+        }
+    }
+}
+vector<vector<int>> Solution::updateMatrix(vector<vector<int>> &matrix) {
+    int rows = matrix.size();
+    if (rows == 0) {
+        return {{}};
+    }
+    int cols = matrix[0].size();
+    if (cols == 0) {
+        return {{}};
+    }
+    while (!updateFinished(matrix, rows, cols)) {
+        updateMatrix(matrix, rows, cols);
+    }
+    return matrix;
 }

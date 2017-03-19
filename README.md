@@ -887,6 +887,9 @@
 # 538. Convert BST to Greater Tree
 * 递归操作
 
+# 542. 01 Matrix
+* 循环遍历
+
 #543. Diameter of Binary Tree
 * 此题可以看做一个动态规划问题
 
