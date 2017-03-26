@@ -6,6 +6,7 @@
 #include <stack>
 #include <queue>
 #include <ctime>
+#include <sstream>
 #include "Solution.h"
 
 /**
@@ -2827,4 +2828,151 @@ vector<vector<int>> Solution::updateMatrix(vector<vector<int>> &matrix) {
         updateMatrix(matrix, rows, cols);
     }
     return matrix;
+}
+
+bool Solution::checkPerfectNumber(int num) {
+}
+
+void getRV(const string & s, int & r, int & v) {
+    string::size_type pos = s.find('+');
+    int num = 0;
+    for (size_t i = 0; i < pos; i++) {
+        if (s[i] >= '0' && s[i] <= '9') {
+            num = num * 10 + s[i] - '0';
+        }
+    }
+    if (s[0] == '-') {
+        num = -num;
+    }
+    r = num;
+    num = 0;
+    for (size_t i = pos + 1; i < s.size(); i++) {
+        if (s[i] >= '0' && s[i] <= '9'){
+            num = num * 10 + s[i] - '0';
+        }
+    }
+    if (s[pos + 1] == '-'){
+        num = -num;
+    }
+    v = num;
+    num = 0;
+}
+string getComplexString(int r, int v) {
+
+    string s;
+    stringstream ss;
+    ss << r;
+    s = ss.str();
+    s += "+";
+    stringstream sss;
+    sss << v;
+    s += sss.str();
+    s += "i";
+    return s;
+}
+string Solution::complexNumberMultiply(string a, string b) {
+    int r1 = 0, r2 = 0, v1 = 0, v2 = 0;
+    getRV(a, r1, v1);
+    getRV(b, r2, v2);
+    int r = r1 * r2 - v1 * v2;
+    int v = r1 * v2 + r2 * v1;
+    return getComplexString(r, v);
+}
+bool isLeaf(TreeNode * node) {
+    if (node->left == NULL && node->right == NULL) {
+        return true;
+    }else {
+        return false;
+    }
+}
+int getDepth(TreeNode * root) {
+    if (root == NULL) {
+        return 0;
+    }
+    return max(getDepth(root->left), getDepth(root->right)) + 1;
+}
+void getBottomBound(TreeNode * root, vector<TreeNode *> & bottomBount) {
+    if (root == NULL) {
+        return ;
+    }
+    if (isLeaf(root)) {
+        bottomBount.push_back(root);
+        return ;
+    }
+    getBottomBound(root->left, bottomBount);
+    getBottomBound(root->right, bottomBount);
+}
+vector<int> Solution::boundaryOfBinaryTree(TreeNode *root) {    vector<int> boundary;
+    if (root==NULL){
+        return boundary;
+    }
+    if (isLeaf(root)){
+        boundary.push_back(root->val);
+        return boundary;
+    }
+    int deep = getDepth(root);
+    // bottom bound
+    vector<TreeNode *> bottomBound;
+    getBottomBound(root, bottomBound);
+    TreeNode * node;
+
+    // leftBoundary
+    vector<TreeNode *> leftBoundary;
+    bool hasMostLeft = false;
+    leftBoundary.reserve(deep);
+    node = root->left;
+    while (node) {
+        hasMostLeft = true;
+        leftBoundary.push_back(node);
+        if (node->left){
+            node = node->left;
+        }else if(node->right){
+            node = node->right;
+        }else {
+            // leafNode
+            break;
+        }
+    }
+    // rightBoundary
+    bool hasMostRight = false;
+    vector<TreeNode *> rightBoundary;
+    rightBoundary.reserve(deep);
+    node = root->right;
+    while (node){
+        hasMostRight = true;
+        rightBoundary.push_back(node);
+        if (node->right){
+            node = node->right;
+        }else if(node->left){
+            node = node->left;
+        }else {
+            // leaf node
+            break;
+        }
+    }
+
+    // merge
+    boundary.push_back(root->val);
+    vector<TreeNode *> boundNode(leftBoundary);
+    if (!bottomBound.empty()) {
+        if (hasMostLeft){
+            copy(bottomBound.begin() + 1, bottomBound.end(), back_inserter(boundNode));
+        }else {
+            copy(bottomBound.begin(), bottomBound.end(), back_inserter(boundNode));
+        }
+    }
+    if (!rightBoundary.empty()) {
+        reverse(rightBoundary.begin(), rightBoundary.end());
+        if (hasMostRight) {
+            copy(rightBoundary.begin() + 1, rightBoundary.end(), back_inserter(boundNode));
+        }else {
+            copy(rightBoundary.begin() , rightBoundary.end(), back_inserter(boundNode));
+
+        }
+    }
+    for (auto node : boundNode) {
+        boundary.push_back(node->val);
+    }
+
+    return boundary;
 }
