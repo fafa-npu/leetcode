@@ -2903,76 +2903,167 @@ void getBottomBound(TreeNode * root, vector<TreeNode *> & bottomBount) {
     getBottomBound(root->right, bottomBount);
 }
 vector<int> Solution::boundaryOfBinaryTree(TreeNode *root) {    vector<int> boundary;
-    if (root==NULL){
-        return boundary;
-    }
-    if (isLeaf(root)){
-        boundary.push_back(root->val);
-        return boundary;
-    }
-    int deep = getDepth(root);
-    // bottom bound
-    vector<TreeNode *> bottomBound;
-    getBottomBound(root, bottomBound);
-    TreeNode * node;
-
-    // leftBoundary
-    vector<TreeNode *> leftBoundary;
-    bool hasMostLeft = false;
-    leftBoundary.reserve(deep);
-    node = root->left;
-    while (node) {
-        hasMostLeft = true;
-        leftBoundary.push_back(node);
-        if (node->left){
-            node = node->left;
-        }else if(node->right){
-            node = node->right;
-        }else {
-            // leafNode
-            break;
-        }
-    }
-    // rightBoundary
-    bool hasMostRight = false;
-    vector<TreeNode *> rightBoundary;
-    rightBoundary.reserve(deep);
-    node = root->right;
-    while (node){
-        hasMostRight = true;
-        rightBoundary.push_back(node);
-        if (node->right){
-            node = node->right;
-        }else if(node->left){
-            node = node->left;
-        }else {
-            // leaf node
-            break;
-        }
-    }
-
-    // merge
-    boundary.push_back(root->val);
-    vector<TreeNode *> boundNode(leftBoundary);
-    if (!bottomBound.empty()) {
-        if (hasMostLeft){
-            copy(bottomBound.begin() + 1, bottomBound.end(), back_inserter(boundNode));
-        }else {
-            copy(bottomBound.begin(), bottomBound.end(), back_inserter(boundNode));
-        }
-    }
-    if (!rightBoundary.empty()) {
-        reverse(rightBoundary.begin(), rightBoundary.end());
-        if (hasMostRight) {
-            copy(rightBoundary.begin() + 1, rightBoundary.end(), back_inserter(boundNode));
-        }else {
-            copy(rightBoundary.begin() , rightBoundary.end(), back_inserter(boundNode));
-
-        }
-    }
-    for (auto node : boundNode) {
-        boundary.push_back(node->val);
-    }
+//    if (root==NULL){
+//        return boundary;
+//    }
+//    if (isLeaf(root)){
+//        boundary.push_back(root->val);
+//        return boundary;
+//    }
+//    int deep = getDepth(root);
+//    // bottom bound
+//    vector<TreeNode *> bottomBound;
+//    getBottomBound(root, bottomBound);
+//    TreeNode * node;
+//
+//    // leftBoundary
+//    vector<TreeNode *> leftBoundary;
+//    bool hasMostLeft = false;
+//    leftBoundary.reserve(deep);
+//    node = root->left;
+//    while (node) {
+//        hasMostLeft = true;
+//        leftBoundary.push_back(node);
+//        if (node->left){
+//            node = node->left;
+//        }else if(node->right){
+//            node = node->right;
+//        }else {
+//            // leafNode
+//            break;
+//        }
+//    }
+//    // rightBoundary
+//    bool hasMostRight = false;
+//    vector<TreeNode *> rightBoundary;
+//    rightBoundary.reserve(deep);
+//    node = root->right;
+//    while (node){
+//        hasMostRight = true;
+//        rightBoundary.push_back(node);
+//        if (node->right){
+//            node = node->right;
+//        }else if(node->left){
+//            node = node->left;
+//        }else {
+//            // leaf node
+//            break;
+//        }
+//    }
+//
+//    // merge
+//    boundary.push_back(root->val);
+//    vector<TreeNode *> boundNode(leftBoundary);
+//    if (!bottomBound.empty()) {
+//        if (hasMostLeft){
+//            copy(bottomBound.begin() + 1, bottomBound.end(), back_inserter(boundNode));
+//        }else {
+//            copy(bottomBound.begin(), bottomBound.end(), back_inserter(boundNode));
+//        }
+//    }
+//    if (!rightBoundary.empty()) {
+//        reverse(rightBoundary.begin(), rightBoundary.end());
+//        if (hasMostRight) {
+//            copy(rightBoundary.begin() + 1, rightBoundary.end(), back_inserter(boundNode));
+//        }else {
+//            copy(rightBoundary.begin() , rightBoundary.end(), back_inserter(boundNode));
+//
+//        }
+//    }
+//    for (auto node : boundNode) {
+//        boundary.push_back(node->val);
+//    }
 
     return boundary;
+}
+bool greaterThanTwice(int a, int b) {
+    if (b < INT_MIN / 2) {
+        return true;
+    }else if (b > INT_MAX / 2) {
+        return false;
+    }else {
+        if (a > b * 2){
+            return true;
+        }else {
+            return false;
+        }
+    }
+//    if (a > 0 && b <= 0){
+//        return true;
+//    }
+//    if (b <= INT_MAX / 2 && b >= INT_MIN / 2 && a > b * 2) {
+//        return true;
+//    }
+//    return false;
+}
+int Solution::reversePairs(vector<int> & nums, int start, int end) {
+    if (nums.empty()) {
+        return 0;
+    }
+    if (start == end) {
+        return 0;
+    }
+    int reverseCnt = 0;
+    if (start == end - 1) {
+        if (greaterThanTwice(nums[start], nums[end])){
+            reverseCnt = 1;
+        }
+        if (nums[start] > nums[end]){
+            swap(nums[start], nums[end]);
+        }
+    }else {
+        int mid = start + (end - start) / 2;
+        reverseCnt += reversePairs(nums, start, mid);
+        reverseCnt += reversePairs(nums, mid + 1, end);
+        reverseCnt += mergePairs(nums, start, mid, mid+1, end);
+    }
+    return reverseCnt;
+}
+int Solution::mergePairs(vector<int> &nums, int s1, int e1, int s2, int e2) {
+    if (nums.empty()) {
+        return 0;
+    }
+    int mergedSize = e2 - s1 + 1;
+    vector<int> mergedPairs;
+    mergedPairs.reserve(mergedSize);
+    int reverseCnt = 0;
+    int p1 = e1, p2 = e2;
+    while (p1 >= s1 && p2 >= s2) {
+        if (greaterThanTwice(nums[p1], nums[p2])) {
+            reverseCnt += (p2 - s2 + 1);
+            p1--;
+        }else {
+            p2 -- ;
+        }
+    }
+    p1 = e1;
+    p2 = e2;
+    while (p1 >= s1 && p2 >= s2) {
+        if (nums[p1] > nums[p2]){
+            mergedPairs.push_back(nums[p1--]);
+        }else {
+            mergedPairs.push_back(nums[p2--]);
+        }
+    }
+    if (p1 >= s1) {
+        while (p1 >= s1) {
+            mergedPairs.push_back(nums[p1--]);
+        }
+    }else {
+        while (p2 >= s2) {
+            mergedPairs.push_back(nums[p2--]);
+        }
+    }
+    std::reverse(mergedPairs.begin(), mergedPairs.end());
+    for (int index = 0; index < mergedSize; index++) {
+        nums[index + s1] = mergedPairs[index];
+    }
+    return reverseCnt;
+}
+int Solution::reversePairs(vector<int> &nums) {
+    if(nums.empty()) {
+        return 0;
+    }
+    vector<int> tmpNums(nums);
+    return reversePairs(tmpNums, 0, nums.size() - 1);
 }

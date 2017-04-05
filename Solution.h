@@ -1799,6 +1799,25 @@ public :
     int hammingWeight(uint32_t n);
 
     /**
+     * 493. Reverse Pairsven an array nums, we call (i, j) an important reverse pair if i < j and nums[i] > 2*nums[j].
+        You need to return the number of important reverse pairs in the given array.
+        Example1:
+        Input: [1,3,2,3,1]
+        Output: 2
+        Example2:
+        Input: [2,4,3,5,1]
+        Output: 3
+        Note:
+        The length of the given array will not exceed 50,000.
+        All the numbers in the input array are in the range of 32-bit integer.
+     * @param nums
+     * @return
+     */
+    int reversePairs(vector<int> & nums);
+    int reversePairs(vector<int> & nums, int start, int end);
+    int mergePairs(vector<int> & nums, int s1, int e1, int s2, int e2);
+
+    /**
      * 507. Perfect Number
      * We define the Perfect Number is a positive integer that is equal to the sum of all its positive divisors except itself.
         Now, given an integer n, write a function that returns true when it is a perfect number and false when it is not.
