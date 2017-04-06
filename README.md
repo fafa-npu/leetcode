@@ -840,9 +840,11 @@
 * 深度优先搜索
 
 # 134. Gas Station
-1. 搜索Gas量最多的station
-2. 从1中找到的station开始走，看能否到达
-3. 如果1中找到多个station，则遍历这些station
+1. 计算每一站gas与cost的差
+2. 查找每一个index，这些index满足以下条件
+    - lastgas[index] >= 0
+    - lastgas[index - 1] < 0
+3. 以2中的index为起点，计算是否能达到终点
 
 # 136. Single Number
 * hashtable , 会使用额外的存储空间
