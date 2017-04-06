@@ -3093,3 +3093,23 @@ int Solution::maxProduct(vector<string> &words) {
     return product;
 
 }
+
+int Solution::firstMissingPostive(vector<int> &nums) {
+    if (nums.empty()){
+        return 1;
+    }
+    int size = nums.size();
+    for (int i = 0; i < size; ){
+        if (nums[i] != i + 1 && nums[i] > 0 && nums[i] < size && nums[nums[i] - 1] != nums[i]) {
+            swap(nums[i], nums[nums[i] - 1]);
+        }else {
+            i ++;
+        }
+    }
+    for (int i = 0; i < size; i++) {
+        if (nums[i] != i + 1) {
+            return i + 1;
+        }
+    }
+    return nums.back() + 1;
+}

@@ -548,6 +548,18 @@ public :
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target, vector<int> & combination, int begin);
 
     /**
+     * 41. First Missing Postive
+     * Given an unsorted integer array, find the first missing positive integer.
+        For example,
+        Given [1,2,0] return 3,
+        and [3,4,-1,1] return 2.
+        Your algorithm should run in O(n) time and uses constant space.
+     * @param nums
+     * @return
+     */
+    int firstMissingPostive(vector<int> & nums);
+
+    /**
      * 42. Trapping Rain Water
     Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
         For example,
