@@ -3113,3 +3113,46 @@ int Solution::firstMissingPostive(vector<int> &nums) {
     }
     return nums.back() + 1;
 }
+size_t increaseIndexOfGas(int index, int N) {
+    index = index + 1;
+    if (index >= N) {
+        return 0;
+    }else {
+        return index;
+    }
+}
+bool Solution::canCompleteCircuit(vector<int> & lastGas, int index){
+    int totalGas = 0;
+    int i = index;
+    do{
+        totalGas += lastGas[i];
+        if (totalGas < 0) {
+            return false;
+        }
+        i = increaseIndexOfGas(i, lastGas.size());
+    }while (i != index);
+    return true;
+}
+int Solution::canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
+    if (gas.size() != cost.size() || gas.size() == 0 || cost.size() == 0) {
+        return -1;
+    }
+    int size = gas.size();
+    vector<int> lastGas;
+    lastGas.reserve(size);
+    for (int i = 0; i < size; i++) {
+        lastGas.push_back(gas[i] - cost[i]);
+    }
+    vector<int> startIndexs;
+    for (int i = 0; i < size; i++) {
+        if (lastGas[i] < 0 && lastGas[increaseIndexOfGas(i, size)] >= 0){
+            startIndexs.push_back(increaseIndexOfGas(i, size));
+        }
+    }
+    for(auto index : startIndexs) {
+        if (canCompleteCircuit(lastGas,index)){
+            return index;
+        }
+    }
+    return -1;
+}

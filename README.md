@@ -839,6 +839,11 @@
 # 129. Sum Root to Leaf Numbers
 * 深度优先搜索
 
+# 134. Gas Station
+1. 搜索Gas量最多的station
+2. 从1中找到的station开始走，看能否到达
+3. 如果1中找到多个station，则遍历这些station
+
 # 136. Single Number
 * hashtable , 会使用额外的存储空间
 * 位操作
