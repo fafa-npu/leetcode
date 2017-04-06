@@ -884,6 +884,9 @@
 #191. Number of  1 Bits
 * n & (n - 1) 将n中第一个不为1的bit置为0
 
+# 318. Maximum Product of Word Lengths
+* 使用位操作来判断两个字符串是否相等，然后遍历所有记录，求出最大乘积。
+
 # 493. Reverse Pairs
 * 使用归并排序的思想
 

@@ -3067,3 +3067,29 @@ int Solution::reversePairs(vector<int> &nums) {
     vector<int> tmpNums(nums);
     return reversePairs(tmpNums, 0, nums.size() - 1);
 }
+
+int Solution::maxProduct(vector<string> &words) {
+    if (words.empty()){
+        return 0;
+    }
+    int product = 0;
+    map<int, int> numAndLength;
+    for (auto str : words) {
+        int num = 0;
+        for (char c : str) {
+            num |= 1 << (c - 'a');
+        }
+        if (numAndLength[num] < str.size()){
+            numAndLength[num] = str.size();
+        }
+    }
+    for (auto a : numAndLength) {
+        for (auto b : numAndLength) {
+            if (!(a.first & b.first)) {
+                product = max(product, a.second * b.second);
+            }
+        }
+    }
+    return product;
+
+}
