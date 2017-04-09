@@ -2003,6 +2003,56 @@ public :
      */
     vector<int> boundaryOfBinaryTree(TreeNode * root);
 
+    /**
+     * 557. Reverse Words in a String III
+     *Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+        Example 1:
+        Input: "Let's take LeetCode contest"
+        Output: "s'teL ekat edoCteeL tsetnoc"
+        Note: In the string, each word is separated by single space and there will not be any extra space in the string.
+     * @param s
+     * @return
+     */
+    string reverseWords(string s) ;
+
+    /**
+     * 554. Brick Wall
+     * There is a brick wall in front of you. The wall is rectangular and has several rows of bricks. The bricks have the same height but different width. You want to draw a vertical line from the top to the bottom and cross the least bricks.
+        The brick wall is represented by a list of rows. Each row is a list of integers representing the width of each brick in this row from left to right.
+        If your line go through the edge of a brick, then the brick is not considered as crossed. You need to find out how to draw the line to cross the least bricks and return the number of crossed bricks.
+        You cannot draw a line just along one of the two vertical edges of the wall, in which case the line will obviously cross no bricks.
+        Example:
+        Input:
+        [[1,2,2,1],
+         [3,1,2],
+         [1,3,2],
+         [2,4],
+         [3,1,2],
+         [1,3,1,1]]
+        Output: 2
+        Explanation:
+
+        Note:
+        The width sum of bricks in different rows are the same and won't exceed INT_MAX.
+        The number of bricks in each row is in range [1,10,000]. The height of wall is in range [1,10,000]. Total number of bricks of the wall won't exceed 20,000.
+     * @param wall
+     * @return
+     */
+    int leastBricks(vector<vector<int>> & wall);
+
+    /**
+     * 556. Next Greater Element III
+     * Given a positive 32-bit integer n, you need to find the smallest 32-bit integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive 32-bit integer exists, you need to return -1.
+        Example 1:
+        Input: 12
+        Output: 21
+        Example 2:
+        Input: 21
+        Output: -1
+     * @param n
+     * @return
+     */
+    int nextGreaterElement(int n);
 };
 
 

@@ -3156,3 +3156,90 @@ int Solution::canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
     }
     return -1;
 }
+void reverseWord(string & s, int start, int end){
+    while (start < end) {
+        swap(s[start], s[end]);
+        start ++;
+        end --;
+    }
+}
+string Solution::reverseWords(string s) {
+    int size = s.size();
+    int p1 = 0, p2 = 0;
+    while (true) {
+        while (s[p2] != ' ' && p2 < size) {
+            p2 ++;
+        }
+        reverseWord(s, p1, p2 - 1);
+        p2 ++;
+        p1 = p2;
+        if (p2 >= size) {
+            break;
+        }
+    }
+    return s;
+}
+
+int Solution::leastBricks(vector<vector<int>> &wall) {
+    if (wall.empty()) {
+        return 0;
+    }
+    vector<vector<int>> brickSumOfWall;
+    for (auto line : wall) {
+        for (int i = 1; i < line.size(); i++) {
+            line[i] += line[i - 1];
+        }
+        brickSumOfWall.push_back(line);
+    }
+    map<int, int> bricksSum;
+    for (auto line: brickSumOfWall){
+        for (int sum : line) {
+            bricksSum[sum] ++;
+        }
+    }
+    int widthOfEveryLevel = brickSumOfWall[0].back();
+    int maxNumOfSum = 0;
+    for (auto sums : bricksSum) {
+        if (sums.first != widthOfEveryLevel) {
+            if (sums.second > maxNumOfSum) {
+                maxNumOfSum = sums.second;
+            }
+        }
+    }
+    return wall.size() - maxNumOfSum;
+}
+
+int Solution::nextGreaterElement(int n) {
+    vector<int> numVec;
+    numVec.reserve(32);
+    int num(n);
+    while (num) {
+        numVec.push_back(num % 10);
+        num /= 10;
+    }
+    std::reverse(numVec.begin(), numVec.end());
+    int size = numVec.size();
+    for (int i = size - 1; i >= 0; i--) {
+        bool gotNext = false;
+        for (int j = size - 1; j > i; j--) {
+            if (numVec[j] > numVec[i]) {
+                swap(numVec[i], numVec[j]);
+                sort(numVec.begin() + i + 1, numVec.end());
+                gotNext = true;
+                break;
+            }
+        }
+        if (gotNext) {
+            break;
+        }
+    }
+    int nextNum = 0;
+    for (auto dig : numVec){
+        nextNum = nextNum * 10 + dig;
+    }
+    if (nextNum > n) {
+        return nextNum;
+    }else {
+        return -1;
+    }
+}
