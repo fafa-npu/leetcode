@@ -2003,7 +2003,7 @@ vector<TreeNode *> Solution::generateTreesRecursive(int n) {
 }
 
 vector<TreeNode * > Solution::generateTrees(int n) {
-
+	return {};
 }
 
 vector<vector<int>> Solution::subsetsWithDup(vector<int> &nums) {
@@ -2831,6 +2831,7 @@ vector<vector<int>> Solution::updateMatrix(vector<vector<int>> &matrix) {
 }
 
 bool Solution::checkPerfectNumber(int num) {
+	return false;
 }
 
 void getRV(const string & s, int & r, int & v) {
