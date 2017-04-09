@@ -2026,6 +2026,7 @@ public :
      * @return
      */
     int longestConsecutive(TreeNode * root);
+	int longestConsecutive(TreeNode * node, map<TreeNode *, vector<TreeNode *>> &);
 
     /**
      * 554. Brick Wall

@@ -3245,14 +3245,14 @@ int Solution::nextGreaterElement(int n) {
     }
 }
 
-int longestConsecutive(TreeNode * node, map<TreeNode *, vector<TreeNode *>> & nodeWithNext){
+int Solution::longestConsecutive(TreeNode * node, map<TreeNode *, vector<TreeNode *>> & nodeWithNext){
     if (node == NULL || nodeWithNext.empty()){
         return 0;
     }
-    int maxLength = 0;
+    int maxLength = 1;
     for (TreeNode * nextNode : nodeWithNext[node]) {
         if (node->val + 1 == nextNode->val) {
-            maxLength = max(maxLength, longestConsecutive(nextNode, nodeWithNext));
+            maxLength = max(maxLength, 1 + longestConsecutive(nextNode, nodeWithNext));
         }
     }
     return maxLength;
@@ -3281,7 +3281,7 @@ int Solution::longestConsecutive(TreeNode *root) {
     }
     int maxLength = 0;
     for (auto nodeAndNext : nodeWithNext) {
-        maxLength = max(maxLength, longestConsecutive(nodeAndNext.first));
+        maxLength = max(maxLength, longestConsecutive(nodeAndNext.first, nodeWithNext));
     }
     return maxLength;
 }
