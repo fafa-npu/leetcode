@@ -3243,3 +3243,44 @@ int Solution::nextGreaterElement(int n) {
         return -1;
     }
 }
+
+int longestConsecutive(TreeNode * node, map<TreeNode *, vector<TreeNode *>> & nodeWithNext){
+    if (node == NULL || nodeWithNext.empty()){
+        return 0;
+    }
+    int maxLength = 0;
+    for (TreeNode * nextNode : nodeWithNext[node]) {
+        if (node->val + 1 == nextNode->val) {
+            maxLength = max(maxLength, longestConsecutive(nextNode, nodeWithNext));
+        }
+    }
+    return maxLength;
+}
+
+int Solution::longestConsecutive(TreeNode *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    deque<TreeNode *> traversalQue;
+    map<TreeNode *, vector<TreeNode *>> nodeWithNext;
+    traversalQue.push_back(root);
+    while (!traversalQue.empty()) {
+        TreeNode * curNode = traversalQue.front();
+        traversalQue.pop_front();
+        if (curNode->left) {
+            nodeWithNext[curNode].push_back(curNode->left);
+            nodeWithNext[curNode->left].push_back(curNode);
+            traversalQue.push_back(curNode->left);
+        }
+        if (curNode->right) {
+            nodeWithNext[curNode].push_back(curNode->right);
+            nodeWithNext[curNode->right].push_back(curNode);
+            traversalQue.push_back(curNode->right);
+        }
+    }
+    int maxLength = 0;
+    for (auto nodeAndNext : nodeWithNext) {
+        maxLength = max(maxLength, longestConsecutive(nodeAndNext.first));
+    }
+    return maxLength;
+}

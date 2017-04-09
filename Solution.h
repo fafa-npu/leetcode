@@ -2004,16 +2004,27 @@ public :
     vector<int> boundaryOfBinaryTree(TreeNode * root);
 
     /**
-     * 557. Reverse Words in a String III
-     *Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+     * 549. Binary Tree Longest Consecutive Sequence II
+     * Given a binary tree, you need to find the length of Longest Consecutive Path in Binary Tree.
+        Especially, this path can be either increasing or decreasing. For example, [1,2,3,4] and [4,3,2,1] are both considered valid, but the path [1,2,4,3] is not valid. On the other hand, the path can be in the child-Parent-child order, where not necessarily be parent-child order.
         Example 1:
-        Input: "Let's take LeetCode contest"
-        Output: "s'teL ekat edoCteeL tsetnoc"
-        Note: In the string, each word is separated by single space and there will not be any extra space in the string.
-     * @param s
+        Input:
+                1
+               / \
+              2   3
+        Output: 2
+        Explanation: The longest consecutive path is [1, 2] or [2, 1].
+        Example 2:
+        Input:
+                2
+               / \
+              1   3
+        Output: 3
+        Explanation: The longest consecutive path is [1, 2, 3] or [3, 2, 1].
+     * @param root
      * @return
      */
-    string reverseWords(string s) ;
+    int longestConsecutive(TreeNode * root);
 
     /**
      * 554. Brick Wall
@@ -2053,6 +2064,18 @@ public :
      * @return
      */
     int nextGreaterElement(int n);
+
+    /**
+     * 557. Reverse Words in a String III
+     *Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+        Example 1:
+        Input: "Let's take LeetCode contest"
+        Output: "s'teL ekat edoCteeL tsetnoc"
+        Note: In the string, each word is separated by single space and there will not be any extra space in the string.
+     * @param s
+     * @return
+     */
+    string reverseWords(string s) ;
 };
 
 
