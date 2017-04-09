@@ -900,6 +900,14 @@
 # 318. Maximum Product of Word Lengths
 * 使用位操作来判断两个字符串是否相等，然后遍历所有记录，求出最大乘积。
 
+# 424 Longest Repeating Character Replacement
+* 采用滑动窗口的方法
+
+        Given a string convert it to a string with all same characters with minimal changes. The answer to this is
+        length of the entire string - number of times of the maximum occurring character in the string
+        Given this, we can apply the at most k changes constraint and maintain a sliding window such that
+        (length of substring - number of times of the maximum occurring character in the substring) <= k
+
 # 493. Reverse Pairs
 * 使用归并排序的思想
 

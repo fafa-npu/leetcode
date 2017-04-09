@@ -3285,3 +3285,22 @@ int Solution::longestConsecutive(TreeNode *root) {
     }
     return maxLength;
 }
+
+int Solution::characterReplacement(string s, int k) {
+	int start = 0, end = 0, maxCharCnt = 0, maxLength = 0;
+	map<char, int> charCnt;
+	for (; end < s.size(); end++) {
+		charCnt[s[end]] ++;
+		maxCharCnt = max(maxCharCnt, charCnt[s[end]]);
+		if (end - start + 1 - maxCharCnt > k) {
+			charCnt[s[start]] --;
+			start++;
+			int maxCharCnt = 0;
+			//for (auto p : charCnt) {
+			//	maxCharCnt = max(maxCharCnt, p.second);
+			//}
+		}
+		maxLength = max(maxLength, end - start + 1);
+	}
+	return maxLength;
+}
