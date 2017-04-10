@@ -908,6 +908,11 @@
         Given this, we can apply the at most k changes constraint and maintain a sliding window such that
         (length of substring - number of times of the maximum occurring character in the substring) <= k
 
+# 477. Total Hamming Distance
+* 分别对所有数据的32位的每一位计算1的数量总和与0的数量总和。
+* 每一位的汉密尔顿距离总和为1的数目 \* 0 的数目
+
+
 # 493. Reverse Pairs
 * 使用归并排序的思想
 

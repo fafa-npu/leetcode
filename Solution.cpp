@@ -3304,3 +3304,22 @@ int Solution::characterReplacement(string s, int k) {
 	}
 	return maxLength;
 }
+
+int Solution::totalHammingDistance(vector<int> & nums) {
+	int totalDistance = 0;
+	int numCnt = nums.size();
+	vector<int> bit1Cnt(32, 0);
+	for (auto num : nums) {
+		int bitPos = 0;
+		while (bitPos < 32) {
+			if (num & (1 << bitPos)) {
+				bit1Cnt[bitPos] ++;
+			}
+			bitPos++;
+		}
+	}
+	for (int pos = 0; pos < 32; pos++) {
+		totalDistance += bit1Cnt[pos] * (numCnt - bit1Cnt[pos]);
+	}
+	return totalDistance;
+}
