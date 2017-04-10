@@ -3235,55 +3235,56 @@ int Solution::nextGreaterElement(int n) {
         }
     }
     int nextNum = 0;
-    for (auto dig : numVec){
-        nextNum = nextNum * 10 + dig;
-    }
-    if (nextNum > n) {
-        return nextNum;
-    }else {
-        return -1;
-    }
+for (auto dig : numVec) {
+	nextNum = nextNum * 10 + dig;
+}
+if (nextNum > n) {
+	return nextNum;
+}
+else {
+	return -1;
+}
 }
 
-int Solution::longestConsecutive(TreeNode * node, map<TreeNode *, vector<TreeNode *>> & nodeWithNext){
-    if (node == NULL || nodeWithNext.empty()){
-        return 0;
-    }
-    int maxLength = 1;
-    for (TreeNode * nextNode : nodeWithNext[node]) {
-        if (node->val + 1 == nextNode->val) {
-            maxLength = max(maxLength, 1 + longestConsecutive(nextNode, nodeWithNext));
-        }
-    }
-    return maxLength;
+int Solution::longestConsecutive(TreeNode * node, map<TreeNode *, vector<TreeNode *>> & nodeWithNext) {
+	if (node == NULL || nodeWithNext.empty()) {
+		return 0;
+	}
+	int maxLength = 1;
+	for (TreeNode * nextNode : nodeWithNext[node]) {
+		if (node->val + 1 == nextNode->val) {
+			maxLength = max(maxLength, 1 + longestConsecutive(nextNode, nodeWithNext));
+		}
+	}
+	return maxLength;
 }
 
 int Solution::longestConsecutive(TreeNode *root) {
-    if (root == NULL) {
-        return 0;
-    }
-    deque<TreeNode *> traversalQue;
-    map<TreeNode *, vector<TreeNode *>> nodeWithNext;
-    traversalQue.push_back(root);
-    while (!traversalQue.empty()) {
-        TreeNode * curNode = traversalQue.front();
-        traversalQue.pop_front();
-        if (curNode->left) {
-            nodeWithNext[curNode].push_back(curNode->left);
-            nodeWithNext[curNode->left].push_back(curNode);
-            traversalQue.push_back(curNode->left);
-        }
-        if (curNode->right) {
-            nodeWithNext[curNode].push_back(curNode->right);
-            nodeWithNext[curNode->right].push_back(curNode);
-            traversalQue.push_back(curNode->right);
-        }
-    }
-    int maxLength = 0;
-    for (auto nodeAndNext : nodeWithNext) {
-        maxLength = max(maxLength, longestConsecutive(nodeAndNext.first, nodeWithNext));
-    }
-    return maxLength;
+	if (root == NULL) {
+		return 0;
+	}
+	deque<TreeNode *> traversalQue;
+	map<TreeNode *, vector<TreeNode *>> nodeWithNext;
+	traversalQue.push_back(root);
+	while (!traversalQue.empty()) {
+		TreeNode * curNode = traversalQue.front();
+		traversalQue.pop_front();
+		if (curNode->left) {
+			nodeWithNext[curNode].push_back(curNode->left);
+			nodeWithNext[curNode->left].push_back(curNode);
+			traversalQue.push_back(curNode->left);
+		}
+		if (curNode->right) {
+			nodeWithNext[curNode].push_back(curNode->right);
+			nodeWithNext[curNode->right].push_back(curNode);
+			traversalQue.push_back(curNode->right);
+		}
+	}
+	int maxLength = 0;
+	for (auto nodeAndNext : nodeWithNext) {
+		maxLength = max(maxLength, longestConsecutive(nodeAndNext.first, nodeWithNext));
+	}
+	return maxLength;
 }
 
 int Solution::characterReplacement(string s, int k) {
@@ -3322,4 +3323,87 @@ int Solution::totalHammingDistance(vector<int> & nums) {
 		totalDistance += bit1Cnt[pos] * (numCnt - bit1Cnt[pos]);
 	}
 	return totalDistance;
+}
+typedef struct DirTreeNode {
+	string name;
+	int level;
+	vector<DirTreeNode *> children;
+}DirTreeNode;
+
+DirTreeNode * getNextNode(const string & path, int & index) {
+	if (path.empty()) {
+		return NULL;
+	}
+	if (index >= path.size()) {
+		return NULL;
+	}
+	DirTreeNode * node = new DirTreeNode();
+	int level = 0;
+	if (path[index] == '\n') {
+		index ++;
+	}
+	while (index < path.size() && path[index] == '\t'){
+		level++;
+		index ++;
+	}
+	node->level = level;
+	int nameStartPos = index;
+	while (index < path.size() && path[index] != '\n') {
+		index++;
+	}
+	node->name.assign(path.begin() + nameStartPos, path.begin() + index);
+	return node;
+}
+
+DirTreeNode * getFirstNode(const string & path) {
+	if (path.empty()) {
+		return NULL;
+	}
+	DirTreeNode * root = new DirTreeNode();
+	root->level = 0;
+	int index = 0;
+	while (index < path.size() && path[index] != '\n') {
+		index++;
+	}
+	root->name.assign(path.begin(), path.begin() + index);
+	return root;
+}
+
+DirTreeNode * buildDirTree(const string & path) {
+	if (path.empty()) {
+		return NULL;
+	}
+	
+	DirTreeNode * root;
+	root = getFirstNode(path);
+	vector<DirTreeNode *> levelNodes(100, NULL);
+	levelNodes[0] = root;
+	int index = root->name.size();
+	while (true) {
+		DirTreeNode * node = getNextNode(path, index);
+		if (node == NULL) {
+			break;
+		}
+		levelNodes[node->level - 1]->children.push_back(node);
+		levelNodes[node->level] = node;
+	}
+	return root;
+}
+
+int getMaxDirPathLength(DirTreeNode * root) {
+	int maxLength = 0;
+	for (DirTreeNode * node : root->children) {
+		maxLength = max(maxLength, getMaxDirPathLength(node));
+	}
+	if (maxLength == 0) {
+		return root->name.size();
+	}
+	else {
+		return maxLength + 1 + root->name.size();
+	}
+}
+
+int Solution::lengthLongestPath(string input) {
+	DirTreeNode * root = buildDirTree(input);
+	return getMaxDirPathLength(root);
 }

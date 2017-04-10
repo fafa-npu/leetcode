@@ -900,6 +900,9 @@
 # 318. Maximum Product of Word Lengths
 * 使用位操作来判断两个字符串是否相等，然后遍历所有记录，求出最大乘积。
 
+# 388. Longest Absolute File Path
+* 先构造一个树，再根据树递归求最大长度
+
 # 424 Longest Repeating Character Replacement
 * 采用滑动窗口的方法
 
