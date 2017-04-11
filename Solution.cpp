@@ -3447,3 +3447,53 @@ int Solution::lengthLongestPath2(string path) {
 	}
 	return maxLength;
 }
+int getIncreasingPath(int row, int col, const vector<vector<int>> & matrix, vector<vector<int>> & maxIncreasingPath) {
+	int rows = matrix.size();
+	int cols = matrix[0].size();
+	if (row < 0 || row >= rows || col < 0 || col >= cols) {
+		return 0;
+	}
+	if (maxIncreasingPath[row][col] != -1) {
+		return maxIncreasingPath[row][col];
+	}
+	int left = 0, right = 0, up = 0, bottom = 0;
+	int maxPath = 0;
+	if (col - 1 >= 0 && matrix[row][col] > matrix[row][col - 1]) {
+		left = 1 + getIncreasingPath(row, col - 1, matrix, maxIncreasingPath);
+		maxPath = max(left, maxPath);
+	}
+	if (row - 1 >= 0 && matrix[row][col] > matrix[row - 1][col]) {
+		up = 1 + getIncreasingPath(row - 1, col, matrix, maxIncreasingPath);
+		maxPath = max(up, maxPath);
+	}
+	if (row + 1 < rows && matrix[row][col] > matrix[row + 1][col]) {
+		bottom = 1 + getIncreasingPath(row + 1, col, matrix, maxIncreasingPath);
+		maxPath = max(bottom, maxPath);
+	}
+	if (col + 1 < cols && matrix[row][col] > matrix[row][col+1]) {
+		right = 1 + getIncreasingPath(row, col + 1, matrix, maxIncreasingPath);
+		maxPath = max(right, maxPath);
+	}
+	maxIncreasingPath[row][col] = maxPath;
+	return maxPath;
+}
+
+int Solution::longestIncreasingPath(vector<vector<int>> & matrix) {
+	if (matrix.empty()) {
+		return 0;
+	}
+	int rows = matrix.size();
+	if (matrix[0].empty()) {
+		return 0;
+	}
+	int cols = matrix[0].size();
+	vector<vector<int>> maxIncreasingCnt(rows, vector<int>(cols, -1));
+	int maxPath = 0;
+	for (int row = 0; row < rows; row++) {
+		for (int col = 0; col < cols; col++) {
+			getIncreasingPath(row, col, matrix, maxIncreasingCnt);
+			maxPath = max(maxPath, maxIncreasingCnt[row][col]);
+		}
+	}
+	return maxPath + 1;
+}

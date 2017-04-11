@@ -900,6 +900,10 @@
 # 318. Maximum Product of Word Lengths
 * 使用位操作来判断两个字符串是否相等，然后遍历所有记录，求出最大乘积。
 
+# 329. Longest Increasing Path in Matrix
+* 深度优先搜索
+* 在深度优先搜索的基础上加入剪枝操作（对已经计算过最大increasing path的位置不再计算）
+
 # 388. Longest Absolute File Path
 * 先构造一个树，再根据树递归求最大长度
 
