@@ -1871,7 +1871,8 @@ public :
 		Time complexity required: O(n) where n is the size of the input string.
 		Notice that a/aa/aaa/file1.txt is not the longest file path, if there is another path aaaaaaaaaaaaaaaaaaaaa/sth.png.	
 	*/
-	int lengthLongestPath(string input);
+	int lengthLongestPath(string input);// build a tree and compute the longest length recursively
+	int lengthLongestPath2(string input); // compute the longest length in a iterative way
 
 	/* 424.  Longest Repeating Character Replacement
 	Given a string that consists of only uppercase English letters, you can replace any letter in the string with another letter at most k times. Find the length of a longest substring containing all repeating letters you can get after performing the above operations.

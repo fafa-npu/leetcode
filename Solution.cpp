@@ -3396,7 +3396,12 @@ int getMaxDirPathLength(DirTreeNode * root) {
 		maxLength = max(maxLength, getMaxDirPathLength(node));
 	}
 	if (maxLength == 0) {
-		return root->name.size();
+		if (find(root->name.begin(), root->name.end(), '.') != root->name.end()) {
+			return root->name.size();
+		}
+		else {
+			return 0;
+		}
 	}
 	else {
 		return maxLength + 1 + root->name.size();
@@ -3406,4 +3411,39 @@ int getMaxDirPathLength(DirTreeNode * root) {
 int Solution::lengthLongestPath(string input) {
 	DirTreeNode * root = buildDirTree(input);
 	return getMaxDirPathLength(root);
+}
+
+int Solution::lengthLongestPath2(string path) {
+	if (path.empty()) {
+		return 0;
+	}
+	int maxLength = 0;
+	int index = 0;
+	int size = path.size();
+	vector<int> maxLengthByLevel(200, 0);
+	while (index < size) {
+		int level = 0;
+		bool isFile = false;
+		int curNameCnt = 0;
+		// get the path level
+		while (index < size && path[index] == '\t') {
+			level++;
+			index++;
+		}
+		while (index < size && path[index] != '\n') {
+			if (path[index] == '.') {
+				isFile = true;
+			}
+			curNameCnt++;
+			index++;
+		}
+		index++;
+		if (isFile) {
+			maxLength = std::max(maxLength, curNameCnt + maxLengthByLevel[level]);
+		}
+		else {
+			maxLengthByLevel[level + 1] =  curNameCnt + maxLengthByLevel[level] + 1;
+		}
+	}
+	return maxLength;
 }
