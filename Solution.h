@@ -1920,6 +1920,25 @@ public :
 	int characterReplacement(string s, int k);
 
 	/*
+	474. Ones and Zeros
+	In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.
+	For now, suppose you are a dominator of m 0s and n 1s respectively. On the other hand, there is an array with strings consisting of only 0s and 1s.
+	Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.
+	Note:
+	The given numbers of 0s and 1s will both not exceed 100
+	The size of given string array won't exceed 600.
+	Example 1:
+		Input: Array = {"10", "0001", "111001", "1", "0"}, m = 5, n = 3
+		Output: 4
+		Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”
+	Example 2:
+		Input: Array = {"10", "0", "1"}, m = 1, n = 1
+		Output: 2
+		Explanation: You could form "10", but then you'd have nothing left. Better form "0" and "1".
+	*/
+	int findMaxForm(vector<string> & strs, int m, int n);
+
+	/*
 	477. Total Hamming Distance
 	The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
 	Now your job is to find the total Hamming distance between all pairs of the given numbers.
@@ -1934,6 +1953,25 @@ public :
 		Length of the array will not exceed 10^4.
 	*/
 	int totalHammingDistance(vector<int>& nums);
+
+	/*	482. License Key Formatting
+		Now you are given a string S, which represents a software license key which we would like to format. The string S is composed of alphanumerical characters and dashes. The dashes split the alphanumerical characters within the string into groups. (i.e. if there are M dashes, the string is split into M+1 groups). The dashes in the given string are possibly misplaced.
+		We want each group of characters to be of length K (except for possibly the first group, which could be shorter, but still must contain at least one character). To satisfy this requirement, we will reinsert dashes. Additionally, all the lower case letters in the string must be converted to upper case.
+		So, you are given a non-empty string S, representing a license key to format, and an integer K. And you need to return the license key formatted according to the description above.
+		Example 1:
+		Input: S = "2-4A0r7-4k", K = 4
+		Output: "24A0-R74K"
+		Explanation: The string S has been split into two parts, each part has 4 characters.
+		Example 2:
+		Input: S = "2-4A0r7-4k", K = 3
+		Output: "24-A0R-74K"
+		Explanation: The string S has been split into three parts, each part has 3 characters except the first part as it could be shorter as said above.
+		Note:
+		The length of string S will not exceed 12,000, and K is a positive integer.
+		String S consists only of alphanumerical characters (a-z and/or A-Z and/or 0-9) and dashes(-).
+		String S is non-empty.
+	*/
+	string licenseKeyFormating(string S, int K);
 
     /**
      * 493. Reverse Pairsven an array nums, we call (i, j) an important reverse pair if i < j and nums[i] > 2*nums[j].

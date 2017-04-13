@@ -915,9 +915,22 @@
         Given this, we can apply the at most k changes constraint and maintain a sliding window such that
         (length of substring - number of times of the maximum occurring character in the substring) <= k
 
+# 474. Ones and Zeros
+* dp
+
+        dp[i][j] 为i个0和j个1时最大容纳的字符串数目，则
+        dp[i][j] = max(dp[i][j], dp[i - nums0][j - nums1] + 1)
+
+        注意，遍历时要从右上方向左下方遍历，
+        同时，使用的dp的长和宽应为 m+1 和 n+1
+
 # 477. Total Hamming Distance
 * 分别对所有数据的32位的每一位计算1的数量总和与0的数量总和。
 * 每一位的汉密尔顿距离总和为1的数目 \* 0 的数目
+
+# 482. Liscense Key Formating
+* 从后往前遍历
+* 新建一个string存储
 
 
 # 493. Reverse Pairs

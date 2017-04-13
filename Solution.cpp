@@ -3497,3 +3497,62 @@ int Solution::longestIncreasingPath(vector<vector<int>> & matrix) {
 	}
 	return maxPath + 1;
 }
+
+string Solution::licenseKeyFormating(string S, int K) {
+	string licenseKey;
+	int length = S.size();
+	for (int index = length - 1; index >= 0; ) {
+		int step = K;
+		while (index >= 0 && step > 0) {
+			char curChar = S[index];
+			index--;
+			if (curChar == '-') {
+				continue;
+			}
+			if (curChar <= 'z' && curChar >= 'a') {
+				curChar -= 32;
+			}
+			licenseKey.push_back(curChar);
+			step--;
+		}
+		if (index >= 0) {
+			licenseKey.push_back('-');
+		}
+	}
+	int index = licenseKey.size() - 1;
+	while (index >= 0) {
+		if (licenseKey[index] == '-') {
+			licenseKey.erase(licenseKey.begin() + index);
+		}
+		else {
+			break;
+		}
+	}
+	std::reverse(licenseKey.begin(), licenseKey.end());
+	return licenseKey;
+}
+
+int Solution::findMaxForm(vector<string> & strs, int m, int n) {
+	if (strs.empty()) {
+		return 0;
+	}
+	vector<vector<int>> maxCnt(m + 1, vector<int>(n + 1, 0));
+	for (string str : strs) {
+		int num0 = 0;
+		int num1 = 0;
+		for (char c : str) {
+			if (c == '0') {
+				num0++;
+			}
+			else {
+				num1++;
+			}
+		}
+		for (int index0 = m ; index0 >= num0; index0--) {
+			for (int index1 = n ; index1 >= num1; index1--) {
+				maxCnt[index0][index1] = max(maxCnt[index0][index1], maxCnt[index0 - num0][index1 - num1] + 1);
+			}
+		}
+	}
+	return maxCnt[m ][n ];
+}
