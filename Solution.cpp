@@ -3556,3 +3556,23 @@ int Solution::findMaxForm(vector<string> & strs, int m, int n) {
 	}
 	return maxCnt[m ][n ];
 }
+
+int Solution::lengthOfLIS(vector<int> &nums) {
+    if (nums.empty()) {
+        return 0;
+    }
+    int size = nums.size();
+    int maxLength = 1;
+    vector<int> length(size, 1);
+    for (int i = 1; i < size; i ++) {
+        int curLength = 1;
+        for (int j = 0; j < i; j++) {
+            if (nums[j] < nums[i]){
+                curLength = max(curLength, length[j] + 1);
+            }
+        }
+        length[i] = curLength;
+        maxLength = max(maxLength, curLength);
+    }
+    return maxLength;
+}

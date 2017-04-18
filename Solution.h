@@ -1827,6 +1827,19 @@ public :
     int hammingWeight(uint32_t n);
 
     /**
+     * 300. Longest Increasing Subsequence
+     * Given an unsorted array of integers, find the length of longest increasing subsequence.
+        For example,
+        Given [10, 9, 2, 5, 3, 7, 101, 18],
+        The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS combination, it is only necessary for you to return the length.
+        Your algorithm should run in O(n2) complexity.
+        Follow up: Could you improve it to O(n log n) time complexity?
+     * @param nums
+     * @return
+     */
+    int lengthOfLIS(vector<int> & nums);
+
+    /**
      * 318. Maximum Product of Word Lengths
      * Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
         Example 1:
