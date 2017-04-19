@@ -904,6 +904,16 @@
 * 深度优先搜索
 * 在深度优先搜索的基础上加入剪枝操作（对已经计算过最大increasing path的位置不再计算）
 
+# 354. Russian Doll Envelopes
+* 遍历加剪枝，相当于dp
+        
+       先对envelopes按照length或width进行排序，然后从最大项开始计算可放入的信封数量，同时对已经计算过的信封数量保存下来，在下次查询时使用
+       *TLE*
+       这种思路是正确的，可是实现时使用了递归，所以会超时。
+* DP
+        先排序
+        按照从小到大的顺序计算，就可以避免递归
+
 # 388. Longest Absolute File Path
 * 先构造一个树，再根据树递归求最大长度
 
@@ -915,6 +925,15 @@
         Given this, we can apply the at most k changes constraint and maintain a sliding window such that
         (length of substring - number of times of the maximum occurring character in the substring) <= k
 
+# 450. Delete Node in BST
+* 递归
+          
+        
+        如果当前节点的值等于key
+            若右孩子为空，则直接返回右孩子
+            否则，找到右子树中最小的节点，将最小节点和当前节点的值交换，并对当前节点的右子树执行递归删除操作。
+        如果当前节点的值大于key，则递归删除左子树，使当前节点的左孩子指向删除后的左子树。
+        小于key，对右子树执行上述操作。
 # 474. Ones and Zeros
 * dp
 

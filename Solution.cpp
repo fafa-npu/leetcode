@@ -3557,19 +3557,69 @@ int Solution::findMaxForm(vector<string> & strs, int m, int n) {
 	return maxCnt[m ][n ];
 }
 
-int Solution::lengthOfLIS(vector<int> &nums) {
-    if (nums.empty()) {
-        return 0;
-    }
-    vector<int> tails;
-    tails.reserve(nums.size());
-    for (int num : nums){
-        auto it = std::lower_bound(tails.begin(), tails.end(), num);
-        if (it == tails.end()) {
-            tails.push_back(num);
-        }else {
-            *it = num;
-        }
-    }
-    return tails.size();
+bool hasBiggerLength(pair<int, int> & a, pair<int, int> & b) {
+	return a.first > b.first;
+}
+
+int getRsNum(int index, const vector<pair<int, int>> & envelopes, int size, vector<int> & nums) {
+	if (nums[index] != 0) {
+		return nums[index];
+	}
+	else {
+		int maxRsNum = 1;
+		for (int nIndex = index + 1; nIndex < size; nIndex++) {
+			if (envelopes[nIndex].first < envelopes[index].first && envelopes[nIndex].second < envelopes[index].second) {
+				maxRsNum = max(maxRsNum, 1 + getRsNum(nIndex, envelopes, size, nums));
+			}
+		}
+		return maxRsNum;
+	}
+}
+
+int Solution::maxEnvelopes(vector<pair<int, int>> & envelopes) {
+	if (envelopes.empty()) {
+		return 0;
+	}
+	sort(envelopes.begin(), envelopes.end(), hasBiggerLength);
+	int size = envelopes.size();
+	int maxRsNum = 0;
+	vector<int> rsNums(size, 0);
+	for (int index = 0; index < size; index++) {
+		int rsNum = getRsNum(index, envelopes, size, rsNums);
+		if (rsNum > maxRsNum) {
+			maxRsNum = rsNum;
+		}
+	}
+	return maxRsNum;
+}
+
+TreeNode * deleteNode(TreeNode * root, int key) {
+	// search for key
+	if (root == NULL) {
+		return root;
+	}
+	bool swaped = false;
+	if (root->val == key) {
+		if (root->right == NULL) {
+			return root->left;
+		}
+		else {
+			TreeNode * curNode = root->right;
+			while (curNode->left) {
+				curNode = curNode->left;
+			}
+			swap(curNode->val, root->val);
+			swaped = true;
+		}
+	}
+	if (swaped) {
+		root->right = deleteNode(root->right, key);
+	}
+	else if (root->val < key) {
+		root->right = deleteNode(root->right, key);
+	}
+	else {
+		root->left = deleteNode(root->left, key);
+	}
+	return root;
 }
