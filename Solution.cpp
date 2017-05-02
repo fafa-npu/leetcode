@@ -3623,3 +3623,37 @@ TreeNode * deleteNode(TreeNode * root, int key) {
 	}
 	return root;
 }
+
+bool Solution::validUtf8(vector<int> & data) {
+	if (data.empty()) {
+		return true;
+	}
+	int size = data.size();
+	int curIndex = 0;
+	while (curIndex < size) {
+		int cntOf1 = 0;
+		int firstNum = data[curIndex];
+		while (firstNum & 128 ) {
+			cntOf1++;
+			firstNum = firstNum << 1;
+		}
+		if (cntOf1 == 0) {
+			curIndex++;
+			continue;
+		}
+		if (cntOf1 > 4 || cntOf1 == 1) {
+			return false;
+		}
+		int cntWihtPre10 = 0;
+		for (int i = 1; i < cntOf1 - 1; i++) {
+			if (curIndex + i >= size) {
+				return false;
+			}
+			int curNum = data[curIndex + i] & 192;
+			if (curNum != 128) {
+				return false;
+			}
+		}
+		curIndex += (cntOf1 - 1);
+	}
+}

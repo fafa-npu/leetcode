@@ -917,6 +917,13 @@
 # 388. Longest Absolute File Path
 * 先构造一个树，再根据树递归求最大长度
 
+# 393.  UTF-8 Validation
+* 先判断第一个字符中前缀1的个数，再数后续的以10为前缀的个数
+* 注意：
+
+        1. 第一个character的前缀不会为10， 且前缀不会出现连续1的个数大于四个
+        2. 输入的data可能是连续几个utf-8的值
+
 # 424 Longest Repeating Character Replacement
 * 采用滑动窗口的方法
 
