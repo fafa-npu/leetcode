@@ -1241,6 +1241,16 @@ public :
      */
     int numTrees(int n);
 
+	/*
+	99. Recover Binary Search Tree
+	Two elements of a binary search tree (BST) are swapped by mistake.
+	Recover the tree without changing its structure.
+	Note:
+	A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
+	*/
+	void inorderTraversal(TreeNode *, TreeNode **, TreeNode **, TreeNode **);
+	void recoverTree(TreeNode * root);
+
     /**
      * 100. Same Tree.
      * Given two binary trees, write a function to check if they are equal or not.
@@ -1477,6 +1487,17 @@ public :
      * @param root
      */
     void flatten(TreeNode * root);
+
+	/*115. Distinct Subsequences
+	Compute the number of distinct subsequences of S equal to T
+	A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+
+	Here is an example:
+	S = "rabbbit", T = "rabbit"
+
+	Return 3.
+	*/
+	int numDistinct(string s, string t);
 
     /**
      * 116. Populating Next Right Pointers in Each Node

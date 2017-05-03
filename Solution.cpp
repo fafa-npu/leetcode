@@ -3657,3 +3657,47 @@ bool Solution::validUtf8(vector<int> & data) {
 		curIndex += (cntOf1 - 1);
 	}
 }
+
+int Solution::numDistinct(string s, string t) {
+	int sSize = s.size();
+	int tSize = t.size();
+	vector<vector<int>> cnt(sSize + 1, vector<int>(tSize + 1, 0));
+	for (int j = 0; j <= tSize; j++) {
+		for (int i = j; i <= sSize; i++) {
+			if (j == 0) {
+				cnt[i][j] = 1;
+				continue;
+			}
+			if (s[i - 1] == t[j - 1]) {
+				cnt[i][j] = cnt[i - 1][j] + cnt[i - 1][j - 1];
+			}
+			else {
+				cnt[i][j] = cnt[i - 1][j];
+			}
+		}
+	}
+	return cnt[sSize][tSize];
+}
+
+void Solution::inorderTraversal(TreeNode * root, TreeNode ** fNode, TreeNode ** sNode, TreeNode ** preNode) {
+	if (root == NULL) {
+		return;
+	}
+	inorderTraversal(root->left, fNode, sNode, preNode);
+	if (*fNode == NULL && (*preNode)->val > root->val) {
+		*fNode = *preNode;
+	}
+	if (*fNode != NULL && (*preNode)->val > root->val) {
+		*sNode = root;
+	}
+	*preNode = root;
+	inorderTraversal(root->right, fNode, sNode, preNode);
+}
+
+void Solution::recoverTree(TreeNode * root) {
+	TreeNode * fNode = NULL;
+	TreeNode * sNode = NULL;
+	TreeNode * preNode = new TreeNode(INT_MIN);
+	inorderTraversal(root, &fNode, &sNode, &preNode);
+	swap((fNode)->val, (sNode)->val);
+}

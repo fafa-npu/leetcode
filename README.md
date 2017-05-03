@@ -706,6 +706,9 @@
         两式合并，得
             G(n) = G(0) * G(n - 1) + G(1) * G(n - 2) + ... + G(n - 1) * G(0)
         其中: G(0) = G(1) = 1
+
+# 99. Recover Binary Search Tree
+* 中序遍历， 寻找第一个逆序对中的第一个数和最后一个逆序对中的第二个数，交换
     
 # 100. Same Tree.
 * DFS
@@ -773,7 +776,24 @@
     1. 将当前节点的右子树追加到当前节点的左子树的最右节点
     2. 将当前节点的左子树放置到右子树的位置，左子树置为NULL
     3. 将当前节点下沉到其右子节点，重复以上操作
-    
+
+# 115. Distinct Subsequences
+*动态规划
+
+        令cnt[i][j] 为S[0, i-1]与T[0, j-1]中符合条件的子串的数量。
+        则 cnt[i][0] = 1  for i = (0, T.size());
+           cnt[0][j] = 0  for j = (0, S.size());
+           cnt[i][j] = cnt[i - 1][j] if S[i - 1] != T[j - 1]
+                     = cnt[i - 1][j - 1] + cnt[i - 1][j] if S[i - 1] = T[j - 1] 
+
+ 以上公式可以由例子推出来。例如S = "BBBB", T = "BB"
+
+            i 0 1 2 3 4
+          j     B B B B
+          0   1 1 1 1 1
+          1 B 0 1 2 3 4 
+          2 B 0 0 1 3 6
+          3 B 0 0 0 1 4
 # 116. Populating Next Rihgt Pointers in Each Node
 * 方法1. 遍历整个树，将整个树按层划分，存储在一个vector array中
 * 方法2. 迭代法
