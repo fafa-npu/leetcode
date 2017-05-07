@@ -3554,7 +3554,7 @@ int Solution::findMaxForm(vector<string> & strs, int m, int n) {
 			}
 		}
 	}
-	return maxCnt[m ][n ];
+	return maxCnt[m][n];
 }
 
 int Solution::lengthOfLIS(vector<int> &nums) {
@@ -3572,4 +3572,80 @@ int Solution::lengthOfLIS(vector<int> &nums) {
         }
     }
     return tails.size();
+}
+
+
+int Solution::distributeCandies(vector<int> &candies) {
+    if (candies.empty()){
+        return 0;
+    }
+    int size = candies.size();
+    map<int, int> valueAndCnt;
+
+    for (auto num : candies) {
+        valueAndCnt[num] ++;
+    }
+    int sisterCnt = valueAndCnt.size();
+    return sisterCnt <= size / 2 ? sisterCnt : size/2;
+}
+
+bool isEqualTree(TreeNode *s, TreeNode * t){
+    if (s == NULL && t == NULL) {
+        return true;
+    }
+    if (s == NULL || t == NULL) {
+        return false;
+    }
+    if (s->val == t->val){
+        return isEqualTree(s->left, t->left) && isEqualTree(s->right, t->right);
+    }else {
+        return false;
+    }
+}
+bool Solution::isSubtree(TreeNode *s, TreeNode *t) {
+    if (isEqualTree(s, t)) {
+        return true;
+    } else {
+        if (s == NULL) {
+            return false;
+        }
+        return isSubtree(s->left, t) || isSubtree(s->right, t);
+    }
+}
+
+int Solution::findPaths(int m, int n, int N, int i, int j) {
+    const int MOD = 10e9 + 7;
+    vector<vector<pair<int, int>>> curpaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
+    vector<vector<pair<int, int>>> prepaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
+    for (int step = 0; step < N; step++) {
+        for (int row = 1; row <= m; row++) {
+            for (int col = 1; col <= n; col ++) {
+                if (step == 0) {
+                    if (row == 1) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                    if (col == 1) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                    if (row == m) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                    if (col == n) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                } else {
+                    curpaths[row][col].first =((prepaths[row - 1][col].first + prepaths[row + 1][col].first) % MOD + (prepaths[row][col + 1].first + prepaths[row][col - 1].first) % MOD) % MOD;
+                    curpaths[row][col].second = curpaths[row][col].first + prepaths[row][col].second;
+                    curpaths[row][col].first = curpaths[row][col].first % MOD;
+                    curpaths[row][col].second = curpaths[row][col].second % MOD;
+                }
+            }
+        }
+        prepaths = curpaths;
+    }
+    return curpaths[i+1][j+1].second;
 }
