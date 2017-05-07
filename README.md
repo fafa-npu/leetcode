@@ -706,6 +706,9 @@
         两式合并，得
             G(n) = G(0) * G(n - 1) + G(1) * G(n - 2) + ... + G(n - 1) * G(0)
         其中: G(0) = G(1) = 1
+
+# 99. Recover Binary Search Tree
+* 中序遍历， 寻找第一个逆序对中的第一个数和最后一个逆序对中的第二个数，交换
     
 # 100. Same Tree.
 * DFS
@@ -773,7 +776,24 @@
     1. 将当前节点的右子树追加到当前节点的左子树的最右节点
     2. 将当前节点的左子树放置到右子树的位置，左子树置为NULL
     3. 将当前节点下沉到其右子节点，重复以上操作
-    
+
+# 115. Distinct Subsequences
+*动态规划
+
+        令cnt[i][j] 为S[0, i-1]与T[0, j-1]中符合条件的子串的数量。
+        则 cnt[i][0] = 1  for i = (0, T.size());
+           cnt[0][j] = 0  for j = (0, S.size());
+           cnt[i][j] = cnt[i - 1][j] if S[i - 1] != T[j - 1]
+                     = cnt[i - 1][j - 1] + cnt[i - 1][j] if S[i - 1] = T[j - 1] 
+
+ 以上公式可以由例子推出来。例如S = "BBBB", T = "BB"
+
+            i 0 1 2 3 4
+          j     B B B B
+          0   1 1 1 1 1
+          1 B 0 1 2 3 4 
+          2 B 0 0 1 3 6
+          3 B 0 0 0 1 4
 # 116. Populating Next Rihgt Pointers in Each Node
 * 方法1. 遍历整个树，将整个树按层划分，存储在一个vector array中
 * 方法2. 迭代法
@@ -904,8 +924,25 @@
 * 深度优先搜索
 * 在深度优先搜索的基础上加入剪枝操作（对已经计算过最大increasing path的位置不再计算）
 
+# 354. Russian Doll Envelopes
+* 遍历加剪枝，相当于dp
+        
+       先对envelopes按照length或width进行排序，然后从最大项开始计算可放入的信封数量，同时对已经计算过的信封数量保存下来，在下次查询时使用
+       *TLE*
+       这种思路是正确的，可是实现时使用了递归，所以会超时。
+* DP
+        先排序
+        按照从小到大的顺序计算，就可以避免递归
+
 # 388. Longest Absolute File Path
 * 先构造一个树，再根据树递归求最大长度
+
+# 393.  UTF-8 Validation
+* 先判断第一个字符中前缀1的个数，再数后续的以10为前缀的个数
+* 注意：
+
+        1. 第一个character的前缀不会为10， 且前缀不会出现连续1的个数大于四个
+        2. 输入的data可能是连续几个utf-8的值
 
 # 424 Longest Repeating Character Replacement
 * 采用滑动窗口的方法
@@ -915,6 +952,15 @@
         Given this, we can apply the at most k changes constraint and maintain a sliding window such that
         (length of substring - number of times of the maximum occurring character in the substring) <= k
 
+# 450. Delete Node in BST
+* 递归
+          
+        
+        如果当前节点的值等于key
+            若右孩子为空，则直接返回右孩子
+            否则，找到右子树中最小的节点，将最小节点和当前节点的值交换，并对当前节点的右子树执行递归删除操作。
+        如果当前节点的值大于key，则递归删除左子树，使当前节点的左孩子指向删除后的左子树。
+        小于key，对右子树执行上述操作。
 # 474. Ones and Zeros
 * dp
 

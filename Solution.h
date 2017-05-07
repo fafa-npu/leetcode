@@ -1241,6 +1241,16 @@ public :
      */
     int numTrees(int n);
 
+	/*
+	99. Recover Binary Search Tree
+	Two elements of a binary search tree (BST) are swapped by mistake.
+	Recover the tree without changing its structure.
+	Note:
+	A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
+	*/
+	void inorderTraversal(TreeNode *, TreeNode **, TreeNode **, TreeNode **);
+	void recoverTree(TreeNode * root);
+
     /**
      * 100. Same Tree.
      * Given two binary trees, write a function to check if they are equal or not.
@@ -1477,6 +1487,17 @@ public :
      * @param root
      */
     void flatten(TreeNode * root);
+
+	/*115. Distinct Subsequences
+	Compute the number of distinct subsequences of S equal to T
+	A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+
+	Here is an example:
+	S = "rabbbit", T = "rabbit"
+
+	Return 3.
+	*/
+	int numDistinct(string s, string t);
 
     /**
      * 116. Populating Next Right Pointers in Each Node
@@ -1827,19 +1848,6 @@ public :
     int hammingWeight(uint32_t n);
 
     /**
-     * 300. Longest Increasing Subsequence
-     * Given an unsorted array of integers, find the length of longest increasing subsequence.
-        For example,
-        Given [10, 9, 2, 5, 3, 7, 101, 18],
-        The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS combination, it is only necessary for you to return the length.
-        Your algorithm should run in O(n2) complexity.
-        Follow up: Could you improve it to O(n log n) time complexity?
-     * @param nums
-     * @return
-     */
-    int lengthOfLIS(vector<int> & nums);
-
-    /**
      * 318. Maximum Product of Word Lengths
      * Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
         Example 1:
@@ -1882,6 +1890,15 @@ public :
 	*/
 	int longestIncreasingPath(vector<vector<int>> & matrix);
 
+	/**
+	354. Russian Doll Envelopes
+	You have a number of envelopes with widths and heights given as a pair of integers (w, h). One envelope can fit into another if and only if both the width and height of one envelope is greater than the width and height of the other envelope.
+	What is the maximum number of envelopes can you Russian doll? (put one inside other)
+	Example:
+		Given envelopes = [[5,4],[6,4],[6,7],[2,3]], the maximum number of envelopes you can Russian doll is 3 ([2,3] => [5,4] => [6,7]).
+	*/
+	int maxEnvelopes(vector<pair<int, int>> & envelopes);
+
 	/*388. Longest Absolute File Path
 	Suppose we abstract our file system by a string in the following manner:
 		The string "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext" represents:
@@ -1909,6 +1926,41 @@ public :
 	*/
 	int lengthLongestPath(string input);// build a tree and compute the longest length recursively
 	int lengthLongestPath2(string input); // compute the longest length in a iterative way
+
+	/** 393. UTF-8 Validation
+			A character in UTF8 can be from 1 to 4 bytes long, subjected to the following rules:
+	For 1-byte character, the first bit is a 0, followed by its unicode code.
+	For n-bytes character, the first n-bits are all one's, the n+1 bit is 0, followed by n-1 bytes with most significant 2 bits being 10.
+	This is how the UTF-8 encoding would work:
+
+	   Char. number range  |        UTF-8 octet sequence
+		  (hexadecimal)    |              (binary)
+	   --------------------+---------------------------------------------
+	   0000 0000-0000 007F | 0xxxxxxx
+	   0000 0080-0000 07FF | 110xxxxx 10xxxxxx
+	   0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
+	   0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+	Given an array of integers representing the data, return whether it is a valid utf-8 encoding.
+
+	Note:
+	The input is an array of integers. Only the least significant 8 bits of each integer is used to store the data. This means each integer represents only 1 byte of data.
+
+	Example 1:
+
+	data = [197, 130, 1], which represents the octet sequence: 11000101 10000010 00000001.
+
+	Return true.
+	It is a valid utf-8 encoding for a 2-bytes character followed by a 1-byte character.
+	Example 2:
+
+	data = [235, 140, 4], which represented the octet sequence: 11101011 10001100 00000100.
+
+	Return false.
+	The first 3 bits are all one's and the 4th bit is 0 means it is a 3-bytes character.
+	The next byte is a continuation byte which starts with 10 and that's correct.
+	But the second continuation byte does not start with 10, so it is invalid.
+	*/
+	bool validUtf8(vector<int>& data);
 
 	/* 424.  Longest Repeating Character Replacement
 	Given a string that consists of only uppercase English letters, you can replace any letter in the string with another letter at most k times. Find the length of a longest substring containing all repeating letters you can get after performing the above operations.

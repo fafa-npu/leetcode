@@ -3554,98 +3554,150 @@ int Solution::findMaxForm(vector<string> & strs, int m, int n) {
 			}
 		}
 	}
-	return maxCnt[m][n];
+	return maxCnt[m ][n ];
 }
 
-int Solution::lengthOfLIS(vector<int> &nums) {
-    if (nums.empty()) {
-        return 0;
-    }
-    vector<int> tails;
-    tails.reserve(nums.size());
-    for (int num : nums){
-        auto it = std::lower_bound(tails.begin(), tails.end(), num);
-        if (it == tails.end()) {
-            tails.push_back(num);
-        }else {
-            *it = num;
-        }
-    }
-    return tails.size();
+bool hasBiggerLength(pair<int, int> & a, pair<int, int> & b) {
+	return a.first > b.first;
 }
 
-
-int Solution::distributeCandies(vector<int> &candies) {
-    if (candies.empty()){
-        return 0;
-    }
-    int size = candies.size();
-    map<int, int> valueAndCnt;
-
-    for (auto num : candies) {
-        valueAndCnt[num] ++;
-    }
-    int sisterCnt = valueAndCnt.size();
-    return sisterCnt <= size / 2 ? sisterCnt : size/2;
+int getRsNum(int index, const vector<pair<int, int>> & envelopes, int size, vector<int> & nums) {
+	if (nums[index] != 0) {
+		return nums[index];
+	}
+	else {
+		int maxRsNum = 1;
+		for (int nIndex = index + 1; nIndex < size; nIndex++) {
+			if (envelopes[nIndex].first < envelopes[index].first && envelopes[nIndex].second < envelopes[index].second) {
+				maxRsNum = max(maxRsNum, 1 + getRsNum(nIndex, envelopes, size, nums));
+			}
+		}
+		return maxRsNum;
+	}
 }
 
-bool isEqualTree(TreeNode *s, TreeNode * t){
-    if (s == NULL && t == NULL) {
-        return true;
-    }
-    if (s == NULL || t == NULL) {
-        return false;
-    }
-    if (s->val == t->val){
-        return isEqualTree(s->left, t->left) && isEqualTree(s->right, t->right);
-    }else {
-        return false;
-    }
-}
-bool Solution::isSubtree(TreeNode *s, TreeNode *t) {
-    if (isEqualTree(s, t)) {
-        return true;
-    } else {
-        if (s == NULL) {
-            return false;
-        }
-        return isSubtree(s->left, t) || isSubtree(s->right, t);
-    }
+int Solution::maxEnvelopes(vector<pair<int, int>> & envelopes) {
+	if (envelopes.empty()) {
+		return 0;
+	}
+	sort(envelopes.begin(), envelopes.end(), hasBiggerLength);
+	int size = envelopes.size();
+	int maxRsNum = 0;
+	vector<int> rsNums(size, 0);
+	for (int index = 0; index < size; index++) {
+		int rsNum = getRsNum(index, envelopes, size, rsNums);
+		if (rsNum > maxRsNum) {
+			maxRsNum = rsNum;
+		}
+	}
+	return maxRsNum;
 }
 
-int Solution::findPaths(int m, int n, int N, int i, int j) {
-    const int MOD = 10e9 + 7;
-    vector<vector<pair<int, int>>> curpaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
-    vector<vector<pair<int, int>>> prepaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
-    for (int step = 0; step < N; step++) {
-        for (int row = 1; row <= m; row++) {
-            for (int col = 1; col <= n; col ++) {
-                if (step == 0) {
-                    if (row == 1) {
-                        curpaths[row][col].first+=1;
-                        curpaths[row][col].second+=1;
-                    }
-                    if (col == 1) {
-                        curpaths[row][col].first+=1;
-                        curpaths[row][col].second+=1;
-                    }
-                    if (row == m) {
-                        curpaths[row][col].first+=1;
-                        curpaths[row][col].second+=1;
-                    }
-                    if (col == n) {
-                        curpaths[row][col].first+=1;
-                        curpaths[row][col].second+=1;
-                    }
-                } else {
-                    curpaths[row][col].first =((prepaths[row - 1][col].first + prepaths[row + 1][col].first) % MOD + (prepaths[row][col + 1].first + prepaths[row][col - 1].first) % MOD) % MOD;
-                    curpaths[row][col].second = curpaths[row][col].first + prepaths[row][col].second;
-                    curpaths[row][col].first = curpaths[row][col].first % MOD;
-                    curpaths[row][col].second = curpaths[row][col].second % MOD;
-                }
-            }
-        }
-        prepaths = curpaths;
-    }
-    return curpaths[i+1][j+1].second;
+TreeNode * deleteNode(TreeNode * root, int key) {
+	// search for key
+	if (root == NULL) {
+		return root;
+	}
+	bool swaped = false;
+	if (root->val == key) {
+		if (root->right == NULL) {
+			return root->left;
+		}
+		else {
+			TreeNode * curNode = root->right;
+			while (curNode->left) {
+				curNode = curNode->left;
+			}
+			swap(curNode->val, root->val);
+			swaped = true;
+		}
+	}
+	if (swaped) {
+		root->right = deleteNode(root->right, key);
+	}
+	else if (root->val < key) {
+		root->right = deleteNode(root->right, key);
+	}
+	else {
+		root->left = deleteNode(root->left, key);
+	}
+	return root;
+}
+
+bool Solution::validUtf8(vector<int> & data) {
+	if (data.empty()) {
+		return true;
+	}
+	int size = data.size();
+	int curIndex = 0;
+	while (curIndex < size) {
+		int cntOf1 = 0;
+		int firstNum = data[curIndex];
+		while (firstNum & 128 ) {
+			cntOf1++;
+			firstNum = firstNum << 1;
+		}
+		if (cntOf1 == 0) {
+			curIndex++;
+			continue;
+		}
+		if (cntOf1 > 4 || cntOf1 == 1) {
+			return false;
+		}
+		int cntWihtPre10 = 0;
+		for (int i = 1; i < cntOf1 - 1; i++) {
+			if (curIndex + i >= size) {
+				return false;
+			}
+			int curNum = data[curIndex + i] & 192;
+			if (curNum != 128) {
+				return false;
+			}
+		}
+		curIndex += (cntOf1 - 1);
+	}
+}
+
+int Solution::numDistinct(string s, string t) {
+	int sSize = s.size();
+	int tSize = t.size();
+	vector<vector<int>> cnt(sSize + 1, vector<int>(tSize + 1, 0));
+	for (int j = 0; j <= tSize; j++) {
+		for (int i = j; i <= sSize; i++) {
+			if (j == 0) {
+				cnt[i][j] = 1;
+				continue;
+			}
+			if (s[i - 1] == t[j - 1]) {
+				cnt[i][j] = cnt[i - 1][j] + cnt[i - 1][j - 1];
+			}
+			else {
+				cnt[i][j] = cnt[i - 1][j];
+			}
+		}
+	}
+	return cnt[sSize][tSize];
+}
+
+void Solution::inorderTraversal(TreeNode * root, TreeNode ** fNode, TreeNode ** sNode, TreeNode ** preNode) {
+	if (root == NULL) {
+		return;
+	}
+	inorderTraversal(root->left, fNode, sNode, preNode);
+	if (*fNode == NULL && (*preNode)->val > root->val) {
+		*fNode = *preNode;
+	}
+	if (*fNode != NULL && (*preNode)->val > root->val) {
+		*sNode = root;
+	}
+	*preNode = root;
+	inorderTraversal(root->right, fNode, sNode, preNode);
+}
+
+void Solution::recoverTree(TreeNode * root) {
+	TreeNode * fNode = NULL;
+	TreeNode * sNode = NULL;
+	TreeNode * preNode = new TreeNode(INT_MIN);
+	inorderTraversal(root, &fNode, &sNode, &preNode);
+	swap((fNode)->val, (sNode)->val);
 }
