@@ -3701,3 +3701,47 @@ void Solution::recoverTree(TreeNode * root) {
 	inorderTraversal(root, &fNode, &sNode, &preNode);
 	swap((fNode)->val, (sNode)->val);
 }
+
+string Solution::removeDuplicateLetters(string s) {
+	string str = "";
+	if (s.empty()) {
+		return str;
+	}
+	map<int, vector<int>> charAndIndex;
+	int size = s.size();
+	for (int index = 0; index < size; index++) {
+		charAndIndex[s[index]].push_back(index);
+	}
+	int preIndex = -1;
+	for (auto it = charAndIndex.begin(); ;) {
+		if (charAndIndex.empty()) {
+			break;
+		}
+		vector<int> curIndexs = it->second;
+		int curIndexAtString = 0;
+		for (int num : curIndexs) {
+			if (num > preIndex) {
+				curIndexAtString = num;
+				break;
+			}
+		}
+		int cnt = 0;
+		for (auto it2 = charAndIndex.begin(); it2 != charAndIndex.end(); it2++) {
+			if (it2->first != it->first && it2->second.back() > curIndexAtString) {
+				cnt++;
+			}
+		}
+		if (cnt == charAndIndex.size() - 1) {
+			str.push_back(it->first);
+			preIndex = curIndexAtString;
+			charAndIndex.erase(it);
+			if (!charAndIndex.empty()) {
+				it = charAndIndex.begin();
+			}
+		}
+		else {
+			it++;
+		}
+	}
+	return str;
+}

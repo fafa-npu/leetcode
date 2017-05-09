@@ -1847,6 +1847,17 @@ public :
      */
     int hammingWeight(uint32_t n);
 
+	/*
+	316. Remove Duplicate Letters
+	Given a string which contains only lowercase letters, remove duplicate letters so that every letter appear once and only once. You must make sure your result is the smallest in lexicographical order among all possible results.
+	Example:
+		Given "bcabc"
+		Return "abc"
+
+		Given "cbacdcbc"
+		Return "acdb"
+	*/
+	string removeDuplicateLetters(string s);
     /**
      * 318. Maximum Product of Word Lengths
      * Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
