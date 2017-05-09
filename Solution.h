@@ -2281,6 +2281,83 @@ public :
      * @return
      */
     string reverseWords(string s) ;
+
+    /*
+     * 572. Subtree of Another Tree
+     * Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s. A subtree of s is a tree consists of a node in s and all of this node's descendants. The tree s could also be considered as a subtree of itself.
+        Example 1:
+        Given tree s:
+             3
+            / \
+           4   5
+          / \
+         1   2
+        Given tree t:
+           4
+          / \
+         1   2
+        Return true, because t has the same structure and node values with a subtree of s.
+
+        Example 2:
+        Given tree s:
+             3
+            / \
+           4   5
+          / \
+         1   2
+            /
+           0
+        Given tree t:
+           4
+          / \
+         1   2
+        Return false.
+     */
+    bool isSubtree(TreeNode * s, TreeNode * t);
+
+    /*
+     * 575. Distribute Candies
+     * Given an integer array with even length, where different numbers in this array represent different kinds of candies. Each number means one candy of the corresponding kind. You need to distribute these candies equally in number to brother and sister. Return the maximum number of kinds of candies the sister could gain.
+        Example 1:
+        Input: candies = [1,1,2,2,3,3]
+        Output: 3
+        Explanation:
+        There are three different kinds of candies (1, 2 and 3), and two candies for each kind.
+        Optimal distribution: The sister has candies [1,2,3] and the brother has candies [1,2,3], too.
+        The sister has three different kinds of candies.
+        Example 2:
+        Input: candies = [1,1,2,3]
+        Output: 2
+        Explanation: For example, the sister has candies [2,3] and the brother has candies [1,1].
+        The sister has two different kinds of candies, the brother has only one kind of candies.
+        Note:
+
+        The length of the given array is in range [2, 10,000], and will be even.
+        The number in given array is in range [-100,000, 100,000].
+     */
+    int distributeCandies(vector<int> & candies) ;
+
+    /*
+     * 576. Out of Boundary Paths
+     * There is an m by n grid with a ball. Given the start coordinate (i,j) of the ball, you can move the ball to adjacent cell or cross the grid boundary in four directions (up, down, left, right). However, you can at most move N times. Find out the number of paths to move the ball out of grid boundary. The answer may be very large, return it after mod 109 + 7.
+
+        Example 1:
+        Input:m = 2, n = 2, N = 2, i = 0, j = 0
+        Output: 6
+        Explanation:
+
+        Example 2:
+        Input:m = 1, n = 3, N = 3, i = 0, j = 1
+        Output: 12
+        Explanation:
+
+        Note:
+        Once you move the ball out of boundary, you cannot move it back.
+        The length and height of the grid is in range [1,50].
+        N is in range [0,50].
+     */
+    int findPaths(int m, int n, int N, int i, int j) ;
+
 };
 
 

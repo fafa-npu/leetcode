@@ -3702,46 +3702,77 @@ void Solution::recoverTree(TreeNode * root) {
 	swap((fNode)->val, (sNode)->val);
 }
 
-string Solution::removeDuplicateLetters(string s) {
-	string str = "";
-	if (s.empty()) {
-		return str;
-	}
-	map<int, vector<int>> charAndIndex;
-	int size = s.size();
-	for (int index = 0; index < size; index++) {
-		charAndIndex[s[index]].push_back(index);
-	}
-	int preIndex = -1;
-	for (auto it = charAndIndex.begin(); ;) {
-		if (charAndIndex.empty()) {
-			break;
-		}
-		vector<int> curIndexs = it->second;
-		int curIndexAtString = 0;
-		for (int num : curIndexs) {
-			if (num > preIndex) {
-				curIndexAtString = num;
-				break;
-			}
-		}
-		int cnt = 0;
-		for (auto it2 = charAndIndex.begin(); it2 != charAndIndex.end(); it2++) {
-			if (it2->first != it->first && it2->second.back() > curIndexAtString) {
-				cnt++;
-			}
-		}
-		if (cnt == charAndIndex.size() - 1) {
-			str.push_back(it->first);
-			preIndex = curIndexAtString;
-			charAndIndex.erase(it);
-			if (!charAndIndex.empty()) {
-				it = charAndIndex.begin();
-			}
-		}
-		else {
-			it++;
-		}
-	}
-	return str;
+int Solution::distributeCandies(vector<int> &candies) {
+    if (candies.empty()){
+        return 0;
+    }
+    int size = candies.size();
+    map<int, int> valueAndCnt;
+
+    for (auto num : candies) {
+        valueAndCnt[num] ++;
+    }
+    int sisterCnt = valueAndCnt.size();
+    return sisterCnt <= size / 2 ? sisterCnt : size/2;
+}
+
+bool isEqualTree(TreeNode *s, TreeNode * t){
+    if (s == NULL && t == NULL) {
+        return true;
+    }
+    if (s == NULL || t == NULL) {
+        return false;
+    }
+    if (s->val == t->val){
+        return isEqualTree(s->left, t->left) && isEqualTree(s->right, t->right);
+    }else {
+        return false;
+    }
+}
+bool Solution::isSubtree(TreeNode *s, TreeNode *t) {
+    if (isEqualTree(s, t)) {
+        return true;
+    } else {
+        if (s == NULL) {
+            return false;
+        }
+        return isSubtree(s->left, t) || isSubtree(s->right, t);
+    }
+}
+
+int Solution::findPaths(int m, int n, int N, int i, int j) {
+    const int MOD = 10e9 + 7;
+    vector<vector<pair<int, int>>> curpaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
+    vector<vector<pair<int, int>>> prepaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
+    for (int step = 0; step < N; step++) {
+        for (int row = 1; row <= m; row++) {
+            for (int col = 1; col <= n; col ++) {
+                if (step == 0) {
+                    if (row == 1) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                    if (col == 1) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                    if (row == m) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                    if (col == n) {
+                        curpaths[row][col].first+=1;
+                        curpaths[row][col].second+=1;
+                    }
+                } else {
+                    curpaths[row][col].first =((prepaths[row - 1][col].first + prepaths[row + 1][col].first) % MOD + (prepaths[row][col + 1].first + prepaths[row][col - 1].first) % MOD) % MOD;
+                    curpaths[row][col].second = curpaths[row][col].first + prepaths[row][col].second;
+                    curpaths[row][col].first = curpaths[row][col].first % MOD;
+                    curpaths[row][col].second = curpaths[row][col].second % MOD;
+                }
+            }
+        }
+        prepaths = curpaths;
+    }
+    return curpaths[i+1][j+1].second;
 }
