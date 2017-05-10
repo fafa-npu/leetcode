@@ -982,6 +982,29 @@
 # 493. Reverse Pairs
 * 使用归并排序的思想
 
+# 494. Target Sum
+1. 使用递归的方法
+        
+        令sum 为 nums的和，则
+        if (abs(sum) < S)  return 0
+        if (nums.empty()) 
+            if (S == 0) return 1
+            if (S != 0) return 0
+        return findTargetSumWays(nums(nums.begin(), nums.end() - 1, S + nums.back()) 
+                + findTargetSumWays(nums(nums.begin(), nums.end() - 1, S - nums.back()) 
+    注意以上方法，由于在递归过程中传递参数时会发生大量的复制操作，所以会超时。
+    可以重载findTargetSumWays方法，传入要计算的范围，可以极大地缩短时间。
+2. DP
+        
+        可以将S分为两个子集合，P中存储符号为正的数，N中存储符号为-的数。
+        则
+            sum(P) + sum(N) = sum(S)
+            sum(P) - sum(N) = target
+            2 * sum(P) = sum(S) + target
+            sum(P) = ( sum(S) + target ) / 2
+        由此，此问题转换为了求和为 M 的 S 的子集的个数问题。
+        同时， target + sum(S) 必须为偶数才有解
+        
 # 538. Convert BST to Greater Tree
 * 递归操作
 
