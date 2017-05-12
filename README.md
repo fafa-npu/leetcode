@@ -978,6 +978,20 @@
 * 从后往前遍历
 * 新建一个string存储
 
+#486. Predict the Winner
+* DP
+        
+        令dp(i, j) 代表player1从i到j（包含i和j）选的时候的最大的sum值
+        则：
+            dp(i, j) = max(
+                        sum(i + 1, j) - dp(i + 1, j) + nums[i],
+                        sum(i, j - 1) - dp(i, j - 1) + nums[j]
+                        )
+                     = max(
+                        sum(i, j) - dp(i + 1, j),
+                        sum(i, j) - dp(i, j - 1)
+                        )
+
 
 # 493. Reverse Pairs
 * 使用归并排序的思想

@@ -7,6 +7,7 @@
 #include <queue>
 #include <ctime>
 #include <sstream>
+#include <numeric>
 #include "Solution.h"
 
 /**
@@ -765,8 +766,8 @@ vector<int> Solution::searchRange(vector<int> &nums, int target) {
 double Solution::findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
     size_t m = nums1.size(), n = nums2.size();
     if (m < n) {
-        swap(nums1, nums2);
-        swap(m, n);
+        std::swap(nums1, nums2);
+        std::swap(m, n);
     }
     int front = 0, back = n * 2;
     while (front <= back)  {
@@ -1053,7 +1054,7 @@ vector<vector<int>> Solution::permuteUnique(vector<int> nums, int begin) {
 
     for (int i = begin; i < nums.size(); i ++) {
         if (i != begin && nums[i] == nums[begin]) continue;
-        swap(nums[begin], nums[i]);
+        std::swap(nums[begin], nums[i]);
         for (vector<int> row: permuteUnique(nums, begin + 1)) {
             row.insert(row.begin(), nums[begin]);
             result.push_back(row);
@@ -1130,8 +1131,8 @@ string Solution::addBinary(string a, string b) {
     int aLength = a.size();
     int bLength = b.size();
     if (aLength > bLength) { // 使a变为短的一方
-        swap(a, b);
-        swap(aLength, bLength);
+        std::swap(a, b);
+        std::swap(aLength, bLength);
     }
     for (int i = 1; i <= aLength; i++) {
         int intA = a[aLength - i] - '0';
@@ -1454,11 +1455,11 @@ void Solution::sortColors(vector<int> &nums) {
     int index = 1;
     while (index <= flag2) {
         if (nums[index] == 0) {
-            swap(nums[flag0], nums[index]);
+            std::swap(nums[flag0], nums[index]);
             flag0 ++;
             index ++;
         } else if (nums[index] == 2) {
-            swap(nums[flag2], nums[index]);
+            std::swap(nums[flag2], nums[index]);
             flag2 --;
         } else {
             index ++;
@@ -3742,8 +3743,19 @@ bool Solution::isSubtree(TreeNode *s, TreeNode *t) {
 
 int Solution::findPaths(int m, int n, int N, int i, int j) {
     const int MOD = 10e9 + 7;
-    vector<vector<pair<int, int>>> curpaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
-    vector<vector<pair<int, int>>> prepaths(m + 2, vector<pair<int, int>>(n + 2, pair<int, int>(0,0)));
+    vector<vector<pair<int, int>>> curpaths;
+    curpaths.reserve(m+2);
+    for (int i = 0; i < m+2; i++) {
+        vector<pair<int, int>> path(n +2, pair<int, int>(0,0));
+        curpaths[i] = path;
+    }
+
+    vector<vector<pair<int, int>>> prepaths;
+    prepaths.reserve(m+2);
+    for (int i = 0; i < m+2; i++) {
+        vector<pair<int, int>> path(n +2, pair<int, int>(0,0));
+        prepaths[i] = path;
+    }
     for (int step = 0; step < N; step++) {
         for (int row = 1; row <= m; row++) {
             for (int col = 1; col <= n; col ++) {
@@ -3812,4 +3824,23 @@ int Solution::findTargetSumWays(vector<int> &nums, int S) {
         return 0;
     }
     return subnetOfS(nums, (S + sum) >> 1);
+}
+
+bool Solution::PredictTheWinner(vector<int> &nums) {
+    if (nums.empty() || nums.size() == 1){
+        return true;
+    }
+    int size = nums.size();
+    vector<vector<int>> dp(size, vector<int>(size, 0));
+    for (int step = 0; step < size; step++) {
+        for (int i = 0; i + step < size; i++) {
+            if (step == 0) {
+                dp[i][i] = nums[i];
+            }else {
+                int sum = accumulate(nums.begin() + i, nums.begin() + i + step + 1, 0);
+                dp[i][i + step] = max(sum - dp[i + 1][i + step], sum - dp[i][i + step - 1]);
+            }
+        }
+    }
+    return dp[0][size - 1] >= dp[1][size - 1] || dp[0][size - 1] >= dp[0][size - 2];
 }
