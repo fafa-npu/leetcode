@@ -1838,6 +1838,14 @@ public :
      */
     int majorityELement(vector<int> & nums);
 
+    /*
+     * 179. Largest Number
+     * Given a list of non negative integers, arrange them such that they form the largest number.
+        For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
+        Note: The result may be very large, so you need to return a string instead of an integer.
+     */
+    string largestNumber(vector<int> & nums);
+//    static   bool lowerStrInLargestNumber(const string & a, const string & b);
     /**
      * 191. Number of 1 Bits
      *Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
@@ -2401,6 +2409,76 @@ public :
         N is in range [0,50].
      */
     int findPaths(int m, int n, int N, int i, int j) ;
+
+    /*
+     * 581.  Shortest Unsorted Continuous Subarray
+     * Given an integer array, you need to find one continuous subarray that if you only sort this subarray in ascending order, then the whole array will be sorted in ascending order, too.
+
+You need to find the shortest such subarray and output its length.
+
+Example 1:
+
+Input: [2, 6, 4, 8, 10, 9, 15]
+Output: 5
+Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+
+Note:
+
+    Then length of the input array is in range [1, 10,000].
+    The input array may contain duplicates, so ascending order here means <=.
+
+     */
+    int findUnsortedSubarray(vector<int> & nums);
+
+    /*
+     * 582. Kill Process
+     * Given n processes, each process has a unique PID (process id) and its PPID (parent process id).
+
+        Each process only has one parent process, but may have one or more children processes. This is just like a tree structure. Only one process has PPID that is 0, which means this process has no parent process. All the PIDs will be distinct positive integers.
+
+        We use two list of integers to represent a list of processes, where the first list contains PID for each process and the second list contains the corresponding PPID.
+
+        Now given the two lists, and a PID representing a process you want to kill, return a list of PIDs of processes that will be killed in the end. You should assume that when a process is killed, all its children processes will be killed. No order is required for the final answer.
+
+        Example 1:
+
+        Input:
+        pid =  [1, 3, 10, 5]
+        ppid = [3, 0, 5, 3]
+        kill = 5
+        Output: [5,10]
+        Explanation:
+                   3
+                 /   \
+                1     5
+                     /
+                    10
+        Kill 5 will also kill 10.
+
+        Note:
+
+            1. The given kill id is guaranteed to be one of the given PIDs.
+            2. n >= 1.
+
+     */
+    vector<int> killProcess(vector<int> & pid, vector<int> & ppid, int kill);
+
+    /*
+     * 583. Delete Operation for Two Strings
+     *  Given two words word1 and word2, find the minimum number of steps required to make word1 and word2 the same, where in each step you can delete one character in either string.
+
+    Example 1:
+
+    Input: "sea", "eat"
+    Output: 2
+    Explanation: You need one step to make "sea" to "ea" and another step to make "eat" to "ea".
+
+    Note:
+
+        The length of given words won't exceed 500.
+        Characters in given words can only be lower-case letters.
+     */
+    int minDistance583(string word1, string word2);
 
 
     int maxRotateFunction(vector<int> &);

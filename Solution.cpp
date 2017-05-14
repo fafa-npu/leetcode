@@ -3844,3 +3844,151 @@ bool Solution::PredictTheWinner(vector<int> &nums) {
     }
     return dp[0][size - 1] >= dp[1][size - 1] || dp[0][size - 1] >= dp[0][size - 2];
 }
+
+
+static bool greaterStrInLargestNumber(const string & a, const string & b){
+
+    auto ait = a.begin();
+    auto bit = b.begin();
+    while (ait != a.end() && bit != b.end()){
+        if (*ait > *bit){
+            return true;
+        }else if (*ait < *bit){
+            return false;
+        }else {
+            ait++;
+            bit++;
+        }
+    }
+    if (ait == a.end() && bit == b.end()){
+        return false;
+    }else if (ait == a.end()){
+        return *bit < b.front();
+    }else{
+        return *ait >= a.front();
+    }
+}
+
+
+//static bool greaterStrInLargestNumber(const string & a, const string & b){
+//    return !lowerStrInLargestNumber(a, b);
+//}
+string Solution::largestNumber(vector<int> &nums) {
+    vector<string> strNums;
+    strNums.reserve(nums.size());
+    for (auto num : nums){
+        strNums.push_back(to_string(num));
+    }
+    sort(strNums.begin(), strNums.end(), [](string & s1, string & s2){return s1 + s2 > s2 + s1;});
+    string result;
+    for (auto str : strNums){
+        result.append(str);
+    }
+    auto it = result.begin();
+    for (;it != result.end(); it++){
+        if (*it != '0'){
+            break;
+        }
+    }
+    result.erase(result.begin(), it);
+    if(result.empty()){
+        result.push_back('0');
+    }
+    return result;
+}
+
+int Solution::findUnsortedSubarray(vector<int> &nums) {
+    int maxNum = INT_MIN;
+    int minNum = INT_MAX;
+    int lastIndex = 0;
+    int firstIndex = 0;
+    int index = 0;
+    for (auto it  = nums.begin(); it != nums.end(); it++){
+
+        if (*it >= maxNum){
+            maxNum = *it;
+        }else {
+            lastIndex = index;
+        }
+        index ++;
+    }
+    index = nums.size() - 1;
+    for (auto rit = nums.rbegin(); rit != nums.rend(); rit ++){
+        if (*rit <= minNum){
+            minNum = *rit;
+        }else {
+            firstIndex = index;
+        }
+        index --;
+    }
+    int dis = lastIndex - firstIndex ;
+    return dis == 0 ? 0 : dis + 1;
+}
+
+vector<int> Solution::killProcess(vector<int> &pid, vector<int> &ppid, int kill) {
+    vector<int> result;
+    if (pid.empty() || ppid.empty() ){
+        return result;
+    }
+    int n = pid.size();
+    deque<int> pidToRemove;
+    pidToRemove.push_back(kill);
+    while (!pidToRemove.empty()){
+        int curPid = pidToRemove.front();
+        result.push_back(curPid);
+        pidToRemove.pop_front();
+        for (auto itpid = pid.begin(), itppid = ppid.begin(); itpid != pid.end();){
+            if (*itppid == curPid){
+                pidToRemove.push_back(*itpid);
+                itpid = pid.erase(itpid);
+                itppid = ppid.erase(itppid);
+            }else {
+                itpid++;
+                itppid++;
+            }
+        }
+
+    }
+    return result;
+}
+
+int Solution::minDistance583(string word1, string word2) {
+    if (word1.compare(word2) == 0){
+        return 0;
+    }
+    int originLength = word1.size() + word2.size();
+    set<char> charInWord1;
+    set<char> charInWord2;
+    for (auto c : word1){
+        charInWord1.insert(c);
+    }
+    for (auto c : word2){
+        charInWord2.insert(c);
+    }
+    for (auto c : charInWord1){
+        if (charInWord2.count(c) == 0){
+            charInWord1.erase(c);
+            word1.erase(remove(word1.begin(), word1.end(), c), word1.end());
+        }
+    }
+    for (auto c : charInWord2){
+        if (charInWord1.count(c) == 0){
+            charInWord2.erase(c);
+            word2.erase(remove(word2.begin(), word2.end(), c), word2.end());
+        }
+    }
+    int size1 = word1.size();
+    int size2 = word2.size();
+    vector<vector<int>> dp(size1 + 1, vector<int>(size2 + 1, 0));
+    for (int i = 1; i <= size1; i++){
+        for (int j = 1; j <= size2; j++){
+            if (word1[i - 1] == word2[j - 1]){
+                dp[i][j] = max(dp[i][j],dp[i - 1][j - 1] + 1);
+            }else {
+                dp[i][j] = max(dp[i][j], dp[i - 1][j]);
+                dp[i][j] = max(dp[i][j], dp[i][j - 1]);
+            }
+        }
+    }
+    return originLength - 2 * dp[size1][size2];
+}
