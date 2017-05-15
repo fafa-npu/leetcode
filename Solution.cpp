@@ -3992,3 +3992,17 @@ int Solution::minDistance583(string word1, string word2) {
     }
     return originLength - 2 * dp[size1][size2];
 }
+
+int Solution::singleNumberII(vector<int> & nums) {
+	int ones = 0;
+	int twos = 0;
+	int bits_appeared_3times = 0;
+	for (auto num : nums) {
+		twos |= ones & num;
+		ones ^= num;
+		bits_appeared_3times = ones & twos;
+		ones &= ~bits_appeared_3times;
+		twos &= ~bits_appeared_3times;
+	}
+	return ones;
+}

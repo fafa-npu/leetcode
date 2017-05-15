@@ -870,6 +870,17 @@
 * hashtable , 会使用额外的存储空间
 * 位操作
     * A xor A = 0
+
+# 137. Single Number II
+* 位操作
+
+        让ones表示出现了一次的bits，twos表示出现了两次的bits。
+        当num第一次出现时，ones ^= num
+        当num第二次出现时，将num从ones中移除，放入twos中
+        当num第三次出现时，将ones ^= num
+            此时，ones和twos中都存在num
+            应从ones和twos中移除num
+        最后，num中剩余的数即为所求的数
     
 # 142. Linked List Cycle II
 * 使用快行指针

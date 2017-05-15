@@ -1689,6 +1689,14 @@ public :
      */
     int singleNumber(vector<int> & nums);
 
+	/*
+	137. Single Number II
+     * Given an array of integers, every element appears three times except for one. Find that single one.
+        Note:
+        Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+	*/
+	int singleNumberII(vector<int> & nums);
+
     /**
      * 144. Binary Tree Preorder Traversal
      * Given a binary tree, return the preorder traversal of its nodes' values.
