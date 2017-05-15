@@ -1864,6 +1864,12 @@ public :
     int hammingWeight(uint32_t n);
 
 	/*
+	231. Power Of Two 
+	Given an integer, write a function to determine if it is a power of two.
+	*/
+	bool isPowerOfTwo(int n);
+
+	/*
 	316. Remove Duplicate Letters
 	Given a string which contains only lowercase letters, remove duplicate letters so that every letter appear once and only once. You must make sure your result is the smallest in lexicographical order among all possible results.
 	Example:

@@ -4006,3 +4006,7 @@ int Solution::singleNumberII(vector<int> & nums) {
 	}
 	return ones;
 }
+
+bool Solution::isPowerOfTwo(int n) {
+	return n <= 0 ? false : !(n & (n - 1));
+}
