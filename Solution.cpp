@@ -4008,5 +4008,70 @@ int Solution::singleNumberII(vector<int> & nums) {
 }
 
 bool Solution::isPowerOfTwo(int n) {
+	bool b = (n & (n - 1)) == 0;
 	return n <= 0 ? false : !(n & (n - 1));
+}
+
+vector<Point> Solution::outerTrees(vector<Point> & points) {
+	if (points.size() == 1){
+		return points;
+	}
+	Point bottomPoint = points[0];
+	const double pi = 3.14159265358979323846;
+	// 获取最低点
+	for (Point p : points) {
+		if (p.y < bottomPoint.y) {
+			bottomPoint = p;
+		}
+	}
+	vector<Point> edges;
+	edges.reserve(points.size());
+	Point prePoint(bottomPoint.x + 1, bottomPoint.y);
+	Point curPoint(bottomPoint);
+	while (true) {
+		double minAngle = pi;
+		vector<Point> nextEdgePoints;
+		for (Point p : points) {
+			if (p.x == curPoint.x && p.y == curPoint.y) {
+				continue;
+			}
+			int vaX = curPoint.x - prePoint.x;
+			int vaY = curPoint.y - prePoint.y;
+			int vbX = p.x - curPoint.x;
+			int vbY = p.y - curPoint.y;
+			double absA = pow(vaX * vaX + vaY * vaY, 0.5);
+			double absB = pow(vbX * vbX + vbY * vbY, 0.5);
+			double cosValue = ((vaX * vbX) + (vaY * vbY)) / (absA * absB);
+			double angle = acos(cosValue);
+			if (abs(angle - minAngle) <= 0.00001) {
+				nextEdgePoints.push_back(p);
+			}else if (angle - minAngle < 0) {
+				nextEdgePoints.clear();
+				nextEdgePoints.push_back(p);
+				minAngle = angle;
+			}
+		}
+		edges.insert(edges.end(), nextEdgePoints.begin(), nextEdgePoints.end());
+		Point nextPoint(nextEdgePoints[0]);
+		double maxDistance = sqrt((nextPoint.x - curPoint.x) * (nextPoint.x - curPoint.x) + (nextPoint.y - curPoint.y) *(nextPoint.y - curPoint.y));
+		for (Point p : nextEdgePoints) {
+			double distance = sqrt((p.x - curPoint.x) * (p.x - curPoint.x) + (p.y - curPoint.y) *(p.y - curPoint.y));
+			if (distance > maxDistance) {
+				nextPoint = p;
+				maxDistance = distance;
+			}
+		}
+		if (nextPoint.x == bottomPoint.x && nextPoint.y == bottomPoint.y) {
+			
+			return edges;
+		}else
+		if (edges.size() == points.size() - 1){
+		    edges.push_back(bottomPoint);
+		    return edges;
+		}
+		else {
+			prePoint = curPoint;
+			curPoint = nextPoint;
+		}
+	}
 }

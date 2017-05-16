@@ -1042,4 +1042,12 @@
 #543. Diameter of Binary Tree
 * 此题可以看做一个动态规划问题
 
+# 587. Erect the Fence
+凸壳算法：
+1. 卷包裹法
+   * 过最低点p1做一条直线
+   * 寻找点p2， 使得p1p2与上述直线的夹角最小，则p2为外壳上的第二个点
+   * 以直线P<sub>i-1</sub>P<sub>i</sub>为基准，寻找点P<sub>j</sub>,使得直线P<sub>i</sub>P<sub>j</sub>的夹角最小。则P<sub>j</sub>为下一个边缘点。
+   * 重复上述步骤，直到P<sub>j</sub> == P1
+2. 格雷厄姆方法
 
