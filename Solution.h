@@ -47,6 +47,41 @@ struct ListNode {
      TreeNode(int x):val(x),left(NULL), right(NULL){}
  };
 
+ /*
+  Definition for a Trie
+ */
+ struct TrieNode {
+	 bool isEnd;
+	 vector<TrieNode * > children;
+	 TrieNode() : isEnd(false), children(26, NULL) {};
+ };
+
+ class Trie {
+ private :
+	 TrieNode * root;
+ public :
+	 Trie(vector<string> words) {
+		 root = new TrieNode();
+		 for (auto word : words) {
+			 addWord(word);
+		 }
+	 }
+	 TrieNode * getRoot() {
+		 return root;
+	 }
+	 void addWord(string & word) {
+		 TrieNode * curNode = root;
+		 for (auto c : word) {
+			 int index = c - 'a';
+			 if (curNode->children[index] == NULL) {
+				 curNode->children[index] = new TrieNode();
+			 }
+			 curNode = curNode->children[index];
+		}
+		 curNode->isEnd = true;
+	 }
+ };
+
 struct Interval {
     int start;
     int end;
