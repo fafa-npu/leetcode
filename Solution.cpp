@@ -4075,3 +4075,66 @@ vector<Point> Solution::outerTrees(vector<Point> & points) {
 		}
 	}
 }
+
+void bkFindWords(int row, int col, int index, set<string> wordsWithSamePre, set<pair<int, int>> arrivePoints, set<string> & result, const vector<vector<char>> & board) {
+	for (auto it = wordsWithSamePre.begin(); it != wordsWithSamePre.end();) {
+		if (it->size() == index) {
+			result.insert(*it);
+			it = wordsWithSamePre.erase(it);
+		}
+		else {
+			it++;
+		}
+	}
+	if (wordsWithSamePre.empty()) {
+		return;
+	}
+	int rows = board.size();
+	int cols = board[0].size();
+	if (row < 0 || row == rows || col < 0 || col == cols) {
+		return;
+	}
+	if (arrivePoints.count(make_pair(row, col)) == 1) {
+		return;
+	}
+	else {
+		arrivePoints.insert(make_pair(row, col));
+	}
+	for (auto it = wordsWithSamePre.begin(); it != wordsWithSamePre.end(); ) {
+		if ((*it)[index] != board[row][col]) {
+			it = wordsWithSamePre.erase(it);
+		}
+		else {
+			it++;
+		}
+	}
+	bkFindWords(row + 1, col, index + 1, wordsWithSamePre, arrivePoints, result, board);
+	bkFindWords(row - 1, col, index + 1, wordsWithSamePre, arrivePoints, result, board);
+	bkFindWords(row, col + 1, index + 1, wordsWithSamePre, arrivePoints, result, board);
+	bkFindWords(row, col - 1, index + 1, wordsWithSamePre, arrivePoints, result, board);
+}
+
+vector<string> Solution::findWords(vector<vector<char>>& board, vector<string>& words) {
+	set<string> result;
+	int rows = board.size();
+	int cols = board[0].size();
+	for (int row = 0; row < rows; row++) {
+		for (int col = 0; col < cols; col++) {
+			set<string> wordsWithSamePre;
+			set<pair<int, int>> arrivedPoints;
+			arrivedPoints.insert(make_pair(row, col));
+			for (auto word : words) {
+				if (word[0] == board[row][col]) {
+					wordsWithSamePre.insert(word);
+				}
+			}
+			bkFindWords(row + 1, col, 1, wordsWithSamePre, arrivedPoints, result, board);
+			bkFindWords(row - 1, col, 1, wordsWithSamePre, arrivedPoints, result, board);
+			bkFindWords(row, col + 1, 1, wordsWithSamePre, arrivedPoints, result, board);
+			bkFindWords(row, col - 1, 1, wordsWithSamePre, arrivedPoints, result, board);
+		}
+	}
+	vector<string> vecResult(result.begin(), result.end());
+	return vecResult;
+
+}
