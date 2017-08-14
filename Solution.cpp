@@ -4138,3 +4138,64 @@ vector<string> Solution::findWords(vector<vector<char>>& board, vector<string>& 
 	return vecResult;
 
 }
+
+  int Solution::findIndex(vector<int> & arr, int l, int r, int x, int & index){
+        while (l <= r){
+            int mid = l + (r - l) / 2;
+            if (arr[mid] == x){
+                index = mid;
+                return index;
+            }else if (arr[mid] > x){
+                r = mid - 1;
+            }else {
+                l = mid + 1;
+            }
+        }
+        index = r;
+        return index;
+    }
+vector<int> Solution::findClosestElements(vector<int>& arr, int k, int x) {
+	  sort(arr.begin(), arr.end());
+        if (x <= arr.front()){
+            vector<int> res(arr.begin(), arr.begin() + k);
+            return res;
+        }
+        if (x >= arr.back()){
+            vector<int> res(arr.end() - k, arr.end());
+            return res;
+        }
+        int index = 0;
+        int left = 0;
+        int right = 0;
+        int len = arr.size();
+        left = findIndex(arr, 0, len - 1, x, index);
+        right = left + 1;
+        // if (findIndex(arr, 0, len - 1, x, index)){
+        //     left = index;
+        //     right = index + 1;
+        // }else {
+        //     left = index;
+        //     right = index + 1;
+        // }
+        int t = k;
+        while (k > 0){
+            k--;
+            if (left >= 0 || right < len){
+                if (left < 0){
+                    right ++;
+                    continue;
+                }
+                if (right >= len){
+                    left --;
+                    continue;
+                }
+                if (x - arr[left] <= arr[right] - x){
+                    left --;
+                }else {
+                    right ++;
+                }
+            }
+        }
+        vector<int> res(arr.begin() + (left + 1), arr.begin() + (left + 1 + t));
+        return res;
+}
