@@ -1,12 +1,18 @@
 ﻿using System;
 
-namespace csharp
+namespace leetcode
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Solution sln = new Solution();
+            var res = sln.TwoSum(new int[] { 3, 2, 4 }, 6);
+
+            foreach (var num in res)
+            {
+                Console.WriteLine(num);
+            }
         }
     }
 }
