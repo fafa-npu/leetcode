@@ -1237,6 +1237,18 @@ public :
      */
     ListNode * reverseBetween(ListNode * head, int m, int n);
 
+	/**
+	93. Restore IP Addresses
+	Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+
+		For example:
+		Given "25525511135",
+		return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
+	*/
+	vector<string> restoreIpAddresses(string s);
+	bool restoreIpAddresses(string & s, int index, int level, vector<string> curIp, vector<string> & res);
+	bool isValid(string & s, int l, int cnt);
+
     /**
      *    94. Binary Tree Inorder Traversal
         Given a binary tree, return the inorder traversal of its nodes' values.

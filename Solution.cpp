@@ -4199,3 +4199,43 @@ vector<int> Solution::findClosestElements(vector<int>& arr, int k, int x) {
         vector<int> res(arr.begin() + (left + 1), arr.begin() + (left + 1 + t));
         return res;
 }
+ bool Solution::isValid(string & s, int l, int cnt){
+        if (l + cnt > s.size()){
+            return false;
+        }
+        string curNum = s.substr(l, cnt);
+        int num = stoi(curNum);
+        if (num >= 0 && num <= 255){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    bool Solution::restoreIpAddresses(string & s, int index, int level, vector<string> curIp, vector<string> & res){
+        if (level == 4){
+            if (index == s.size()){
+                string ip = curIp[0];
+                for (int i = 1; i < 4; i++){
+                    ip.push_back('.');
+                    ip.append(curIp[i]);
+                }
+                res.push_back(ip);
+                return true;
+            }else {
+                return false;
+            }
+        }
+        for (int cnt = 1; cnt <= 3; cnt ++){
+            if (isValid(s, index, cnt)){
+                curIp[level] = s.substr(index, cnt);
+                restoreIpAddresses(s, index + cnt, level + 1, curIp, res);
+            }
+        }
+        return true;
+    }
+vector<string> Solution::restoreIpAddresses(string s) {
+	vector<string> curIp(4);
+        vector<string> res;
+        restoreIpAddresses(s, 0, 0, curIp, res);
+        return res;
+}
