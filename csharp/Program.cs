@@ -7,11 +7,16 @@ namespace leetcode
         static void Main(string[] args)
         {
             Solution sln = new Solution();
-            var res = sln.TwoSum(new int[] { 3, 2, 4 }, 6);
+            var l1 = new ListNode(9);
+            l1.next = new ListNode(9);
+            var l2 = new ListNode(2);
+            l2.next = new ListNode(9);
+            var res = sln.AddTwoNumbers(l1, l2);
 
-            foreach (var num in res)
+            while(res != null)
             {
-                Console.WriteLine(num);
+                Console.WriteLine(res.val);
+                res = res.next;
             }
         }
     }
